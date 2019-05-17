@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_employee"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="@string/myEmployee" />
+
+        <item
+            android:id="@+id/nav_orderPhoto"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="@string/ORderPhoto" />
+        <item
+            android:id="@+id/nav_master"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="@string/master" />
+
+        <!--  <item
+              android:id="@+id/nav_catalogName"
+              android:icon="@drawable/ic_shopping_cart_black_24dp"
+              android:title="@string/catalog" />
+          <item
+              android:id="@+id/nav_catalogpricing"
+              android:icon="@drawable/ic_monetization_on_black_24dp"
+              android:title="@string/catalogPricing" />
+  -->
+        <item
+            android:id="@+id/nav_complaintReply"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="Complain reply" />
+        <!--<item-->
+        <!--android:id="@+id/nav_ReviewReply"-->
+        <!--android:icon="@drawable/ic_reply_black_24dp"-->
+        <!--android:title="Review reply" />-->
+
+        <item
+            android:id="@+id/nav_discount"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="Discount Offer" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="logout" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_account_circle_black_24dp"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_account_circle_black_24dp"
+                android:title="Send" />
+        </menu>
+    </item>
+
+</menu>

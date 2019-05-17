@@ -2,9 +2,15 @@ package com.awizom.reliablepackaging;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +20,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -38,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     private TextInputEditText userid, password;
     private ProgressBar loadingProgressBar;
     private RelativeLayout rootView, afterAnimationView;
+    private LinearLayout linearLayout;
+    Snackbar snackbar;
+    boolean connected = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +81,19 @@ public class MainActivity extends AppCompatActivity {
         reliableimageview = findViewById(R.id.reliableimage);
         reliableTextView = findViewById(R.id.reliablepackaging);
         loadingProgressBar = findViewById(R.id.loadingProgressBar);
+        linearLayout=findViewById(R.id.linearlayout);
+        snackbar = Snackbar.make(linearLayout, "No internet connection!", Snackbar.LENGTH_INDEFINITE)
+                .setAction("RETRY", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        initViews();
+                    }
+                });
+        snackbar.setActionTextColor(Color.RED);
+        View sbView = snackbar.getView();
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(Color.YELLOW);
+        checkInternet();
         userid = findViewById(R.id.userid);
         password = findViewById(R.id.passwordEditText);
         loginbutton = findViewById(R.id.loginButton);
@@ -85,16 +108,32 @@ public class MainActivity extends AppCompatActivity {
                 } else if (password.getText().toString().isEmpty() || password.getText().toString().contains(" ")) {
                     password.setError("Please Enter valid Password");
                     password.requestFocus();
+                } else {
+                    Intent intent = new Intent(MainActivity.this, HomePage.class);
+                    startActivity(intent);
                 }
-
-
             }
         });
     }
 
+    private void checkInternet() {
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+            //    Toast.makeText(getApplicationContext(), "Internet is On", Toast.LENGTH_SHORT).show();
+        } else {
+            connected = false;
+            snackbar.show();
+        }
+    }
+
+
     private void startAnimation() {
         ViewPropertyAnimator viewPropertyAnimator = reliableimageview.animate();
-        viewPropertyAnimator.x(300f);
+        viewPropertyAnimator.x(350f);
         viewPropertyAnimator.y(100f);
         viewPropertyAnimator.setDuration(1000);
         viewPropertyAnimator.setListener(new Animator.AnimatorListener() {

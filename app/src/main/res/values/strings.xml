@@ -1,3 +1,24 @@
 <resources>
-    <string name="app_name">ReliablePackaging</string>
+    <string name="app_name">Reliable</string>
+    <string name="title_activity_home_page">HomePage</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+    <string name="title_activity_admin_home_page">Reliable</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_home">home</string>
+    <string name="Search">Search</string>
+    <string name="Master">master</string>
+    <string name="Help_Center">Help</string>
+    <string name="myEmployee">myEmp</string>
+    <string name="ORderPhoto">orderphoto</string>
+    <string name="master">master</string>
+    <string name="title_activity_basic">Basic</string>
+    <string name="title_activity_next">Next</string>
 </resources>

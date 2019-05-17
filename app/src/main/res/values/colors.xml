@@ -8,4 +8,5 @@
     <color name="colorProgressBar">#FFCE511C</color>
     <color name="colorTextView">#83898E</color>
     <color name="white">#ffffff</color>
+    <color name="transparency">#00000000</color>
 </resources>
