@@ -5,56 +5,34 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_employee"
-            android:icon="@drawable/ic_account_circle_black_24dp"
-            android:title="@string/myEmployee" />
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/account_box"
+            android:title="@string/myProfile" />
 
         <item
-            android:id="@+id/nav_orderPhoto"
-            android:icon="@drawable/ic_account_circle_black_24dp"
-            android:title="@string/ORderPhoto" />
+            android:id="@+id/my_acc"
+            android:icon="@drawable/money"
+            android:title="@string/myAccount" />
         <item
-            android:id="@+id/nav_master"
-            android:icon="@drawable/ic_account_circle_black_24dp"
-            android:title="@string/master" />
+            android:id="@+id/nav_password"
+            android:icon="@drawable/key"
+            android:title="@string/password" />
 
-        <!--  <item
-              android:id="@+id/nav_catalogName"
-              android:icon="@drawable/ic_shopping_cart_black_24dp"
-              android:title="@string/catalog" />
-          <item
-              android:id="@+id/nav_catalogpricing"
-              android:icon="@drawable/ic_monetization_on_black_24dp"
-              android:title="@string/catalogPricing" />
-  -->
-        <item
-            android:id="@+id/nav_complaintReply"
-            android:icon="@drawable/ic_account_circle_black_24dp"
-            android:title="Complain reply" />
-        <!--<item-->
-        <!--android:id="@+id/nav_ReviewReply"-->
-        <!--android:icon="@drawable/ic_reply_black_24dp"-->
-        <!--android:title="Review reply" />-->
-
-        <item
-            android:id="@+id/nav_discount"
-            android:icon="@drawable/ic_account_circle_black_24dp"
-            android:title="Discount Offer" />
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:icon="@drawable/lock_open"
             android:title="logout" />
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_account_circle_black_24dp"
-                android:title="Share" />
+                android:id="@+id/nav_refer"
+                android:icon="@drawable/link"
+                android:title="Refer App" />
             <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/ic_account_circle_black_24dp"
+                android:icon="@drawable/send"
                 android:title="Send" />
         </menu>
     </item>

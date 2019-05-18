@@ -12,7 +12,6 @@ import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
@@ -24,15 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -65,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 reliableTextView.setVisibility(GONE);
                 loadingProgressBar.setVisibility(GONE);
 
-                reliableimageview.setImageResource(R.drawable.reliable);
+                reliableimageview.setImageResource(R.drawable.reliables);
 
                 startAnimation();
             }
@@ -133,8 +123,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void startAnimation() {
         ViewPropertyAnimator viewPropertyAnimator = reliableimageview.animate();
-        viewPropertyAnimator.x(350f);
-        viewPropertyAnimator.y(100f);
+        viewPropertyAnimator.x(260f);
+        viewPropertyAnimator.y(150f);
         viewPropertyAnimator.setDuration(1000);
         viewPropertyAnimator.setListener(new Animator.AnimatorListener() {
             @Override

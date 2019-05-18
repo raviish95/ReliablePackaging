@@ -1,6 +1,6 @@
-package com.awizom.reliablepackaging;
+package com.awizom.reliablepackaging.Model;
 
-public class Catalog {
+public class Order {
     private int CatalogID;
     private String CatalogName;
     private String Category;

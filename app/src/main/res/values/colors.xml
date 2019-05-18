@@ -8,5 +8,15 @@
     <color name="colorProgressBar">#FFCE511C</color>
     <color name="colorTextView">#83898E</color>
     <color name="white">#ffffff</color>
+    <color name="cream">#FFFACD</color>
+
+    <color name="lightstrategy">#F0F8FF</color>
+    <color name="black">#000000</color>
+    <color name="azure">#F0FFFF</color>
+    <color name="new_grey">#778899</color>
+    <color name="green">#32CD32</color>
     <color name="transparency">#00000000</color>
+
+    <color name="light_blue">#ADD8E6</color>
+    <color name="black_overlay">#66000000</color>
 </resources>

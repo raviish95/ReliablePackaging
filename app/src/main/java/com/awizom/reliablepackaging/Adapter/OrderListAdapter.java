@@ -1,0 +1,105 @@
+package com.awizom.reliablepackaging.Adapter;
+
+import java.util.List;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.awizom.reliablepackaging.Config.AppConfig;
+import com.awizom.reliablepackaging.Model.Order;
+import com.awizom.reliablepackaging.OrderDetails;
+import com.awizom.reliablepackaging.R;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyViewHolder> {
+
+    String imagestr;
+    private List<Order> orderList;
+    private Context mCtx;
+
+    public OrderListAdapter(Context baseContext, List<Order> orderList) {
+        this.orderList = orderList;
+        this.mCtx = baseContext;
+
+    }
+
+
+    @Override
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+        Order c = orderList.get(position);
+        holder.category.setText(c.getCategory());
+        holder.imglinkurl.setText(c.getImage());
+        imagestr = AppConfig.BASE_URL + c.getImage();
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mCtx, OrderDetails.class);
+                mCtx.startActivity(intent);
+            }
+        });
+        try {
+            if (c.getImage() == null) {
+
+            } else {
+                Glide.with(mCtx)
+                        .load(imagestr)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(holder.categoryImage);
+
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    @Override
+    public int getItemCount() {
+
+        return orderList.size();
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.adapter_categorylist, parent, false);
+
+        return new MyViewHolder(v);
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView category, imglinkurl;
+        public ImageView categoryImage;
+
+        @RequiresApi(api = Build.VERSION_CODES.M)
+        public MyViewHolder(View view) {
+            super(view);
+
+            category = (TextView) view.findViewById(R.id.categoryName);
+            imglinkurl = (TextView) view.findViewById(R.id.imgLink);
+            categoryImage = (ImageView) view.findViewById(R.id.categoryImage);
+
+
+        }
+
+
+    }
+
+}
