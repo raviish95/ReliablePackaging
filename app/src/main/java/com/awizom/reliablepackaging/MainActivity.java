@@ -43,11 +43,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         initViews();
-        new CountDownTimer(5000, 1000) {
+        new CountDownTimer(50000, 2000) {
 
             @SuppressLint("ResourceType")
             @Override
@@ -123,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startAnimation() {
         ViewPropertyAnimator viewPropertyAnimator = reliableimageview.animate();
-        viewPropertyAnimator.x(260f);
+        viewPropertyAnimator.x(270f);
         viewPropertyAnimator.y(150f);
         viewPropertyAnimator.setDuration(1000);
         viewPropertyAnimator.setListener(new Animator.AnimatorListener() {
