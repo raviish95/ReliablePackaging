@@ -19,6 +19,7 @@
     <string name="Help_Center">Help</string>
     <string name="myEmployee">myEmp</string>
     <string name="myAccount">My Account</string>
+    <string name="OrderSelect">Select Order for Rebook</string>
     <string name="myProfile">My Profile</string>
     <string name="ORderPhoto">orderphoto</string>
     <string name="master">master</string>

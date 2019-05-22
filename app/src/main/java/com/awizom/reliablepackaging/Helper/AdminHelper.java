@@ -35,6 +35,8 @@ public class AdminHelper extends AppCompatActivity {
                     json = response.body().string();
                 }
             } catch (Exception e) {
+
+
                 e.printStackTrace();
 
             }
@@ -46,12 +48,14 @@ public class AdminHelper extends AppCompatActivity {
             try {
                 if (result.isEmpty()) {
 
+                    new GETCategoryList().execute("Home Cleaning & Repairs").get();
                 } else {
                     super.onPostExecute(result);
                 }
 
 
             } catch (Exception e) {
+
                 e.printStackTrace();
             }
         }

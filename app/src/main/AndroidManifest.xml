@@ -16,22 +16,35 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".HomePage"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".OrderDetails"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddOrderActivity"
-            android:theme="@style/AppTheme.NoActionBar"> <intent-filter>
-            <category android:name="android.intent.category.LAUNCHER" />
-
-            <action android:name="android.intent.action.MAIN" />
-        </intent-filter></activity>
+        <activity
+            android:name=".AddOrderActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChangePassword"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RebookOrderActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyAccount"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyProfile"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

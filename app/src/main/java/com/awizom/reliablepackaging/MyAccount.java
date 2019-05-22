@@ -1,42 +1,26 @@
 package com.awizom.reliablepackaging;
 
-import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class OrderDetails extends AppCompatActivity {
+public class MyAccount extends AppCompatActivity {
 
-    com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar verticalSeekBar;
     private LinearLayout linearLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_details);
+        setContentView(R.layout.activity_my_account);
         initview();
-        verticalSeekBar = findViewById(R.id.capacity_seek);
-
-
-        if(android.os.Build.VERSION.SDK_INT >= 11){
-            // will update the "progress" propriety of seekbar until it reaches progress
-            ObjectAnimator animation = ObjectAnimator.ofInt(verticalSeekBar, "progress", 3);
-            animation.setDuration(1050); // 0.5 second
-            animation.setInterpolator(new DecelerateInterpolator());
-            animation.start();
-            verticalSeekBar.setEnabled(false);
-        }
-        else
-            verticalSeekBar.setProgress(2);
     }
 
     private void initview() {
-        android.support.v7.widget.Toolbar toolbar= (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Order Details");
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("My Account");
+        toolbar.setBackgroundColor(Color.parseColor("#87CEFA"));
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);
@@ -47,7 +31,7 @@ public class OrderDetails extends AppCompatActivity {
             }
         });
         linearLayout=findViewById(R.id.linearlayout);
-        linearLayout.setOnTouchListener(new OnSwipeTouchListener(OrderDetails.this) {
+        linearLayout.setOnTouchListener(new OnSwipeTouchListener(MyAccount.this) {
             public void onSwipeTop() {
                 //   Toast.makeText(RebookOrderActivity.this, "top", Toast.LENGTH_SHORT).show();
             }

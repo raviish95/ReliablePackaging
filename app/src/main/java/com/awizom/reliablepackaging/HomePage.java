@@ -5,14 +5,19 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -55,6 +60,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     DrawerLayout drawer;
     FloatingActionButton addorder;
     TextView rebook, neworder;
+    TextView textCartItemCount;
+    int mCartItemCount = 10;
 
     /* For OnBackPRess in HomePage */
     @SuppressLint("ResourceType")
@@ -144,7 +151,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         rebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(HomePage.this, RebookOrderActivity.class);
+                startActivity(intent);
             }
         });
         neworder.setOnClickListener(new View.OnClickListener() {
@@ -202,8 +210,30 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home_page, menu);
+        MenuItem menuItem = menu.findItem(R.id.admin1);
 
+
+        View actionView = MenuItemCompat.getActionView(menuItem);
+        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
+
+        setupBadge();
         return true;
+    }
+
+    private void setupBadge() {
+
+        if (textCartItemCount != null) {
+            if (mCartItemCount == 0) {
+                if (textCartItemCount.getVisibility() != View.GONE) {
+                    textCartItemCount.setVisibility(View.GONE);
+                }
+            } else {
+                textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
+                if (textCartItemCount.getVisibility() != View.VISIBLE) {
+                    textCartItemCount.setVisibility(View.VISIBLE);
+                }
+            }
+        }
     }
 
 
@@ -221,24 +251,36 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             }
 
             case R.id.nav_password: {
-                Toast.makeText(getApplicationContext(), "CHange Password", Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(this,ChangePassword.class);
+                startActivity(intent);
+               // Toast.makeText(getApplicationContext(), "CHange Password", Toast.LENGTH_LONG).show();
                 //do somthing
                 break;
             }
             case R.id.nav_profile: {
-                Toast.makeText(getApplicationContext(), "Profile", Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(this,MyProfile.class);
+                startActivity(intent);
+              /*  Toast.makeText(getApplicationContext(), "Profile", Toast.LENGTH_LONG).show();*/
                 break;
             }
             case R.id.nav_send: {
-                Toast.makeText(getApplicationContext(), "Send", Toast.LENGTH_LONG).show();
+
+                String phoneNumber = "", message = "hi reliable packaging";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
+                intent.putExtra("sms_body", message);
+                startActivity(intent);
+               /*Toast.makeText(getApplicationContext(), "Send", Toast.LENGTH_LONG).show();*/
                 break;
             }
             case R.id.nav_refer: {
-                Toast.makeText(getApplicationContext(), "ReferApp", Toast.LENGTH_LONG).show();
+              /*  Toast.makeText(getApplicationContext(), "ReferApp", Toast.LENGTH_LONG).show();*/
+
                 break;
             }
             case R.id.my_acc: {
-                Toast.makeText(getApplicationContext(), "My Account", Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(this,MyAccount.class);
+                startActivity(intent);
+             /*   Toast.makeText(getApplicationContext(), "My Account", Toast.LENGTH_LONG).show();*/
                 break;
             }
 
