@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.awizom.reliablepackaging.Adapter.OrderListAdapter;
 import com.awizom.reliablepackaging.Adapter.RebookOrderListAdapter;
-import com.awizom.reliablepackaging.Helper.AdminHelper;
+import com.awizom.reliablepackaging.Helper.OrderHelper;
 import com.awizom.reliablepackaging.Model.Order;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -78,10 +78,10 @@ public class RebookOrderActivity extends AppCompatActivity {
 
     private void getcategorylist() {
 
-        String catalogName = "Home Cleaning & Repairs";
+        String clientid = "3";
         try {
 
-            String result = new AdminHelper.GETCategoryList().execute(catalogName.toString()).get();
+            String result = new OrderHelper.GETMyOrder().execute(clientid.toString()).get();
             Gson gson = new Gson();
             Type listType = new TypeToken<List<Order>>() {
             }.getType();

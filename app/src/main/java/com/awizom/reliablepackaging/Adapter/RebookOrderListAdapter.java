@@ -37,9 +37,8 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         Order c = orderList.get(position);
-        holder.category.setText(c.getCategory());
-        holder.imglinkurl.setText(c.getImage());
-        imagestr = AppConfig.BASE_URL + c.getImage();
+        holder.product_name.setText(c.getProductName());
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,16 +67,14 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView category, imglinkurl;
-        public ImageView categoryImage;
+        public TextView product_name;
 
         @RequiresApi(api = Build.VERSION_CODES.M)
         public MyViewHolder(View view) {
             super(view);
 
-            category = (TextView) view.findViewById(R.id.categoryName);
-            imglinkurl = (TextView) view.findViewById(R.id.imgLink);
-            categoryImage = (ImageView) view.findViewById(R.id.categoryImage);
+            product_name = (TextView) view.findViewById(R.id.prod_name);
+
 
 
         }

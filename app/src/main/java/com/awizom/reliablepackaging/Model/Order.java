@@ -1,59 +1,88 @@
 package com.awizom.reliablepackaging.Model;
 
 public class Order {
-    private int CatalogID;
-    private String CatalogName;
-    private String Category;
-    private String ServiceName;
-    private String Description;
-    private String Image;
 
+        public int OrderId ;
+        public String ProductName ;
+        public int TotalItem;
+        public double Weight ;
 
-    public int getCatalogID() {
-        return CatalogID;
-    }
+        public int getOrderId() {
+            return OrderId;
+        }
 
-    public void setCatalogID(int catalogID) {
-        CatalogID = catalogID;
-    }
+        public void setOrderId(int orderId) {
+            OrderId = orderId;
+        }
 
-    public String getCatalogName() {
-        return CatalogName;
-    }
+        public String getProductName() {
+            return ProductName;
+        }
 
-    public void setCatalogName(String catalogName) {
-        CatalogName = catalogName;
-    }
+        public void setProductName(String productName) {
+            ProductName = productName;
+        }
 
-    public String getCategory() {
-        return Category;
-    }
+        public int getTotalItem() {
+            return TotalItem;
+        }
 
-    public void setCategory(String category) {
-        Category = category;
-    }
+        public void setTotalItem(int totalItem) {
+            TotalItem = totalItem;
+        }
 
-    public String getServiceName() {
-        return ServiceName;
-    }
+        public double getWeight() {
+            return Weight;
+        }
 
-    public void setServiceName(String serviceName) {
-        ServiceName = serviceName;
-    }
+        public void setWeight(double weight) {
+            Weight = weight;
+        }
 
-    public String getDescription() {
-        return Description;
-    }
+        public double getTotalAmount() {
+            return TotalAmount;
+        }
 
-    public void setDescription(String description) {
-        Description = description;
-    }
+        public void setTotalAmount(double totalAmount) {
+            TotalAmount = totalAmount;
+        }
 
-    public String getImage() {
-        return Image;
-    }
+        public double getDiscount() {
+            return Discount;
+        }
 
-    public void setImage(String image) {
-        Image = image;
-    }
+        public void setDiscount(double discount) {
+            Discount = discount;
+        }
+
+        public double getUnitPrice() {
+            return UnitPrice;
+        }
+
+        public void setUnitPrice(double unitPrice) {
+            UnitPrice = unitPrice;
+        }
+
+        public int getTotalProduct() {
+            return TotalProduct;
+        }
+
+        public void setTotalProduct(int totalProduct) {
+            TotalProduct = totalProduct;
+        }
+
+        public int getClientID() {
+            return ClientID;
+        }
+
+        public void setClientID(int clientID) {
+            ClientID = clientID;
+        }
+
+        public double TotalAmount ;
+        public double Discount;
+        public double UnitPrice;
+        public int TotalProduct ;
+        public int ClientID ;
+
 }

@@ -2,34 +2,27 @@ package com.awizom.reliablepackaging.Helper;
 
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Toast;
-
 import com.awizom.reliablepackaging.Config.AppConfig;
-import com.google.gson.Gson;
-
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
-public class AdminHelper extends AppCompatActivity {
+public class ProfileHelper extends AppCompatActivity {
 
-    public static final class GETCategoryList extends AsyncTask<String, Void, String> {
+    public static final class GETMyProfile extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
 
             String json = "";
-            String catalogNameOne = params[0];
+            String clientID = params[0];
 
             try {
                 OkHttpClient client = new OkHttpClient();
                 Request.Builder builder = new Request.Builder();
-                builder.url(AppConfig.BASE_URL_API_Admin + "GetCategoryName");
+                builder.url(AppConfig.BASE_URL_API_ + "MyProfile/"+clientID);
                 builder.addHeader("Content-Type", "Application/json");
                 builder.addHeader("Accept", "application/json");
-                FormBody.Builder parameters = new FormBody.Builder();
-                parameters.add("CatalogName", catalogNameOne);
-                builder.post(parameters.build());
+
                 okhttp3.Response response = client.newCall(builder.build()).execute();
                 if (response.isSuccessful()) {
                     json = response.body().string();
@@ -48,7 +41,7 @@ public class AdminHelper extends AppCompatActivity {
             try {
                 if (result.isEmpty()) {
 
-                    new GETCategoryList().execute("Home Cleaning & Repairs").get();
+
                 } else {
                     super.onPostExecute(result);
                 }
@@ -62,6 +55,4 @@ public class AdminHelper extends AppCompatActivity {
 
 
     }
-
-
 }

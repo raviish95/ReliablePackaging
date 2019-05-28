@@ -4,23 +4,36 @@ import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.LinearLayout;
+
+import com.awizom.reliablepackaging.Adapter.OrderDetailsAdapter;
+import com.awizom.reliablepackaging.Helper.OrderHelper;
+import com.awizom.reliablepackaging.Model.OrderDetailsView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class OrderDetails extends AppCompatActivity {
 
     com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar verticalSeekBar;
     private LinearLayout linearLayout;
-
+    private RecyclerView recyclerViewOrder;
+    String Orderid;
+    OrderDetailsAdapter adapterOrderDetails;
+    List<OrderDetailsView> orderdetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_details);
+        Orderid= getIntent().getStringExtra("OrderId");
         initview();
         verticalSeekBar = findViewById(R.id.capacity_seek);
-
 
         if(android.os.Build.VERSION.SDK_INT >= 11){
             // will update the "progress" propriety of seekbar until it reaches progress
@@ -37,6 +50,7 @@ public class OrderDetails extends AppCompatActivity {
     private void initview() {
         android.support.v7.widget.Toolbar toolbar= (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Order Details");
+        toolbar.setBackgroundColor(Color.parseColor("#87CEFA"));
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);
@@ -64,5 +78,26 @@ public class OrderDetails extends AppCompatActivity {
             }
 
         });
+        recyclerViewOrder=findViewById(R.id.recyclerOrderdetails);
+        recyclerViewOrder.setHasFixedSize(true);
+        recyclerViewOrder.setLayoutManager(new LinearLayoutManager(this));
+        getOrderDetails();
+    }
+
+    private void getOrderDetails() {
+
+        try {
+
+            String result = new OrderHelper.GETMyOrderDetails().execute(Orderid.toString()).get();
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<OrderDetailsView>>() {
+            }.getType();
+            orderdetails = new Gson().fromJson(result, listType);
+            adapterOrderDetails = new OrderDetailsAdapter(OrderDetails.this, orderdetails);
+            recyclerViewOrder.setAdapter(adapterOrderDetails);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

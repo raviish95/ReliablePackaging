@@ -5,15 +5,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -24,11 +20,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -36,16 +30,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
 import com.awizom.reliablepackaging.Adapter.OrderListAdapter;
-import com.awizom.reliablepackaging.Helper.AdminHelper;
+import com.awizom.reliablepackaging.Helper.OrderHelper;
 import com.awizom.reliablepackaging.Model.Order;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
-import java.net.NoRouteToHostException;
 import java.util.List;
 
 public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -177,7 +167,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             //we are connected to a network
             no_internet.setVisibility(View.GONE);
             connected = true;
-            getcategorylist();
+            getMyOrderList();
             //    Toast.makeText(getApplicationContext(), "Internet is On", Toast.LENGTH_SHORT).show();
         } else {
             connected = false;
@@ -187,12 +177,12 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         }
     }
 
-    private void getcategorylist() {
+    private void getMyOrderList() {
 
-        String catalogName = "Home Cleaning & Repairs";
+        String clientid = "3";
         try {
 
-            String result = new AdminHelper.GETCategoryList().execute(catalogName.toString()).get();
+            String result = new OrderHelper.GETMyOrder().execute(clientid.toString()).get();
             Gson gson = new Gson();
             Type listType = new TypeToken<List<Order>>() {
             }.getType();
