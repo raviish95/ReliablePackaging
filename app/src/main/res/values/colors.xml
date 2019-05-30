@@ -15,6 +15,8 @@
     <color name="azure">#F0FFFF</color>
     <color name="new_grey">#778899</color>
     <color name="green">#32CD32</color>
+
+    <color name="darkgreen">#006400</color>
     <color name="transparency">#00000000</color>
 
     <color name="purple">#9097CD</color>

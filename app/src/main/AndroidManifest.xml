@@ -45,6 +45,11 @@
         <activity
             android:name=".MyProfile"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SelectDesign"
+            android:theme="@style/AppTheme.NoActionBar" >
+
+
+        </activity>
     </application>
 
 </manifest>

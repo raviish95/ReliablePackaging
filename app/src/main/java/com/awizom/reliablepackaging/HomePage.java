@@ -1,6 +1,7 @@
 package com.awizom.reliablepackaging;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -30,11 +31,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import com.awizom.reliablepackaging.Adapter.OrderListAdapter;
 import com.awizom.reliablepackaging.Helper.OrderHelper;
+import com.awizom.reliablepackaging.Helper.ProfileHelper;
+import com.awizom.reliablepackaging.Model.MyProfileView;
 import com.awizom.reliablepackaging.Model.Order;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -52,6 +57,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     TextView rebook, neworder;
     TextView textCartItemCount;
     int mCartItemCount = 10;
+    TextView username;
 
     /* For OnBackPRess in HomePage */
     @SuppressLint("ResourceType")
@@ -109,6 +115,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         recyclerView.scrollToPosition(0);
         recyclerView.smoothScrollToPosition(0);
         linearLayout = findViewById(R.id.linearlayout);
+
         snackbar = Snackbar.make(linearLayout, "No internet connection!", Snackbar.LENGTH_INDEFINITE)
                 .setAction("RETRY", new View.OnClickListener() {
                     @Override
@@ -128,6 +135,31 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerview = navigationView.getHeaderView(0);
+
+        username = headerview.findViewById(R.id.profileName);
+        getMyProfile();
+    }
+
+    private void getMyProfile() {
+
+        String clientid = "3";
+        try {
+
+            String result = new ProfileHelper.GETMyProfile().execute(clientid.toString()).get();
+            Gson gson = new Gson();
+            Type listType = new TypeToken<MyProfileView>() {
+            }.getType();
+            MyProfileView myProfileView = new Gson().fromJson(result, listType);
+            String nameview = myProfileView.getName().toString();
+            String Email = myProfileView.getEmail().toString();
+            String PhoneNumber = String.valueOf(myProfileView.getPhoneNumber().toString());
+            String pincode = String.valueOf(myProfileView.getPinCode());
+            String billingaddredss = String.valueOf(myProfileView.getBillingAdddress().toString());
+            username.setText(nameview.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void addOrderget() {
@@ -137,7 +169,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.order_type, null);
         rebook = dialogView.findViewById(R.id.rebOok);
-        neworder =dialogView.findViewById(R.id.neworder);
+        neworder = dialogView.findViewById(R.id.neworder);
         rebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -241,16 +273,16 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             }
 
             case R.id.nav_password: {
-                Intent intent=new Intent(this,ChangePassword.class);
+                Intent intent = new Intent(this, ChangePassword.class);
                 startActivity(intent);
-               // Toast.makeText(getApplicationContext(), "CHange Password", Toast.LENGTH_LONG).show();
+                // Toast.makeText(getApplicationContext(), "CHange Password", Toast.LENGTH_LONG).show();
                 //do somthing
                 break;
             }
             case R.id.nav_profile: {
-                Intent intent=new Intent(this,MyProfile.class);
+                Intent intent = new Intent(this, MyProfile.class);
                 startActivity(intent);
-              /*  Toast.makeText(getApplicationContext(), "Profile", Toast.LENGTH_LONG).show();*/
+                /*  Toast.makeText(getApplicationContext(), "Profile", Toast.LENGTH_LONG).show();*/
                 break;
             }
             case R.id.nav_send: {
@@ -259,18 +291,18 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
                 intent.putExtra("sms_body", message);
                 startActivity(intent);
-               /*Toast.makeText(getApplicationContext(), "Send", Toast.LENGTH_LONG).show();*/
+                /*Toast.makeText(getApplicationContext(), "Send", Toast.LENGTH_LONG).show();*/
                 break;
             }
             case R.id.nav_refer: {
-              /*  Toast.makeText(getApplicationContext(), "ReferApp", Toast.LENGTH_LONG).show();*/
+                /*  Toast.makeText(getApplicationContext(), "ReferApp", Toast.LENGTH_LONG).show();*/
 
                 break;
             }
             case R.id.my_acc: {
-                Intent intent=new Intent(this,MyAccount.class);
+                Intent intent = new Intent(this, MyAccount.class);
                 startActivity(intent);
-             /*   Toast.makeText(getApplicationContext(), "My Account", Toast.LENGTH_LONG).show();*/
+                /*   Toast.makeText(getApplicationContext(), "My Account", Toast.LENGTH_LONG).show();*/
                 break;
             }
 

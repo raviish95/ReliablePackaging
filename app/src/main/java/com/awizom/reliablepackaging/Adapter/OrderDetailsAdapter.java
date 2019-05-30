@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.awizom.reliablepackaging.Model.OrderDetailsView;
 import com.awizom.reliablepackaging.OrderDetails;
 import com.awizom.reliablepackaging.R;
+import com.awizom.reliablepackaging.SelectDesign;
 
 public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliablepackaging.Adapter.OrderDetailsAdapter.MyViewHolder> {
 
@@ -35,18 +36,13 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
         holder.weight.setText("Weight - " + String.valueOf(c.getWeight()));
         holder.orderid.setText(String.valueOf(c.getOrderId()));
         holder.amount.setText(" \u20B9" + String.valueOf(c.getTotalAmount()).toString());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mCtx, OrderDetails.class);
-                intent.putExtra("OrderId", holder.orderid.getText().toString());
-                mCtx.startActivity(intent);
-            }
-        });
+
         holder.productdesign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(mCtx, SelectDesign.class);
+                intent.putExtra("OrderId", holder.orderid.getText().toString());
+                mCtx.startActivity(intent);
             }
         });
 

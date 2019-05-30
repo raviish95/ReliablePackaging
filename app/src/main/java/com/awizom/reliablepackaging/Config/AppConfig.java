@@ -6,7 +6,7 @@ public class AppConfig {
 
     }
 
-    public static final String BASE_URL = "http://192.168.1.5:1050/";
-    public static final String BASE_URL_API_ = "http://192.168.1.5:1050/api/apps/";
+    public static final String BASE_URL = "http://192.168.1.4:1789/";
+    public static final String BASE_URL_API_ = "http://192.168.1.4:1789/api/apps/";
 
 }
