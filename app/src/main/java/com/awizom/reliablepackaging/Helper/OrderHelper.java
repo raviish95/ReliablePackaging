@@ -21,7 +21,7 @@ public class OrderHelper extends AppCompatActivity {
             try {
                 OkHttpClient client = new OkHttpClient();
                 Request.Builder builder = new Request.Builder();
-                builder.url(AppConfig.BASE_URL_API_ + "MyOrder/3");
+                builder.url(AppConfig.BASE_URL_API_ + "MyOrder/"+clientID);
                 builder.addHeader("Content-Type", "Application/json");
                 builder.addHeader("Accept", "application/json");
 

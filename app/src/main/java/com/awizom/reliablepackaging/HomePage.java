@@ -56,8 +56,10 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     FloatingActionButton addorder;
     TextView rebook, neworder;
     TextView textCartItemCount;
+    private ImageView notification;
     int mCartItemCount = 10;
     TextView username;
+    String clientid = "",userName="",userId="";
 
     /* For OnBackPRess in HomePage */
     @SuppressLint("ResourceType")
@@ -101,6 +103,9 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         toolbar.setBackgroundColor(Color.parseColor("#87CEFA"));
         toolbar.setTitle("Home Page");
         setSupportActionBar(toolbar);
+        clientid =String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
+        userName =SharedPrefManager.getInstance(this).getUser().getUserName().toString();
+        userId=SharedPrefManager.getInstance(this).getUser().getUserID();
         addorder = findViewById(R.id.addOrder);
         addorder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,14 +141,13 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerview = navigationView.getHeaderView(0);
-
         username = headerview.findViewById(R.id.profileName);
         getMyProfile();
     }
 
     private void getMyProfile() {
 
-        String clientid = "3";
+
         try {
 
             String result = new ProfileHelper.GETMyProfile().execute(clientid.toString()).get();
@@ -210,9 +214,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     private void getMyOrderList() {
-
-        String clientid = "3";
-        try {
+       try {
 
             String result = new OrderHelper.GETMyOrder().execute(clientid.toString()).get();
             Gson gson = new Gson();
@@ -237,7 +239,14 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         View actionView = MenuItemCompat.getActionView(menuItem);
         textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
-
+        notification = (ImageView) actionView.findViewById(R.id.notification);
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomePage.this, NotificationActivity.class);
+                startActivity(intent);
+            }
+        });
         setupBadge();
         return true;
     }
@@ -266,14 +275,29 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         switch (menuItem.getItemId()) {
 
             case R.id.nav_logout: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+
+                try {
+
+                    SharedPrefManager.getInstance(this).logout();
+                    Intent intent = new Intent(this, MainActivity.class);
+
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
                 //do somthing
                 break;
             }
 
             case R.id.nav_password: {
                 Intent intent = new Intent(this, ChangePassword.class);
+                intent.putExtra("UserName",userName.toString());
+                intent.putExtra("UserID",userId.toString());
                 startActivity(intent);
                 // Toast.makeText(getApplicationContext(), "CHange Password", Toast.LENGTH_LONG).show();
                 //do somthing

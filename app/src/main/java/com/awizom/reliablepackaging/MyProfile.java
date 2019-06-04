@@ -87,7 +87,7 @@ public class MyProfile extends AppCompatActivity {
 
     private void getmyProfile() {
 
-        String clientid = "3";
+        String clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
         try {
 
             String result = new ProfileHelper.GETMyProfile().execute(clientid.toString()).get();

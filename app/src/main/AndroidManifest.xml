@@ -16,16 +16,17 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+        <intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+            <action android:name="android.intent.action.MAIN" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".HomePage"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
 
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".OrderDetails"
@@ -45,11 +46,11 @@
         <activity
             android:name=".MyProfile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SelectDesign"
-            android:theme="@style/AppTheme.NoActionBar" >
-
-
-        </activity>
+        <activity
+            android:name=".SelectDesign"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".NotificationActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
