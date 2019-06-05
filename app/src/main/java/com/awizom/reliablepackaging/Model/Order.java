@@ -11,6 +11,28 @@ public class Order {
     public double UnitPrice;
     public int TotalProduct;
     public int ClientID;
+    public String ImageUrl;
+    public String IsApproved;
+
+
+    public String OrderNo;
+    public String JobName;
+
+    public String getOrderNo() {
+        return OrderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        OrderNo = orderNo;
+    }
+
+    public String getJobName() {
+        return JobName;
+    }
+
+    public void setJobName(String jobName) {
+        JobName = jobName;
+    }
 
     public int getOrderId() {
         return OrderId;
@@ -84,5 +106,20 @@ public class Order {
         ClientID = clientID;
     }
 
+    public String getImageUrl() {
+        return ImageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        ImageUrl = imageUrl;
+    }
+
+    public String getIsApproved() {
+        return IsApproved;
+    }
+
+    public void setIsApproved(String isApproved) {
+        IsApproved = isApproved;
+    }
 
 }

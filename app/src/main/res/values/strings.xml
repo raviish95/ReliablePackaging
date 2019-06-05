@@ -11,6 +11,7 @@
     <string name="action_example">Example action</string>
     <string name="title_activity_admin_home_page">Reliable</string>
     <string name="scaletype"><font fgcolor='#FF0000'> *</font> Choose Your Product Scale Type</string>
+    <string name="layertype"><font fgcolor='#FF0000'> *</font> Choose Product Layer Type</string>
     <string name="action_settings">Settings</string>
     <string name="bell">Notification</string>
     <string name="title_home">home</string>

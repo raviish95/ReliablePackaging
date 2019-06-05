@@ -27,11 +27,13 @@ public class OrderDetails extends AppCompatActivity {
     String Orderid;
     OrderDetailsAdapter adapterOrderDetails;
     List<OrderDetailsView> orderdetails;
+    String imageLink;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_details);
         Orderid= getIntent().getStringExtra("OrderId");
+        imageLink=getIntent().getStringExtra("ImageLink");
         initview();
         verticalSeekBar = findViewById(R.id.capacity_seek);
 
@@ -60,6 +62,7 @@ public class OrderDetails extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
         linearLayout=findViewById(R.id.linearlayout);
         linearLayout.setOnTouchListener(new OnSwipeTouchListener(OrderDetails.this) {
             public void onSwipeTop() {
@@ -93,7 +96,7 @@ public class OrderDetails extends AppCompatActivity {
             Type listType = new TypeToken<List<OrderDetailsView>>() {
             }.getType();
             orderdetails = new Gson().fromJson(result, listType);
-            adapterOrderDetails = new OrderDetailsAdapter(OrderDetails.this, orderdetails);
+            adapterOrderDetails = new OrderDetailsAdapter(OrderDetails.this, orderdetails,imageLink);
             recyclerViewOrder.setAdapter(adapterOrderDetails);
 
         } catch (Exception e) {

@@ -2,6 +2,35 @@ package com.awizom.reliablepackaging.Model;
 
 public class OrderDetailsView {
     public int OrderId ;
+    public String ImageUrl ;
+
+    public String OrderNo;
+
+    public String getOrderNo() {
+        return OrderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        OrderNo = orderNo;
+    }
+
+    public String getJobName() {
+        return JobName;
+    }
+
+    public void setJobName(String jobName) {
+        JobName = jobName;
+    }
+
+    public String JobName;
+
+    public String getImageUrl() {
+        return ImageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        ImageUrl = imageUrl;
+    }
 
     public int getOrderId() {
         return OrderId;

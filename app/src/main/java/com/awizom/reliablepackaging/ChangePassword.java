@@ -11,6 +11,11 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.awizom.reliablepackaging.Helper.ProfileHelper;
+import com.awizom.reliablepackaging.Model.ResultModel;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 
 public class ChangePassword extends AppCompatActivity {
 
@@ -83,10 +88,20 @@ public class ChangePassword extends AppCompatActivity {
         } else if (newPass.getText().toString().isEmpty()) {
             newPass.setError("Please enter new password");
             newPass.requestFocus();
-        } else if (cnfrmPass.getText().toString().isEmpty()) {
+        }
+        else if (newPass.getText().toString().length()<6) {
+            newPass.setError("Password length should be minimum 6");
+            newPass.requestFocus();
+        }
+        else if (cnfrmPass.getText().toString().isEmpty()) {
             cnfrmPass.setError("Please enter confirm password");
             cnfrmPass.requestFocus();
-        } else if (!(cnfrmPass.getText().toString() .equals( newPass.getText().toString()))) {
+        }
+        else if (cnfrmPass.getText().toString().length()<6) {
+            cnfrmPass.setError("Password length should be minimum 6");
+            cnfrmPass.requestFocus();
+        }
+        else if (!(cnfrmPass.getText().toString().equals(newPass.getText().toString()))) {
             cnfrmPass.setError("Confirm password should be same as new password");
             cnfrmPass.requestFocus();
         } else {
@@ -96,7 +111,22 @@ public class ChangePassword extends AppCompatActivity {
                     Toast.makeText(ChangePassword.this, "Invalid request", Toast.LENGTH_SHORT).show();
                     result = new ProfileHelper.Changepasswordmethod().execute(userid.toString(), username.toString(), oldPass.getText().toString(), newPass.getText().toString()).get();
                 } else {
-                    Toast.makeText(ChangePassword.this, "Success", Toast.LENGTH_SHORT).show();
+                    Gson gson = new Gson();
+                    Type getType = new TypeToken<ResultModel>() {
+                    }.getType();
+                    ResultModel resultModel = new Gson().fromJson(result, getType);
+                    if (resultModel.getStatus().equals("Password Changed")) {
+                        Toast.makeText(ChangePassword.this, "Password Changed", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(this, HomePage.class);
+                        startActivity(intent);
+                    }
+
+                    else{
+                        oldPass.setError("Please enter valid password");
+                        oldPass.requestFocus();
+                       // Toast.makeText(ChangePassword.this, "Please Enter Valid Password", Toast.LENGTH_SHORT).show();
+                    }
+
 
                 }
             } catch (Exception e) {

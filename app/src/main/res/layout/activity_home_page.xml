@@ -5,12 +5,11 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mobbg">
+    android:background="@drawable/gradientbackground">
 
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"
         android:orientation="vertical">
@@ -81,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@drawable/mobbg"
+        android:background="@drawable/gradientbackground"
         app:headerLayout="@layout/nav_header_admin_home_page"
         app:itemIconTint="#8c000000"
         app:itemTextColor="#e6000000"
