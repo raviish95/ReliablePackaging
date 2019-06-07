@@ -1,6 +1,7 @@
 package com.awizom.reliablepackaging;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -59,7 +60,16 @@ public class OrderDetails extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+
+                if(imageLink.toString().equals("imagelink"))
+                {
+                    Intent intent=new Intent(OrderDetails.this,HomePage.class);
+                    startActivity(intent);
+                }
+                else {
+                    onBackPressed();
+                }
+
             }
         });
 

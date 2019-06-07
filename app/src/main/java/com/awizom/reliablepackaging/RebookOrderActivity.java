@@ -27,6 +27,7 @@ public class RebookOrderActivity extends AppCompatActivity {
     private List<Order> orderlist;
     private RebookOrderListAdapter adapterOrderList;
     private LinearLayout linearLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,25 +46,28 @@ public class RebookOrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent=new Intent(RebookOrderActivity.this,HomePage.class);
+                Intent intent = new Intent(RebookOrderActivity.this, HomePage.class);
                 startActivity(intent);
             }
         });
-        linearLayout=findViewById(R.id.linearlayout);
+        linearLayout = findViewById(R.id.linearlayout);
         linearLayout.setOnTouchListener(new OnSwipeTouchListener(RebookOrderActivity.this) {
             public void onSwipeTop() {
-             //   Toast.makeText(RebookOrderActivity.this, "top", Toast.LENGTH_SHORT).show();
+                //   Toast.makeText(RebookOrderActivity.this, "top", Toast.LENGTH_SHORT).show();
             }
+
             public void onSwipeRight() {
                 onBackPressed();
-               // Toast.makeText(RebookOrderActivity.this, "right", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(RebookOrderActivity.this, "right", Toast.LENGTH_SHORT).show();
             }
+
             public void onSwipeLeft() {
 
-              //  Toast.makeText(RebookOrderActivity.this, "left", Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(RebookOrderActivity.this, "left", Toast.LENGTH_SHORT).show();
             }
+
             public void onSwipeBottom() {
-           //     Toast.makeText(RebookOrderActivity.this, "bottom", Toast.LENGTH_SHORT).show();
+                //     Toast.makeText(RebookOrderActivity.this, "bottom", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -78,7 +82,7 @@ public class RebookOrderActivity extends AppCompatActivity {
 
     private void getcategorylist() {
 
-        String clientid = "3";
+        String clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
         try {
 
             String result = new OrderHelper.GETMyOrder().execute(clientid.toString()).get();

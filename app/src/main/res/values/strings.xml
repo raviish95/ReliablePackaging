@@ -7,7 +7,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="confirm_reebook">Are you sure? You want to rebook this order</string>
     <string name="action_example">Example action</string>
     <string name="title_activity_admin_home_page">Reliable</string>
     <string name="scaletype"><font fgcolor='#FF0000'> *</font> Choose Your Product Scale Type</string>

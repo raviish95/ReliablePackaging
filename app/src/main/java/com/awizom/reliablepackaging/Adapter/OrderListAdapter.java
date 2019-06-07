@@ -52,9 +52,9 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
         }
         try {
             if (!(c.getImageUrl().toString() == null)) {
-                holder.checking.setText("filled");
-                Glide.with(mCtx).load(AppConfig.BASE_URL + c.getImageUrl().toString()).into(holder.categoryImage);
 
+                Glide.with(mCtx).load(AppConfig.BASE_URL + c.getImageUrl().toString()).into(holder.categoryImage);
+                holder.checking.setText("filled");
             } else {
                 holder.categoryImage.setImageResource(R.drawable.desgin_notapprove);
                 holder.checking.setText("blank");
@@ -65,7 +65,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
         }
 
 
-        holder.categoryImage.setOnClickListener(new View.OnClickListener() {
+    /*    holder.categoryImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (holder.checking.getText().toString().equals("filled")) {
@@ -79,7 +79,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
                     mCtx.startActivity(intent);
                 }
             }
-        });
+        });*/
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -7,9 +7,23 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.awizom.reliablepackaging.Adapter.NotificationListAdapter;
+import com.awizom.reliablepackaging.Adapter.OrderListAdapter;
+import com.awizom.reliablepackaging.Helper.OrderHelper;
+import com.awizom.reliablepackaging.Helper.ProfileHelper;
+import com.awizom.reliablepackaging.Model.NotificationModel;
+import com.awizom.reliablepackaging.Model.Order;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.List;
+
 public class NotificationActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    List<NotificationModel> notificationModelList;
+    NotificationListAdapter notificationListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,5 +47,24 @@ public class NotificationActivity extends AppCompatActivity {
         recyclerView=findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        getNotifications();
+    }
+
+    private void getNotifications() {
+        String clientid=String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
+        try {
+
+            String result = new ProfileHelper.GETNotifications().execute(clientid.toString()).get();
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<NotificationModel>>() {
+            }.getType();
+            notificationModelList = new Gson().fromJson(result, listType);
+            notificationListAdapter = new NotificationListAdapter(NotificationActivity.this, notificationModelList);
+
+            recyclerView.setAdapter(notificationListAdapter);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

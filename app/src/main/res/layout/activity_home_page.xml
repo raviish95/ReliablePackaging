@@ -20,6 +20,12 @@
             android:layout_height="match_parent"
             android:src="@drawable/nointernet"
             android:visibility="gone" />
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:scrollbarAlwaysDrawVerticalTrack="true">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview"
@@ -27,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/mobbg"></android.support.v7.widget.RecyclerView>
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 
 

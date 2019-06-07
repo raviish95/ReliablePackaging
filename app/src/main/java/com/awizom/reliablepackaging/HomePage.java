@@ -15,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,6 +32,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.awizom.reliablepackaging.Adapter.OrderListAdapter;
 import com.awizom.reliablepackaging.Helper.OrderHelper;
@@ -59,8 +61,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     private ImageView notification;
     int mCartItemCount = 10;
     TextView username;
-    String clientid = "",userName="",userId="";
-
+    String clientid = "", userName = "", userId = "";
+    SwipeRefreshLayout mSwipeRefreshLayout;
     /* For OnBackPRess in HomePage */
     @SuppressLint("ResourceType")
     @Override
@@ -103,9 +105,9 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         toolbar.setBackgroundColor(Color.parseColor("#87CEFA"));
         toolbar.setTitle("Home Page");
         setSupportActionBar(toolbar);
-        clientid =String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
-        userName =SharedPrefManager.getInstance(this).getUser().getUserName().toString();
-        userId=SharedPrefManager.getInstance(this).getUser().getUserID();
+        clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
+        userName = SharedPrefManager.getInstance(this).getUser().getUserName().toString();
+        userId = SharedPrefManager.getInstance(this).getUser().getUserID();
         addorder = findViewById(R.id.addOrder);
         addorder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +116,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             }
         });
         no_internet = findViewById(R.id.no_internet);
+        mSwipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -143,13 +146,36 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         View headerview = navigationView.getHeaderView(0);
         username = headerview.findViewById(R.id.profileName);
         getMyProfile();
+        getNotiCount();
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                try {
+                 Intent intent=new Intent(HomePage.this,HomePage.class);
+                 startActivity(intent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                  // relativeLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+    }
+
+    private void getNotiCount() {
+        String clientId=String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
+        try {
+            String result = new ProfileHelper.GetNotiCount().execute(clientId.toString()).get();
+           // Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_LONG).show();
+            mCartItemCount=Integer.parseInt(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void getMyProfile() {
-
-
+      //  mSwipeRefreshLayout.setRefreshing(true);
         try {
-
             String result = new ProfileHelper.GETMyProfile().execute(clientid.toString()).get();
             Gson gson = new Gson();
             Type listType = new TypeToken<MyProfileView>() {
@@ -161,6 +187,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             String pincode = String.valueOf(myProfileView.getPinCode());
             String billingaddredss = String.valueOf(myProfileView.getBillingAdddress().toString());
             username.setText(nameview.toString());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -214,7 +241,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     private void getMyOrderList() {
-       try {
+        try {
 
             String result = new OrderHelper.GETMyOrder().execute(clientid.toString()).get();
             Gson gson = new Gson();
@@ -224,7 +251,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             adapterOrderList = new OrderListAdapter(HomePage.this, orderlist);
 
             recyclerView.setAdapter(adapterOrderList);
-
+            mSwipeRefreshLayout.setRefreshing(false);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -296,8 +323,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
             case R.id.nav_password: {
                 Intent intent = new Intent(this, ChangePassword.class);
-                intent.putExtra("UserName",userName.toString());
-                intent.putExtra("UserID",userId.toString());
+                intent.putExtra("UserName", userName.toString());
+                intent.putExtra("UserID", userId.toString());
                 startActivity(intent);
                 // Toast.makeText(getApplicationContext(), "CHange Password", Toast.LENGTH_LONG).show();
                 //do somthing
