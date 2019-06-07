@@ -1,7 +1,9 @@
 package com.awizom.reliablepackaging;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,12 +19,15 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 
+import dmax.dialog.SpotsDialog;
+
 public class ChangePassword extends AppCompatActivity {
 
     private RelativeLayout relativeLayout;
     private String userid, username, result = "";
     private TextInputEditText oldPass, newPass, cnfrmPass;
     private Button subMitButton;
+    private AlertDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,7 @@ public class ChangePassword extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        progressDialog = new SpotsDialog(this, R.style.Custom);
         subMitButton = findViewById(R.id.submitButton);
         oldPass = findViewById(R.id.old_pwd);
         newPass = findViewById(R.id.new_pwd);
@@ -75,6 +81,7 @@ public class ChangePassword extends AppCompatActivity {
         subMitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.show();
                 changepasswordmethod();
             }
         });
@@ -83,28 +90,30 @@ public class ChangePassword extends AppCompatActivity {
     private void changepasswordmethod() {
 
         if (oldPass.getText().toString().isEmpty()) {
+            progressDialog.dismiss();
             oldPass.setError("Please enter valid password");
             oldPass.requestFocus();
         } else if (newPass.getText().toString().isEmpty()) {
+            progressDialog.dismiss();
             newPass.setError("Please enter new password");
             newPass.requestFocus();
-        }
-        else if (newPass.getText().toString().length()<6) {
+        } else if (newPass.getText().toString().length() < 6) {
+            progressDialog.dismiss();
             newPass.setError("Password length should be minimum 6");
             newPass.requestFocus();
-        }
-        else if (cnfrmPass.getText().toString().isEmpty()) {
+        } else if (cnfrmPass.getText().toString().isEmpty()) {
             cnfrmPass.setError("Please enter confirm password");
             cnfrmPass.requestFocus();
-        }
-        else if (cnfrmPass.getText().toString().length()<6) {
+        } else if (cnfrmPass.getText().toString().length() < 6) {
+            progressDialog.dismiss();
             cnfrmPass.setError("Password length should be minimum 6");
             cnfrmPass.requestFocus();
-        }
-        else if (!(cnfrmPass.getText().toString().equals(newPass.getText().toString()))) {
+        } else if (!(cnfrmPass.getText().toString().equals(newPass.getText().toString()))) {
+            progressDialog.dismiss();
             cnfrmPass.setError("Confirm password should be same as new password");
             cnfrmPass.requestFocus();
         } else {
+
             try {
                 result = new ProfileHelper.Changepasswordmethod().execute(userid.toString(), username.toString(), oldPass.getText().toString(), newPass.getText().toString()).get();
                 if (result.isEmpty()) {
@@ -119,12 +128,12 @@ public class ChangePassword extends AppCompatActivity {
                         Toast.makeText(ChangePassword.this, "Password Changed", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(this, HomePage.class);
                         startActivity(intent);
-                    }
-
-                    else{
+                        dismissmethod();
+                    } else {
+                        progressDialog.dismiss();
                         oldPass.setError("Please enter valid password");
                         oldPass.requestFocus();
-                       // Toast.makeText(ChangePassword.this, "Please Enter Valid Password", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(ChangePassword.this, "Please Enter Valid Password", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -134,5 +143,16 @@ public class ChangePassword extends AppCompatActivity {
             }
 
         }
+    }
+
+    private void dismissmethod() {
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
+        }, 100);
     }
 }

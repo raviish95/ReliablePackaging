@@ -2,10 +2,12 @@ package com.awizom.reliablepackaging.Adapter;
 
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import com.awizom.reliablepackaging.R;
 import com.awizom.reliablepackaging.SelectDesign;
 import com.bumptech.glide.Glide;
 
+import dmax.dialog.SpotsDialog;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliablepackaging.Adapter.OrderDetailsAdapter.MyViewHolder> {
@@ -29,7 +32,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
     private List<OrderDetailsView> orderDetails;
     private Context mCtx;
     private String imagelinkurl;
-
+    private AlertDialog progressDialog;
     public OrderDetailsAdapter(Context baseContext, List<OrderDetailsView> orderList, String imageLink) {
         this.orderDetails = orderList;
         this.mCtx = baseContext;
@@ -74,10 +77,11 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
                     openZommImage(holder.image_linkurl.getText().toString(), mCtx);
 
                 } else {
-
+                     progressDialog.show();
                     Intent intent = new Intent(mCtx, SelectDesign.class);
                     intent.putExtra("OrderId", holder.orderid.getText().toString());
                     mCtx.startActivity(intent);
+                    dismissmethod();
                 }
 
             }
@@ -85,6 +89,16 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
 
     }
 
+    private void dismissmethod() {
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
+        }, 100);
+    }
     private void openZommImage(String imagelinkid, Context mCtx) {
 
         final android.support.v7.app.AlertDialog.Builder dialogBuilder = new android.support.v7.app.AlertDialog.Builder(mCtx);
@@ -136,6 +150,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
         @RequiresApi(api = Build.VERSION_CODES.M)
         public MyViewHolder(View view) {
             super(view);
+            progressDialog = new SpotsDialog(mCtx, R.style.Custom);
             image_linkurl=view.findViewById(R.id.image_link);
             product = (TextView) view.findViewById(R.id.prod_name);
             productdesign = (ImageView) view.findViewById(R.id.productdesign);

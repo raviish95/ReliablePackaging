@@ -1,5 +1,6 @@
 package com.awizom.reliablepackaging;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.List;
+
+import dmax.dialog.SpotsDialog;
 
 public class RebookOrderActivity extends AppCompatActivity {
 
@@ -46,8 +49,7 @@ public class RebookOrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(RebookOrderActivity.this, HomePage.class);
-                startActivity(intent);
+            onBackPressed();
             }
         });
         linearLayout = findViewById(R.id.linearlayout);
@@ -71,6 +73,7 @@ public class RebookOrderActivity extends AppCompatActivity {
             }
 
         });
+
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

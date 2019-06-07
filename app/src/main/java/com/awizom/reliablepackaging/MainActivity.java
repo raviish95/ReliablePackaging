@@ -2,6 +2,7 @@ package com.awizom.reliablepackaging;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -34,6 +35,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 
+import dmax.dialog.SpotsDialog;
+
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     Snackbar snackbar;
     String result = "";
     boolean connected = false;
-
+    private AlertDialog progressDialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+
+        progressDialog = new SpotsDialog(MainActivity.this, R.style.Custom);
         reliableimageview = findViewById(R.id.reliableimage);
         reliableTextView = findViewById(R.id.reliablepackaging);
         loadingProgressBar = findViewById(R.id.loadingProgressBar);
@@ -106,10 +111,13 @@ public class MainActivity extends AppCompatActivity {
         loginbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.show();
                 if (userName.getText().toString().isEmpty() || userName.getText().toString().contains(" ")) {
+                    progressDialog.dismiss();
                     userName.setError("Please Enter valid UserId");
                     userName.requestFocus();
                 } else if (password.getText().toString().isEmpty() || password.getText().toString().contains(" ")) {
+                    progressDialog.dismiss();
                     password.setError("Please Enter valid Password");
                     password.requestFocus();
                 } else {
@@ -138,7 +146,9 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("ClientId", clientId.toString());
                                 intent.putExtra("UserName", userName.getText().toString());
                                 startActivity(intent);
+                             //   progressDialog.dismiss();
                             } else {
+                                progressDialog.dismiss();
                                 userName.setError("UserId or Password is Wrong");
                                 password.setError("UserId or Password is Wrong");
                             }

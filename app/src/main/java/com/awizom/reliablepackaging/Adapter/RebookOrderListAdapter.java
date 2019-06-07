@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.awizom.reliablepackaging.AddOrderActivity;
 import com.awizom.reliablepackaging.Config.AppConfig;
 import com.awizom.reliablepackaging.Helper.OrderHelper;
 import com.awizom.reliablepackaging.HomePage;
@@ -29,6 +30,7 @@ import com.awizom.reliablepackaging.SelectDesign;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import dmax.dialog.SpotsDialog;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderListAdapter.MyViewHolder> {
@@ -36,7 +38,7 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
     String imagestr;
     private List<Order> orderList;
     private Context mCtx;
-
+    private AlertDialog progressDialog;
     public RebookOrderListAdapter(Context baseContext, List<Order> orderList) {
         this.orderList = orderList;
         this.mCtx = baseContext;
@@ -99,7 +101,7 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
     }
 
     private void ShowConfirmRebookOrderDialog(final String orderid, Context context) {
-
+        progressDialog = new SpotsDialog(context, R.style.Custom);
         final android.support.v7.app.AlertDialog.Builder dialogBuilder = new android.support.v7.app.AlertDialog.Builder(mCtx);
         dialogBuilder.setCancelable(false);
         LayoutInflater inflater = LayoutInflater.from(mCtx);
@@ -111,6 +113,7 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.show();
                 PostReorder(orderid.toString());
             }
         });

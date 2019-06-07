@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/light_blue"
+        android:background="@drawable/gradient_notificationlist"
         android:orientation="horizontal">
 
         <ImageView
@@ -22,10 +22,13 @@
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/light_blue"
-            app:cardElevation="50dp"
-            app:contentPadding="10dp">
+            android:layout_marginEnd="3dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="10dp"
 
+            app:cardBackgroundColor="@color/light_blue"
+            app:cardElevation="5dp"
+            app:contentPadding="10dp">
 
             <TextView
                 android:id="@+id/noti_read"
@@ -56,7 +59,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:textColor="@color/black" />
+                android:drawableLeft="@drawable/time_left"
+                android:drawablePadding="5dp"
+                android:textColor="@color/new_grey" />
 
             <TextView
 
@@ -64,12 +69,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
 
         </android.support.v7.widget.CardView>
+
+
+
     </LinearLayout>
 
     <TextView

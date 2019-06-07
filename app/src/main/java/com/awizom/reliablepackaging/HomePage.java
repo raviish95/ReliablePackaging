@@ -11,6 +11,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -45,6 +46,8 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
+
 public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     RecyclerView recyclerView;
@@ -63,6 +66,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     TextView username;
     String clientid = "", userName = "", userId = "";
     SwipeRefreshLayout mSwipeRefreshLayout;
+    private AlertDialog progressDialog;
+
     /* For OnBackPRess in HomePage */
     @SuppressLint("ResourceType")
     @Override
@@ -105,6 +110,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         toolbar.setBackgroundColor(Color.parseColor("#87CEFA"));
         toolbar.setTitle("Home Page");
         setSupportActionBar(toolbar);
+        progressDialog = new SpotsDialog(this, R.style.Custom);
+
         clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
         userName = SharedPrefManager.getInstance(this).getUser().getUserName().toString();
         userId = SharedPrefManager.getInstance(this).getUser().getUserID();
@@ -151,22 +158,22 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             @Override
             public void onRefresh() {
                 try {
-                 Intent intent=new Intent(HomePage.this,HomePage.class);
-                 startActivity(intent);
+                    Intent intent = new Intent(HomePage.this, HomePage.class);
+                    startActivity(intent);
                 } catch (Exception e) {
                     e.printStackTrace();
-                  // relativeLayout.setVisibility(View.VISIBLE);
+                    // relativeLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
     }
 
     private void getNotiCount() {
-        String clientId=String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
+        String clientId = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
         try {
             String result = new ProfileHelper.GetNotiCount().execute(clientId.toString()).get();
-           // Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_LONG).show();
-            mCartItemCount=Integer.parseInt(result);
+            // Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_LONG).show();
+            mCartItemCount = Integer.parseInt(result);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -174,7 +181,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     private void getMyProfile() {
-      //  mSwipeRefreshLayout.setRefreshing(true);
+        //  mSwipeRefreshLayout.setRefreshing(true);
         try {
             String result = new ProfileHelper.GETMyProfile().execute(clientid.toString()).get();
             Gson gson = new Gson();
@@ -270,12 +277,25 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.show();
                 Intent intent = new Intent(HomePage.this, NotificationActivity.class);
                 startActivity(intent);
+                dismissmethod();
             }
         });
         setupBadge();
         return true;
+    }
+
+    private void dismissmethod() {
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
+        }, 100);
     }
 
     private void setupBadge() {
@@ -302,7 +322,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         switch (menuItem.getItemId()) {
 
             case R.id.nav_logout: {
-
+                progressDialog.show();
                 try {
 
                     SharedPrefManager.getInstance(this).logout();
@@ -311,9 +331,11 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
+                    dismissmethod();
 
                 } catch (Exception e) {
                     e.printStackTrace();
+                    dismissmethod();
                 }
 
 
@@ -322,17 +344,21 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             }
 
             case R.id.nav_password: {
+                progressDialog.show();
                 Intent intent = new Intent(this, ChangePassword.class);
                 intent.putExtra("UserName", userName.toString());
                 intent.putExtra("UserID", userId.toString());
                 startActivity(intent);
+                dismissmethod();
                 // Toast.makeText(getApplicationContext(), "CHange Password", Toast.LENGTH_LONG).show();
                 //do somthing
                 break;
             }
             case R.id.nav_profile: {
+                progressDialog.show();
                 Intent intent = new Intent(this, MyProfile.class);
                 startActivity(intent);
+                dismissmethod();
                 /*  Toast.makeText(getApplicationContext(), "Profile", Toast.LENGTH_LONG).show();*/
                 break;
             }
@@ -351,8 +377,10 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 break;
             }
             case R.id.my_acc: {
+                progressDialog.show();
                 Intent intent = new Intent(this, MyAccount.class);
                 startActivity(intent);
+                dismissmethod();
                 /*   Toast.makeText(getApplicationContext(), "My Account", Toast.LENGTH_LONG).show();*/
                 break;
             }

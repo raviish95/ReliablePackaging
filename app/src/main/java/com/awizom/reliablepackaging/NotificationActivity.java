@@ -24,6 +24,7 @@ public class NotificationActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     List<NotificationModel> notificationModelList;
     NotificationListAdapter notificationListAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +33,7 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        android.support.v7.widget.Toolbar toolbar= (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Notifications");
         toolbar.setBackgroundColor(Color.parseColor("#87CEFA"));
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
@@ -44,14 +45,14 @@ public class NotificationActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        recyclerView=findViewById(R.id.recyclerview);
+        recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         getNotifications();
     }
 
     private void getNotifications() {
-        String clientid=String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
+        String clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
         try {
 
             String result = new ProfileHelper.GETNotifications().execute(clientid.toString()).get();

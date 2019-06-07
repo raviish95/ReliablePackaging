@@ -1,5 +1,6 @@
 package com.awizom.reliablepackaging;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.TextInputEditText;
@@ -19,6 +20,8 @@ import android.widget.Toolbar;
 
 import com.awizom.reliablepackaging.Helper.OrderHelper;
 
+import dmax.dialog.SpotsDialog;
+
 public class AddOrderActivity extends AppCompatActivity {
 
     private TextInputEditText productname, itemweight;
@@ -30,7 +33,7 @@ public class AddOrderActivity extends AppCompatActivity {
     private Spinner layertype;
     private String layervalue = "1", weightvalue;
     String[] layerlist = {"Two Layer", "Three Layer"};
-
+    private AlertDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,7 @@ public class AddOrderActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        progressDialog = new SpotsDialog(AddOrderActivity.this, R.style.Custom);
         itemweight = findViewById(R.id.itemWeight);
         layertype = findViewById(R.id.layerType);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, layerlist);
@@ -116,10 +120,13 @@ public class AddOrderActivity extends AppCompatActivity {
         submitOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.show();
                 if (productname.getText().toString().isEmpty()) {
+                    progressDialog.dismiss();
                     productname.setError("Product Name should be not blank");
                     productname.requestFocus();
                 } else if (productype.getText().toString().isEmpty()) {
+                    progressDialog.dismiss();
                     productype.setError("Enter your product scale");
                     productype.requestFocus();
                 } else {
@@ -139,6 +146,7 @@ public class AddOrderActivity extends AppCompatActivity {
     }
 
     private void CreateOrder() {
+
 
         String clientId = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
         String userid = SharedPrefManager.getInstance(this).getUser().getUserID();

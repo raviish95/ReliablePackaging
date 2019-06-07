@@ -1,6 +1,7 @@
 package com.awizom.reliablepackaging;
 
 import android.animation.ObjectAnimator;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
+
 public class OrderDetails extends AppCompatActivity {
 
     com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar verticalSeekBar;
@@ -29,6 +32,7 @@ public class OrderDetails extends AppCompatActivity {
     OrderDetailsAdapter adapterOrderDetails;
     List<OrderDetailsView> orderdetails;
     String imageLink;
+    private AlertDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +76,7 @@ public class OrderDetails extends AppCompatActivity {
 
             }
         });
+        progressDialog = new SpotsDialog(OrderDetails.this, R.style.Custom);
 
         linearLayout=findViewById(R.id.linearlayout);
         linearLayout.setOnTouchListener(new OnSwipeTouchListener(OrderDetails.this) {
