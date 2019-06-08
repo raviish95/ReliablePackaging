@@ -1,5 +1,6 @@
 package com.awizom.reliablepackaging;
 
+import android.app.AlertDialog;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,12 +20,14 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
+
 public class NotificationActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     List<NotificationModel> notificationModelList;
     NotificationListAdapter notificationListAdapter;
-
+    private AlertDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,7 @@ public class NotificationActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        progressDialog = new SpotsDialog(this, R.style.Custom);
         getNotifications();
     }
 

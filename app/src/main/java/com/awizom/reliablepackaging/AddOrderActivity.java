@@ -19,6 +19,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.awizom.reliablepackaging.Helper.OrderHelper;
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import dmax.dialog.SpotsDialog;
 
@@ -30,10 +31,11 @@ public class AddOrderActivity extends AppCompatActivity {
     private TextView productype;
     private Button submitOrder;
     private RelativeLayout relativeLayout;
-    private Spinner layertype;
-    private String layervalue = "1", weightvalue;
+    private MaterialBetterSpinner layertype;
+    private String layervalue = "0", weightvalue;
     String[] layerlist = {"Two Layer", "Three Layer"};
     private AlertDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +131,10 @@ public class AddOrderActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     productype.setError("Enter your product scale");
                     productype.requestFocus();
+                } else if (layervalue.toString().equals("0")) {
+                    progressDialog.dismiss();
+                    layertype.setError("Layer type should not be blank");
+                    layertype.requestFocus();
                 } else {
                     CreateOrder();
                 }
