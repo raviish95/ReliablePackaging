@@ -174,6 +174,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             String result = new ProfileHelper.GetNotiCount().execute(clientId.toString()).get();
             // Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_LONG).show();
             mCartItemCount = Integer.parseInt(result);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -269,8 +270,26 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home_page, menu);
         MenuItem menuItem = menu.findItem(R.id.admin1);
+        MenuItem logouts=menu.findItem(R.id.action_logout);
+          logouts.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+              @Override
+              public boolean onMenuItemClick(MenuItem item) {
+                  progressDialog.show();
+                  try {
+                      SharedPrefManager.getInstance(HomePage.this).logout();
+                      Intent intent = new Intent(HomePage.this, MainActivity.class);
+                      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                      startActivity(intent);
+                      finish();
+                      dismissmethod();
 
-
+                  } catch (Exception e) {
+                      e.printStackTrace();
+                      dismissmethod();
+                  }
+                  return true;
+              }
+          });
         View actionView = MenuItemCompat.getActionView(menuItem);
         textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
         notification = (ImageView) actionView.findViewById(R.id.notification);

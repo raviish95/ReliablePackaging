@@ -13,6 +13,7 @@
     <string name="scaletype"><font fgcolor='#FF0000'> *</font> Choose Your Product Scale Type</string>
     <string name="layertype"><font fgcolor='#FF0000'> *</font> Choose Product Layer Type</string>
     <string name="action_settings">Settings</string>
+    <string name="action_logouts">Logout</string>
     <string name="bell">Notification</string>
     <string name="title_home">home</string>
     <string name="Search">Search</string>
@@ -35,7 +36,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="printing">Printing is on Processed it will take some days for complete print</string>
-    <string name="inspection">Inspection in manufacturing includes measuring, examining, testing, or gauging one or more characteristics of a product or process and comparing the results with specified requirements to determine whether is the requirements are met for each characteristic</string>
-    <string name="lamination">Lamination is the technique/process of manufacturing a material in multiple layers, so that the composite material achieves improved strength, stability, sound insulation, appearance or other properties from the use of differing materials</string>
-    <string name="cutting">Cutting is the separation or opening of a physical object, into two or more portions, through the application of an acutely directed force</string>
+    <string name="inspection">Inspection in manufacturing includes measuring, examining, and testing</string>
+    <string name="lamination">Lamination is the technique/process of manufacturing a material in multiple layers</string>
+    <string name="cutting">Cutting is the separation or opening of a physical object, into two or more portions</string>
 </resources>

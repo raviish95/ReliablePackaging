@@ -4,9 +4,9 @@
     tools:context="com.awizom.reliablepackaging.HomePage">
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_logout"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/action_logouts"
         app:showAsAction="never" />
 
     <item  android:id="@+id/admin1"

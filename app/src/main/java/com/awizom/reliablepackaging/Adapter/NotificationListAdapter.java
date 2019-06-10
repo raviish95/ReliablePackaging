@@ -43,6 +43,7 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
     private Context mCtx;
     String result = "";
     private AlertDialog progressDialog;
+
     public NotificationListAdapter(Context baseContext, List<NotificationModel> notificationModelList) {
         this.notificationModelList = notificationModelList;
         this.mCtx = baseContext;
@@ -61,15 +62,13 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
         }
         holder.notification_body.setText(c.getBody().toString());
         holder.notification_date.setText(String.valueOf(c.getDate().toString()).split("T")[0]);
-         if(c.getType().toString().equals("Order"))
-         {
-             holder.noti_typeimage.setImageResource(R.drawable.shopping_cart);
-         }
-         else if(c.getType().toString().equals("Design"))
+        if (c.getType().toString().equals("Order")) {
+            holder.noti_typeimage.setImageResource(R.drawable.shopping_cart);
+        } else if (c.getType().toString().equals("Design"))
 
-         {
-             holder.noti_typeimage.setImageResource(R.drawable.design_noti);
-         }
+        {
+            holder.noti_typeimage.setImageResource(R.drawable.design_noti);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,7 +154,7 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
             notification_date = view.findViewById(R.id.noti_date);
             cardView = view.findViewById(R.id.card_view);
             notification_type = view.findViewById(R.id.noti_type);
-            noti_typeimage=view.findViewById(R.id.noti_typeImage);
+            noti_typeimage = view.findViewById(R.id.noti_typeImage);
         }
 
 
