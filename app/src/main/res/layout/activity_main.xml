@@ -4,7 +4,7 @@
     android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/practical_background">
+    android:background="@drawable/gradientbackground">
 
     <ImageView
         android:id="@+id/reliableimage"

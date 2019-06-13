@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ public class RebookOrderActivity extends AppCompatActivity {
     private List<Order> orderlist;
     private RebookOrderListAdapter adapterOrderList;
     private LinearLayout linearLayout;
+    private Button rebook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +51,12 @@ public class RebookOrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-            onBackPressed();
+                onBackPressed();
             }
         });
-        linearLayout = findViewById(R.id.linearlayout);
+        rebook=findViewById(R.id.addReOrder);
+
+        linearLayout = findViewById(R.id.linear);
         linearLayout.setOnTouchListener(new OnSwipeTouchListener(RebookOrderActivity.this) {
             public void onSwipeTop() {
                 //   Toast.makeText(RebookOrderActivity.this, "top", Toast.LENGTH_SHORT).show();
@@ -74,11 +78,12 @@ public class RebookOrderActivity extends AppCompatActivity {
 
         });
 
-        recyclerView = findViewById(R.id.recyclerview);
+        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.scrollToPosition(0);
         recyclerView.smoothScrollToPosition(0);
+
         getcategorylist();
 
     }
@@ -93,7 +98,7 @@ public class RebookOrderActivity extends AppCompatActivity {
             Type listType = new TypeToken<List<Order>>() {
             }.getType();
             orderlist = new Gson().fromJson(result, listType);
-            adapterOrderList = new RebookOrderListAdapter(RebookOrderActivity.this, orderlist);
+            adapterOrderList = new RebookOrderListAdapter(RebookOrderActivity.this, orderlist,rebook);
 
             recyclerView.setAdapter(adapterOrderList);
 

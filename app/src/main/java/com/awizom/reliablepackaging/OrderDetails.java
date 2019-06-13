@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,20 +42,22 @@ public class OrderDetails extends AppCompatActivity {
         imageLink=getIntent().getStringExtra("ImageLink");
         initview();
         verticalSeekBar = findViewById(R.id.capacity_seek);
-
-        if(android.os.Build.VERSION.SDK_INT >= 11){
+                if(Build.VERSION.SDK_INT >= 11){
             // will update the "progress" propriety of seekbar until it reaches progress
             ObjectAnimator animation = ObjectAnimator.ofInt(verticalSeekBar, "progress", 3);
             animation.setDuration(1050); // 0.5 second
             animation.setInterpolator(new DecelerateInterpolator());
             animation.start();
             verticalSeekBar.setEnabled(false);
-        }
+                    }
         else
-            verticalSeekBar.setProgress(2);
+        {  verticalSeekBar.setProgress(2);}
+
+
     }
 
     private void initview() {
+
         android.support.v7.widget.Toolbar toolbar= (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Order Details");
         toolbar.setBackgroundColor(Color.parseColor("#87CEFA"));
