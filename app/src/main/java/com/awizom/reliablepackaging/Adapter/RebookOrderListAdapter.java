@@ -49,6 +49,7 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
     private AlertDialog progressDialog;
 
     private ArrayList<String> itemnamelist = new ArrayList<String>();
+    private ArrayList<String> orderidlist = new ArrayList<String>();
     Button rebook;
 
     public RebookOrderListAdapter(Context baseContext, List<Order> orderList, Button rebook) {
@@ -114,9 +115,11 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Toast.makeText(mCtx, "check", Toast.LENGTH_LONG).show();
                 if (isChecked) {
-                    itemnamelist.add(holder.product.getText().toString());
+                    itemnamelist.add(holder.product.getText().toString()+">"+holder.orderid.getText().toString());
+
                 } else {
-                    itemnamelist.remove(holder.product.getText().toString());
+                    itemnamelist.remove(holder.product.getText().toString()+">"+holder.orderid.getText().toString());
+
                 }
 
             }
