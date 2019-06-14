@@ -62,24 +62,21 @@ public class AddOrderActivity extends AppCompatActivity {
         layertype = findViewById(R.id.layerType);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, layerlist);
         layertype.setAdapter(arrayAdapter);
-        layertype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        layertype.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String layertypedetails = parent.getItemAtPosition(position).toString();
                 if (layertypedetails.equals("Two Layer")) {
                     //Toast.makeText(getApplicationContext(), "" + createComplaint, Toast.LENGTH_SHORT).show();
-                    layervalue = "1";
-
+                    layervalue = "1".toString();
+                    //valueofLayerType.add(layervalue.toString());
                 } else {
-                    layervalue = "2";
+                    layervalue = "2".toString();
+                    //valueofLayerType.add(layervalue.toString());
                 }
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
         });
+
         relativeLayout = findViewById(R.id.rootView);
         relativeLayout.setOnTouchListener(new OnSwipeTouchListener(AddOrderActivity.this) {
             public void onSwipeTop() {
