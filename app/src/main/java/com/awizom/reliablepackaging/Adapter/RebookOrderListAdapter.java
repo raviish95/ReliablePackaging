@@ -115,10 +115,10 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Toast.makeText(mCtx, "check", Toast.LENGTH_LONG).show();
                 if (isChecked) {
-                    itemnamelist.add(holder.product.getText().toString()+">"+holder.orderid.getText().toString());
+                    itemnamelist.add(holder.product.getText().toString() + ">" + holder.orderid.getText().toString());
 
                 } else {
-                    itemnamelist.remove(holder.product.getText().toString()+">"+holder.orderid.getText().toString());
+                    itemnamelist.remove(holder.product.getText().toString() + ">" + holder.orderid.getText().toString());
 
                 }
 
@@ -143,22 +143,33 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
         LayoutInflater inflater = LayoutInflater.from(mCtx);
 
         final View dialogView = inflater.inflate(R.layout.dialog_openordercinfirm, null);
+        dialogBuilder.setIcon(R.drawable.reliables);
+      /*  dialogBuilder.setNeutralButtonIcon(mCtx.getResources().getDrawable(R.drawable.close_blue));
+*/
+
+       /* dialogBuilder.setPositiveButtonIcon(mCtx.getResources().getDrawable(R.drawable.check_box_green_24dp));
+
+*/
         ListView listView = dialogView.findViewById(R.id.listView);
+        Button order=dialogView.findViewById(R.id.orders);
+        final ListNewAdapter customAdapter = new ListNewAdapter(mCtx, R.layout.adapter_itemlist, itemNameList, order);
 
-        ListNewAdapter customAdapter = new ListNewAdapter(mCtx, R.layout.adapter_itemlist, itemNameList);
+        listView.setAdapter(customAdapter);
+       /* dialogBuilder.setPositiveButton("Order", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
-        listView .setAdapter(customAdapter);
-       /* final ArrayAdapter adapter = new ArrayAdapter(mCtx,
-                android.R.layout.simple_list_item_1, itemNameList);
+              customAdapter.getorderlist();
 
 
-        listView.setAdapter(adapter);*/
+            }
+        });*/
+        dialogBuilder.setCancelable(true);
 
         dialogBuilder.setView(dialogView);
 
         final android.support.v7.app.AlertDialog b = dialogBuilder.create();
         b.show();
-
 
     }
 

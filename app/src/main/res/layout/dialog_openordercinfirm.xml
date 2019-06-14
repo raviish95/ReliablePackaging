@@ -1,57 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <ListView
-        android:id="@+id/listView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </ListView>
-
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/rootlayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/linear"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/addReOrder"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="bottom|center"
-            android:layout_marginBottom="27dp"
-            android:background="@drawable/rebookordergradient"
-            android:text="Re-Book"
-            tools:layout_editor_absoluteX="328dp"
-            tools:layout_editor_absoluteY="448dp" />
-    </FrameLayout>
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/weigh_kg"
+        <ListView
+            android:id="@+id/listView"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+
+        <!--
+                <Button
+                    android:id="@+id/addReOrder"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/rebookordergradient"
+                    android:text="Re-Book" />-->
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/orders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="84dp"
+        android:text="Order"
+        android:background="@drawable/buttonstyleithgradient"
+        android:textColor="#fff" />
+
+    <EditText
+        android:id="@+id/weight_kg"
         android:layout_width="wrap_content"
         android:layout_height="80dp"
         android:layout_weight="1"
-
         android:hint="Weight in KG"
         android:inputType="number"
         android:textColor="@color/black"
         android:textColorHint="@color/new_grey"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:visibility="gone" />
 
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/layerTpe"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_weight="1"
-        android:hint="Weight in KG"
-        android:inputType="textPassword"
-        android:textColor="@color/black"
-        android:textColorHint="@color/new_grey"
-        android:textSize="20sp" />
 
-</LinearLayout>
+
+</RelativeLayout>
