@@ -86,7 +86,7 @@ public class SelectDesign extends AppCompatActivity {
                   }
               }
         );
-        feedbackSubmit.setOnClickListener(new View.OnClickListener() {
+     /*   feedbackSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (agreeMent.isChecked()) {
@@ -103,7 +103,7 @@ public class SelectDesign extends AppCompatActivity {
 
 
             }
-        });
+        });*/
         recyclerView = findViewById(R.id.recyclerview);
 
         recyclerView.setHasFixedSize(true);
@@ -111,17 +111,15 @@ public class SelectDesign extends AppCompatActivity {
         getDesignList();
     }
 
-    private void postApprovedesign(String designId, String orderId, String isapproved, String remArks) {
+    public void postApprovedesign(String designId,  String isapproved, String remArks,String length) {
 
         try {
-            String result = new OrderHelper.POSTDesignApprove().execute(designId, orderId, isapproved, remArks).get();
+            String result = new OrderHelper.POSTDesignFeedback().execute(designId, orderid.toString(), isapproved, remArks,length).get();
             if (result.isEmpty()) {
                 Toast.makeText(this, "Invalid request", Toast.LENGTH_SHORT).show();
-                result = new OrderHelper.POSTDesignApprove().execute(designId, orderId, isapproved, remArks).get();
+                result = new OrderHelper.POSTDesignFeedback().execute(designId, orderid.toString(), isapproved, remArks,length).get();
             } else {
-
                 showApproveDesign();
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -134,7 +132,6 @@ public class SelectDesign extends AppCompatActivity {
         final android.support.v7.app.AlertDialog.Builder dialogBuilder = new android.support.v7.app.AlertDialog.Builder(this);
         dialogBuilder.setCancelable(false);
         LayoutInflater inflater = LayoutInflater.from(this);
-
         final View dialogView = inflater.inflate(R.layout.design_approved, null);
         Button okay = dialogView.findViewById(R.id.ok);
         TextView textView = dialogView.findViewById(R.id.text);
@@ -147,10 +144,8 @@ public class SelectDesign extends AppCompatActivity {
             }
         });
         dialogBuilder.setView(dialogView);
-
         final android.support.v7.app.AlertDialog b = dialogBuilder.create();
         b.show();
-
 
     }
 
@@ -162,7 +157,7 @@ public class SelectDesign extends AppCompatActivity {
             }.getType();
             designDetails = new Gson().fromJson(result, listType);
             adapterdesigndetails = new DesignDetailsAdapter(SelectDesign.this, designDetails);
-            designCheckboxAdapter=new DesignCheckboxAdapter(this,designDetails);
+            designCheckboxAdapter=new DesignCheckboxAdapter(this,designDetails,feedbackSubmit,feedBack,orderid.toString());
             recyclerViewDesign.setAdapter(designCheckboxAdapter);
             recyclerView.setAdapter(adapterdesigndetails);
 

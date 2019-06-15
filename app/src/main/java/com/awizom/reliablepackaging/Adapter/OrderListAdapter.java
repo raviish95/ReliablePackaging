@@ -65,6 +65,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
             }
         } catch (Exception e) {
             holder.categoryImage.setImageResource(R.drawable.desgin_notapprove);
+
             e.printStackTrace();
         }
 

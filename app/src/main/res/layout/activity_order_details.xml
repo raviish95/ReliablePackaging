@@ -57,9 +57,10 @@
                         android:background="@null"
                         android:max="4"
                         android:progress="1"
+                        android:thumb="@drawable/selecor_tick_marks"
+                        app:tickMark="@drawable/rotate"
                         android:progressDrawable="@drawable/seekbar"
                         android:splitTrack="false"
-                        android:tickMark="@drawable/rotate"
                         app:seekBarRotation="CW90" />
 
 

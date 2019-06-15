@@ -200,6 +200,55 @@ public class OrderHelper extends AppCompatActivity {
         }
 
     }
+    public static final class POSTDesignFeedback extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+
+            //     InputStream inputStream
+            String designid = params[0];
+            String orderId = params[1];
+            String isapproved = params[2];
+            String remArks = params[3];
+            String length = params[4];
+
+            String json = "";
+            try {
+
+                OkHttpClient client = new OkHttpClient();
+                Request.Builder builder = new Request.Builder();
+                builder.url(AppConfig.BASE_URL_API_ + "ApproveFeedbackDesign/"+length+"/"+designid);
+                builder.addHeader("Content-Type", "application/x-www-form-urlencoded");
+                builder.addHeader("Accept", "application/json");
+                //builder.addHeader("Authorization", "Bearer " + accesstoken);
+                FormBody.Builder parameters = new FormBody.Builder();
+                parameters.add("DesignId", designid);
+                parameters.add("OrderID", orderId);
+             /*   parameters.add("IsApproved", isapproved);*/
+                parameters.add("Remarks", remArks);
+                builder.post(parameters.build());
+                okhttp3.Response response = client.newCall(builder.build()).execute();
+                if (response.isSuccessful()) {
+                    json = response.body().string();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return json;
+        }
+
+        protected void onPostExecute(String result) {
+
+            if (result.isEmpty()) {
+
+            } else {
+                super.onPostExecute(result);
+//
+            }
+
+
+        }
+
+    }
     public static final class POSTCreateOrder extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
