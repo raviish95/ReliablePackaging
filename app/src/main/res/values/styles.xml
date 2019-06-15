@@ -6,15 +6,23 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
     <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@android:color/holo_blue_dark</item>
+        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow</item>
+        <item name="colorAccent">@color/yellow</item>
+        <item name="dialogCornerRadius">34dp</item>
 
     </style>
+
+
+
     <style name="Custom" parent="android:Theme.DeviceDefault.Dialog">
         <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
         <item name="DialogTitleText">Please Wait</item>
-        <item name="DialogSpotColor">@android:color/holo_blue_dark</item>
+        <item name="DialogSpotColor">@color/yellow</item>
         <item name="DialogSpotCount">8</item>
     </style>
     <style name="ProgressBarStyle">
@@ -66,6 +74,9 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow</item>
+
         <!--<item name="android:windowBackground">@null</item>-->
     </style>
 
@@ -83,6 +94,19 @@
 
     <style name="FullscreenActionBarStyle" parent="android:Widget.Holo.ActionBar">
         <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <style name="styleA">
+        <item name="android:fontFamily">@font/fonts</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">19sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+    <style name="styleB">
+        <item name="android:fontFamily">@font/fonts</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?android:attr/textColorTertiary</item>
     </style>
 
 

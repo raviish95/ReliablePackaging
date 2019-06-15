@@ -1,7 +1,6 @@
 package com.awizom.reliablepackaging;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,11 +32,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.awizom.reliablepackaging.Adapter.OrderListAdapter;
 import com.awizom.reliablepackaging.Helper.OrderHelper;
 import com.awizom.reliablepackaging.Helper.ProfileHelper;
+import com.awizom.reliablepackaging.login.MainActivity;
 import com.awizom.reliablepackaging.Model.MyProfileView;
 import com.awizom.reliablepackaging.Model.Order;
 import com.google.gson.Gson;
@@ -107,8 +106,11 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
     private void initview() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(Color.parseColor("#87CEFA"));
-        toolbar.setTitle("Home Page");
+        toolbar.setBackgroundColor(Color.parseColor("#F9CD50"));
+        toolbar.setLogo(R.drawable.action_logo);
+        toolbar.setSubtitleTextAppearance(getApplicationContext(), R.style.styleA);
+        toolbar.setTitleTextAppearance(getApplicationContext(), R.style.styleA);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
         progressDialog = new SpotsDialog(this, R.style.Custom);
 

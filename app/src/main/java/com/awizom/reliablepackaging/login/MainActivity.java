@@ -1,4 +1,4 @@
-package com.awizom.reliablepackaging;
+package com.awizom.reliablepackaging.login;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
@@ -26,10 +26,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.awizom.reliablepackaging.Helper.OrderHelper;
 import com.awizom.reliablepackaging.Helper.ProfileHelper;
+import com.awizom.reliablepackaging.HomePage;
 import com.awizom.reliablepackaging.Model.LoginModel;
-import com.awizom.reliablepackaging.Model.MyProfileView;
+import com.awizom.reliablepackaging.R;
+import com.awizom.reliablepackaging.SharedPrefManager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

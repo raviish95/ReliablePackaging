@@ -105,7 +105,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:background="@drawable/gradientbackground"
                     android:textColor="@color/black"
                     android:layout_marginBottom="10dp"
                     android:textSize="12sp"
@@ -115,8 +114,7 @@
                     android:id="@+id/productdesign"
                     android:layout_width="110dp"
                     android:layout_height="110dp"
-                    android:src="@drawable/chips_packet"
-                    />
+                    android:src="@drawable/chips_packet" />
 
 
             </android.support.v7.widget.CardView>

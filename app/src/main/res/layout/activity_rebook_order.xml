@@ -63,13 +63,16 @@
 
         <Button
             android:id="@+id/addReOrder"
-            android:layout_width="150dp"
+            android:layout_width="170dp"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_gravity="bottom|center"
-            android:background="@drawable/rebookordergradient"
+            android:background="@drawable/button_shape"
             android:text="Re-Book"
+            android:textAllCaps="false"
+            android:textSize="17sp"
+            android:textColor="@color/white"
             tools:layout_editor_absoluteX="328dp"
             tools:layout_editor_absoluteY="448dp" />
     </FrameLayout>
