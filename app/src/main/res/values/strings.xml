@@ -25,6 +25,7 @@
     <string name="myAccount">My Account</string>
     <string name="OrderSelect">Select Order for Rebook</string>
     <string name="AgreeForDesign">I am not satisfied as per design show in above</string>
+    <string name="DesignChoose">Please select design for which you want to submit feedback</string>
     <string name="myProfile">My Profile</string>
     <string name="ORderPhoto">orderphoto</string>
     <string name="master">master</string>

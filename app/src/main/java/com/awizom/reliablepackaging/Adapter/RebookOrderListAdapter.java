@@ -106,14 +106,14 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
             @Override
             public void onClick(View v) {
                 openItemConfirmDialog((itemnamelist.toArray()));
-                Toast.makeText(mCtx, itemnamelist.toString(), Toast.LENGTH_LONG).show();
+                //   Toast.makeText(mCtx, itemnamelist.toString(), Toast.LENGTH_LONG).show();
 
             }
         });
         holder.itemlist.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Toast.makeText(mCtx, "check", Toast.LENGTH_LONG).show();
+                // Toast.makeText(mCtx, "check", Toast.LENGTH_LONG).show();
                 if (isChecked) {
                     itemnamelist.add(holder.product.getText().toString() + ">" + holder.orderid.getText().toString());
 
@@ -129,7 +129,11 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
             @Override
             public void onClick(View v) {
                 //Toast.makeText(mCtx,"rebook order",Toast.LENGTH_LONG).show();
-                ShowConfirmRebookOrderDialog(holder.orderid.getText().toString(), mCtx);
+                if (holder.itemlist.isChecked()) {
+                    holder.itemlist.setChecked(false);
+                } else {
+                    holder.itemlist.setChecked(true);
+                }// ShowConfirmRebookOrderDialog(holder.orderid.getText().toString(), mCtx);
 
             }
         });
@@ -143,17 +147,18 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
         LayoutInflater inflater = LayoutInflater.from(mCtx);
 
         final View dialogView = inflater.inflate(R.layout.dialog_openordercinfirm, null);
+        dialogBuilder.setTitle("Rebook Order");
         dialogBuilder.setIcon(R.drawable.reliables);
-      /*  dialogBuilder.setNeutralButtonIcon(mCtx.getResources().getDrawable(R.drawable.close_blue));
-*/
+        dialogBuilder.setMessage("Please fill your order details");
+        /*  dialogBuilder.setNeutralButtonIcon(mCtx.getResources().getDrawable(R.drawable.close_blue));
+         */
 
-       /* dialogBuilder.setPositiveButtonIcon(mCtx.getResources().getDrawable(R.drawable.check_box_green_24dp));
+        /* dialogBuilder.setPositiveButtonIcon(mCtx.getResources().getDrawable(R.drawable.check_box_green_24dp));
 
-*/
+         */
         ListView listView = dialogView.findViewById(R.id.listView);
-        Button order=dialogView.findViewById(R.id.orders);
+        Button order = dialogView.findViewById(R.id.orders);
         final ListNewAdapter customAdapter = new ListNewAdapter(mCtx, R.layout.adapter_itemlist, itemNameList, order);
-
         listView.setAdapter(customAdapter);
        /* dialogBuilder.setPositiveButton("Order", new DialogInterface.OnClickListener() {
             @Override

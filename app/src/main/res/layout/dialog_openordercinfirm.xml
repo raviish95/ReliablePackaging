@@ -2,17 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialogfor_edittext">
 
     <LinearLayout
-        android:layout_width="match_parent"
         android:id="@+id/linear"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
         android:orientation="vertical">
 
         <ListView
             android:id="@+id/listView"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -32,11 +32,12 @@
         android:id="@+id/orders"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/linear"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="84dp"
-        android:text="Order"
         android:background="@drawable/buttonstyleithgradient"
+        android:text="Order"
+
+
         android:textColor="#fff" />
 
     <EditText
@@ -50,7 +51,6 @@
         android:textColorHint="@color/new_grey"
         android:textSize="20sp"
         android:visibility="gone" />
-
 
 
 </RelativeLayout>

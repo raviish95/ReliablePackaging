@@ -2,6 +2,7 @@ package com.awizom.reliablepackaging.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -24,6 +25,8 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
 
+import dmax.dialog.SpotsDialog;
+
 public class ListNewAdapter extends ArrayAdapter<Object> {
 
     private int resourceLayout;
@@ -32,6 +35,7 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
     private ArrayList<String> orderdetailslist = new ArrayList<String>();
     Button buildpositivbutto;
     private String layervalue = "0";
+    private android.app.AlertDialog progressDialog;
     private ArrayList<String> valueOfEditText = new ArrayList<String>();
     private ArrayList<String> valueOfproductname = new ArrayList<String>();
     private ArrayList<String> valueOfproductid = new ArrayList<String>();
@@ -59,7 +63,7 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
         }
 
         Object p = getItem(position);
-
+        progressDialog = new SpotsDialog(mContext, R.style.Custom);
         if (p != null) {
             holder.tt1 = (TextView) v.findViewById(R.id.productname);
             final int listLength = itemslist.length;
@@ -75,7 +79,7 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
                         valueOfproductname.add(holder.tt1.getText().toString());
                         valueOfproductid.add(holder.productid.getText().toString());
 
-                        Toast.makeText(mContext, holder.et2.getText().toString(), Toast.LENGTH_LONG).show();
+                        //     Toast.makeText(mContext, holder.et2.getText().toString(), Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -84,22 +88,28 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
             buildpositivbutto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    progressDialog.show();
                     orderdetailslist.add(valueOfproductname.toString() + valueOfEditText.toString() + valueOfproductid.toString() + valueofLayerType.toString());
                     Toast.makeText(mContext, orderdetailslist.toString(), Toast.LENGTH_LONG).show();
                     try {
                         String length = String.valueOf(valueOfproductname.size());
-                        String result = new OrderHelper.POSTRebookPreOrder().execute(valueOfproductname.toString().toString(),valueOfproductid.toString(),valueOfEditText.toString(),valueofLayerType.toString(),length.toString()).get();
+                        String result = new OrderHelper.POSTRebookPreOrder().execute(valueOfproductname.toString().toString(), valueOfproductid.toString(), valueOfEditText.toString(), valueofLayerType.toString(), length.toString()).get();
 
                         if (result.isEmpty()) {
                             Toast.makeText(mContext, "Invalid request", Toast.LENGTH_SHORT).show();
                             result = new OrderHelper.POSTRebookPreOrder().execute(orderdetailslist.toString()).get();
+                            dismissmethod();
                         } else {
-                            Toast.makeText(mContext, "Not done", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, "Successfully Re-Booked Order", Toast.LENGTH_SHORT).show();
+                            Intent intent=new Intent(mContext,HomePage.class);
+                            mContext.startActivity(intent);
+                            dismissmethod();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
+                        dismissmethod();
                     }
-
+                    dismissmethod();
                 }
 
             });
@@ -144,6 +154,17 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
         }
 
         return v;
+    }
+
+    private void dismissmethod() {
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
+        }, 100);
     }
 
 

@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.awizom.reliablepackaging.Adapter.DesignCheckboxAdapter;
 import com.awizom.reliablepackaging.Adapter.DesignDetailsAdapter;
 import com.awizom.reliablepackaging.Adapter.OrderDetailsAdapter;
 import com.awizom.reliablepackaging.Helper.OrderHelper;
@@ -32,10 +33,11 @@ import java.util.List;
 
 public class SelectDesign extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView,recyclerViewDesign;
     private String orderid;
     List<DesignDetails> designDetails;
     DesignDetailsAdapter adapterdesigndetails;
+    DesignCheckboxAdapter designCheckboxAdapter;
     private CheckBox agreeMent;
     private Button feedbackSubmit;
     private EditText feedBack;
@@ -61,8 +63,11 @@ public class SelectDesign extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        recyclerViewDesign=findViewById(R.id.recyclerforDesign);
+        recyclerViewDesign.setHasFixedSize(true);
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(SelectDesign.this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewDesign.setLayoutManager(horizontalLayoutManager);
         feedbackSubmit = findViewById(R.id.submit);
-
         agreeMent = findViewById(R.id.agreement);
         feedBack = findViewById(R.id.feedback);
         feedBack.setEnabled(false);
@@ -70,6 +75,8 @@ public class SelectDesign extends AppCompatActivity {
             @Override
                   public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                       if (agreeMent.isChecked()) {
+
+                          recyclerViewDesign.setVisibility(View.VISIBLE);
                           feedBack.setEnabled(true);
                           feedBack.setHint("Enter your own design details");
                       } else {
@@ -98,6 +105,7 @@ public class SelectDesign extends AppCompatActivity {
             }
         });
         recyclerView = findViewById(R.id.recyclerview);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         getDesignList();
@@ -154,7 +162,10 @@ public class SelectDesign extends AppCompatActivity {
             }.getType();
             designDetails = new Gson().fromJson(result, listType);
             adapterdesigndetails = new DesignDetailsAdapter(SelectDesign.this, designDetails);
+            designCheckboxAdapter=new DesignCheckboxAdapter(this,designDetails);
+            recyclerViewDesign.setAdapter(designCheckboxAdapter);
             recyclerView.setAdapter(adapterdesigndetails);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
