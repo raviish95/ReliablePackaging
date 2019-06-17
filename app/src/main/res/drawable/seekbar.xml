@@ -3,9 +3,19 @@
     <item
         android:id="@android:id/background"
         android:drawable="@drawable/seekbar_background"
-        
-        android:left="2dp"></item>
+
+      ></item>
     <item android:id="@android:id/progress">
         <clip android:drawable="@drawable/seekbar_progress" />
+    </item>
+    <item android:id="@android:id/secondaryProgress">
+        <clip>
+            <shape
+                android:shape="line">
+                <stroke
+                    android:color="@color/purple"
+                    android:width="5dp"/>
+            </shape>
+        </clip>
     </item>
 </layer-list>

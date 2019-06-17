@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!--this drawable is for thumb when pressing-->
-    <item android:drawable="@drawable/rotate"
-        android:state_selected="true" />
-    <item android:drawable="@drawable/close_blue" />
+
+
+
+
+        />
 </selector>

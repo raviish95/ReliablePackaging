@@ -51,17 +51,21 @@
 
                     <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
                         android:id="@+id/capacity_seek"
-                        style="@style/Widget.AppCompat.SeekBar.Discrete"
+                        style="@style/Base.Widget.AppCompat.SeekBar.Discrete"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:max="4"
+                        android:focusable="auto"
                         android:progress="1"
-                        android:thumb="@drawable/selecor_tick_marks"
-                        app:tickMark="@drawable/rotate"
                         android:progressDrawable="@drawable/seekbar"
+                        android:scrollbarSize="50dp"
                         android:splitTrack="false"
-                        app:seekBarRotation="CW90" />
+                        android:tickMark="@drawable/grey_fiber_circle"
+                        android:thumb="@drawable/rotate"
+                        app:seekBarRotation="CW90"
+                      />
+
 
 
                     <!--    <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar

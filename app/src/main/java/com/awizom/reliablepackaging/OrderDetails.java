@@ -8,20 +8,31 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.Toast;
+
 import com.awizom.reliablepackaging.Adapter.OrderDetailsAdapter;
 import com.awizom.reliablepackaging.Helper.OrderHelper;
 import com.awizom.reliablepackaging.Model.OrderDetailsView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar;
+import com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper;
+
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
+
 import dmax.dialog.SpotsDialog;
 
 public class OrderDetails extends AppCompatActivity {
@@ -43,59 +54,38 @@ public class OrderDetails extends AppCompatActivity {
         imageLink = getIntent().getStringExtra("ImageLink");
         initview();
         verticalSeekBar = findViewById(R.id.capacity_seek);
-        if (Build.VERSION.SDK_INT >= 11) {
+
+        verticalSeekBar.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+            }
+        });
+        verticalSeekBar.setOnHoverListener(new View.OnHoverListener() {
+            @Override
+            public boolean onHover(View v, MotionEvent event) {
+                return false;
+            }
+        });
+
+           if (Build.VERSION.SDK_INT >= 11) {
             // will update the "progress" propriety of seekbar until it reaches progress
             ObjectAnimator animation = ObjectAnimator.ofInt(verticalSeekBar, "progress", 3);
             animation.setDuration(1050); // 0.5 second
             animation.setInterpolator(new DecelerateInterpolator());
+
             animation.start();
+
             verticalSeekBar.setEnabled(false);
 
+            if (verticalSeekBar.isSelected()) {
+                verticalSeekBar.setThumbOffset(1000);
+            }
         } else {
+
             verticalSeekBar.setProgress(2);
 
         }
-        verticalSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-                if (seekBar.isSelected()) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        seekBar.setTickMark(getResources().getDrawable(R.drawable.close_blue));
-                    }
-                } else {
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        seekBar.setTickMark(getResources().getDrawable(R.drawable.close_blue));
-                    }
-                }
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                if (seekBar.isSelected()) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        seekBar.setTickMark(getResources().getDrawable(R.drawable.close_blue));
-                    }
-                } else {
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        seekBar.setTickMark(getResources().getDrawable(R.drawable.close_blue));
-                    }
-                }
-
-            }
-
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    seekBar.setTickMark(getResources().getDrawable(R.drawable.close_blue));
-                }
-            }
-        });
 
 
     }
@@ -122,7 +112,6 @@ public class OrderDetails extends AppCompatActivity {
             }
         });
         progressDialog = new SpotsDialog(OrderDetails.this, R.style.Custom);
-
         linearLayout = findViewById(R.id.linearlayout);
         linearLayout.setOnTouchListener(new OnSwipeTouchListener(OrderDetails.this) {
             public void onSwipeTop() {
