@@ -38,7 +38,7 @@ public class NotificationActivity extends AppCompatActivity {
     private void initView() {
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Notifications");
-        toolbar.setBackgroundColor(Color.parseColor("#87CEFA"));
+        toolbar.setBackgroundColor(getResources().getColor(R.color.yellow));
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);

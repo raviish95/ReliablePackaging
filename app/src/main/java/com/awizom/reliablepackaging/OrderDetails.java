@@ -15,16 +15,13 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
-
 import com.awizom.reliablepackaging.Adapter.OrderDetailsAdapter;
 import com.awizom.reliablepackaging.Helper.OrderHelper;
 import com.awizom.reliablepackaging.Model.OrderDetailsView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.util.List;
-
 import dmax.dialog.SpotsDialog;
 
 public class OrderDetails extends AppCompatActivity {
@@ -62,10 +59,31 @@ public class OrderDetails extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
+                if (seekBar.isSelected()) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        seekBar.setTickMark(getResources().getDrawable(R.drawable.close_blue));
+                    }
+                } else {
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        seekBar.setTickMark(getResources().getDrawable(R.drawable.close_blue));
+                    }
+                }
+
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
+                if (seekBar.isSelected()) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        seekBar.setTickMark(getResources().getDrawable(R.drawable.close_blue));
+                    }
+                } else {
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        seekBar.setTickMark(getResources().getDrawable(R.drawable.close_blue));
+                    }
+                }
 
             }
 
@@ -86,7 +104,7 @@ public class OrderDetails extends AppCompatActivity {
 
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Order Details");
-        toolbar.setBackgroundColor(Color.parseColor("#87CEFA"));
+        toolbar.setBackgroundColor(getResources().getColor(R.color.yellow));
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);
