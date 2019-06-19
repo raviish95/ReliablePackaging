@@ -30,6 +30,9 @@
     <color name="black">#060606</color>
     <color name="grey">#efeded</color>
     <color name="light_yellow">#f5db90</color>
+    <color name="red">#a60b0b</color>
+    <color name="dark_yellow">#e1a705</color>
+    <color name="green_color">#43640b</color>
 
     <color name="greyy">#8c000000</color>
 </resources>
