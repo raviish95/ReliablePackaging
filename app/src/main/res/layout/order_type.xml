@@ -16,7 +16,8 @@
         android:drawablePadding="10dp"
         android:text="Rebook Order"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
+        android:fontFamily="serif"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="51dp"
         tools:layout_editor_absoluteY="45dp" />
@@ -31,7 +32,8 @@
         android:drawablePadding="10dp"
         android:text="Create New Order"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
+        android:fontFamily="serif"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="49dp"
         tools:layout_editor_absoluteY="121dp" />
