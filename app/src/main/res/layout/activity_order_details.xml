@@ -55,32 +55,32 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:max="4"
                         android:focusable="auto"
+                        android:max="4"
+                        android:pointerIcon="arrow"
                         android:progress="1"
                         android:progressDrawable="@drawable/seekbar"
                         android:scrollbarSize="50dp"
+                        android:scrollbarThumbHorizontal="@color/grey"
                         android:splitTrack="false"
-                        android:tickMark="@drawable/grey_fiber_circle"
                         android:thumb="@drawable/rotate"
-                        app:seekBarRotation="CW90"
-                      />
-
+                        android:tickMark="@drawable/grey_fiber_circle"
+                        app:seekBarRotation="CW90" />
 
 
                     <!--    <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
-                            android:id="@+id/capacity_seek"
-                            style="@style/Widget.AppCompat.SeekBar.Discrete"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:max="4"
-                            android:progress="1"
-                            android:progressDrawable="@drawable/seekbar"
-                            android:splitTrack="false"
-                            android:thumb="@drawable/seekbar_thumb_green"
-                            android:tickMark="@drawable/rotate"
-                            app:seekBarRotation="CW90" />-->
+                     android:id="@+id/capacity_seek"
+                     style="@style/Widget.AppCompat.SeekBar.Discrete"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:background="@null"
+                     android:max="4"
+                     android:progress="1"
+                     android:progressDrawable="@drawable/seekbar"
+                     android:splitTrack="false"
+                     android:thumb="@drawable/seekbar_thumb_green"
+                     android:tickMark="@drawable/rotate"
+                     app:seekBarRotation="CW90" />-->
 
                 </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
 

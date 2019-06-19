@@ -1,6 +1,7 @@
 package com.awizom.reliablepackaging;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -38,6 +39,7 @@ import dmax.dialog.SpotsDialog;
 public class OrderDetails extends AppCompatActivity {
 
     com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar verticalSeekBar;
+
     private LinearLayout linearLayout;
     private RecyclerView recyclerViewOrder;
     String Orderid;
@@ -54,7 +56,6 @@ public class OrderDetails extends AppCompatActivity {
         imageLink = getIntent().getStringExtra("ImageLink");
         initview();
         verticalSeekBar = findViewById(R.id.capacity_seek);
-
         verticalSeekBar.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -69,26 +70,21 @@ public class OrderDetails extends AppCompatActivity {
         });
 
            if (Build.VERSION.SDK_INT >= 11) {
-            // will update the "progress" propriety of seekbar until it reaches progress
-            ObjectAnimator animation = ObjectAnimator.ofInt(verticalSeekBar, "progress", 3);
+
+               ObjectAnimator animation = ObjectAnimator.ofInt(verticalSeekBar,"progress",0,2);
             animation.setDuration(1050); // 0.5 second
             animation.setInterpolator(new DecelerateInterpolator());
-
+            animation.setPropertyName("check");
             animation.start();
 
-            verticalSeekBar.setEnabled(false);
+           verticalSeekBar.setEnabled(false);
 
-            if (verticalSeekBar.isSelected()) {
-                verticalSeekBar.setThumbOffset(1000);
-            }
-        } else {
+           } else {
 
-            verticalSeekBar.setProgress(2);
+         verticalSeekBar.setProgress(2);
 
         }
-
-
-    }
+        }
 
     private void initview() {
 
