@@ -3,8 +3,33 @@ package com.awizom.reliablepackaging.Model;
 public class OrderDetailsView {
     public int OrderId ;
     public String ImageUrl ;
-
+    public String ProductName;
+    public int TotalItem ;
+    public double Weight ;
+    public double TotalAmount ;
+    public double Discount;
+    public double UnitPrice;
+    public int TotalProduct ;
+    public int ClientID;
+    public String CreatedDate ;
+    public String VerifiedBy ;
+    public String VerifiedDate;
+    public String TINNO ;
+    public String GSTNO ;
+    public double CGST ;
+    public double SGST;
+    public double IGST ;
+    public double UTGST ;
     public String OrderNo;
+    public String OrderType;
+
+    public String getOrderType() {
+        return OrderType;
+    }
+
+    public void setOrderType(String orderType) {
+        OrderType = orderType;
+    }
 
     public String getOrderNo() {
         return OrderNo;
@@ -176,22 +201,5 @@ public class OrderDetailsView {
         this.UTGST = UTGST;
     }
 
-    public String ProductName;
-    public int TotalItem ;
-    public double Weight ;
-    public double TotalAmount ;
-    public double Discount;
-    public double UnitPrice;
-    public int TotalProduct ;
-    public int ClientID;
-    public String CreatedDate ;
-    public String VerifiedBy ;
-    public String VerifiedDate;
-    public String TINNO ;
-    public String GSTNO ;
-    public double CGST ;
-    public double SGST;
-    public double IGST ;
-    public double UTGST ;
 
 }

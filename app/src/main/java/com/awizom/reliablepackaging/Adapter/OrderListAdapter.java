@@ -34,10 +34,10 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
     private List<Order> orderList;
     private Context mCtx;
     private AlertDialog progressDialog;
+
     public OrderListAdapter(Context baseContext, List<Order> orderList) {
         this.orderList = orderList;
         this.mCtx = baseContext;
-
     }
 
 
@@ -47,6 +47,8 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
 
         holder.product.setText(c.getJobName());
         holder.weight.setText("Weight - " + String.valueOf(c.getWeight()));
+
+        holder.layer_type.setText(c.getLayerName().toString());
 
         holder.orderid.setText(String.valueOf(c.getOrderId()));
         try {
@@ -86,6 +88,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
             }
         });*/
 
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -108,7 +111,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-               progressDialog.dismiss();
+                progressDialog.dismiss();
             }
         }, 100);
     }

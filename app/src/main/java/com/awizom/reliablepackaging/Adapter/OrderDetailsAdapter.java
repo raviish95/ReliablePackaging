@@ -36,6 +36,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
     private Context mCtx;
     private String imagelinkurl;
     private AlertDialog progressDialog;
+
     public OrderDetailsAdapter(Context baseContext, List<OrderDetailsView> orderList, String imageLink) {
         this.orderDetails = orderList;
         this.mCtx = baseContext;
@@ -50,18 +51,25 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
         holder.weight.setText("Weight - " + String.valueOf(c.getWeight()));
         holder.orderid.setText(String.valueOf(c.getOrderId()));
         holder.amount.setText(" \u20B9" + String.valueOf(c.getTotalAmount()).toString());
-     /*   String dispatchedate=String.valueOf(c.getCreatedDate().toString());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar cal = Calendar.getInstance();
+        String dispatchedate = String.valueOf(c.getCreatedDate().toString());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        Calendar calendar = Calendar.getInstance();
         try {
-            cal.setTime(sdf.parse(dispatchedate));
+            calendar.setTime(sdf.parse(dispatchedate));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        cal.add(Calendar.DATE, 25);  // number of days to add
-        dispatchedate = sdf.format(cal.getTime());
-        holder.dispatch_date.setText("Estimated Dispatch Date - "+cal.toString()*/
-        //);
+        if (c.getOrderType().equals("Rebooked Order")) {
+            calendar.add(Calendar.DATE , 20);
+        } else {
+            calendar.add(Calendar.DATE, 25);
+        }
+        // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        String output = sdf1.format(calendar.getTime());
+
+        holder.dispatch_date.setText("Estimated Dispatch Date - " + output.toString()
+        );
         try {
             holder.image_linkurl.setText(AppConfig.BASE_URL + c.getImageUrl().toString());
         } catch (Exception e) {
@@ -91,7 +99,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
                     openZommImage(holder.image_linkurl.getText().toString(), mCtx);
 
                 } else {
-                     progressDialog.show();
+                    progressDialog.show();
                     Intent intent = new Intent(mCtx, SelectDesign.class);
                     intent.putExtra("OrderId", holder.orderid.getText().toString());
                     mCtx.startActivity(intent);
@@ -113,6 +121,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
             }
         }, 100);
     }
+
     private void openZommImage(String imagelinkid, Context mCtx) {
 
         final android.support.v7.app.AlertDialog.Builder dialogBuilder = new android.support.v7.app.AlertDialog.Builder(mCtx);
@@ -158,16 +167,16 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView product, weight, orderid, amount,image_linkurl, order_no,checking,dispatch_date;
+        public TextView product, weight, orderid, amount, image_linkurl, order_no, checking, dispatch_date;
         public ImageView productdesign;
 
         @RequiresApi(api = Build.VERSION_CODES.M)
         public MyViewHolder(View view) {
             super(view);
             progressDialog = new SpotsDialog(mCtx, R.style.Custom);
-            image_linkurl=view.findViewById(R.id.image_link);
+            image_linkurl = view.findViewById(R.id.image_link);
             product = (TextView) view.findViewById(R.id.prod_name);
-            dispatch_date=view.findViewById(R.id.dispatch_date);
+            dispatch_date = view.findViewById(R.id.dispatch_date);
             productdesign = (ImageView) view.findViewById(R.id.productdesign);
             weight = (TextView) view.findViewById(R.id.weight);
             orderid = view.findViewById(R.id.orderid);

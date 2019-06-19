@@ -13,10 +13,17 @@ public class Order {
     public int ClientID;
     public String ImageUrl;
     public String IsApproved;
-
-
     public String OrderNo;
     public String JobName;
+    public String  LayerName;
+
+    public String getLayerName() {
+        return LayerName;
+    }
+
+    public void setLayerName(String layerName) {
+        LayerName = layerName;
+    }
 
     public String getOrderNo() {
         return OrderNo;
