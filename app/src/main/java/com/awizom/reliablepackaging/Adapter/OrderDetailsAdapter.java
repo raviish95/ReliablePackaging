@@ -64,6 +64,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
         } else {
             calendar.add(Calendar.DATE, 25);
         }
+        //
         // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
         SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
         String output = sdf1.format(calendar.getTime());
