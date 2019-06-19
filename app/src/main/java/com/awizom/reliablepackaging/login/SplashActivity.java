@@ -11,7 +11,7 @@ import com.awizom.reliablepackaging.SharedPrefManager;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static int SPLASH_TIME_OUT = 200;
+    private static int SPLASH_TIME_OUT = 2000;
     private Intent intent;
 
     @Override

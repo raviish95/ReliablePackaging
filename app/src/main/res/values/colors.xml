@@ -35,4 +35,5 @@
     <color name="green_color">#43640b</color>
 
     <color name="greyy">#8c000000</color>
+    <color name="dark_greyy">#8c6e0101</color>
 </resources>

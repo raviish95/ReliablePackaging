@@ -2,18 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/dialogfor_edittext"
+    android:layout_margin="30dp"
+    android:layout_gravity="center|center_horizontal|center_vertical">
     <TextView
         android:id="@+id/rebOok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:drawableBottom="@drawable/rebook_order"
+        android:drawableRight="@drawable/ic_refresh_black_24dp"
         android:drawablePadding="10dp"
+        android:drawableTint="@color/yellow"
         android:text="Rebook Order"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -26,10 +32,10 @@
         android:id="@+id/neworder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
-        android:drawableBottom="@drawable/new_order"
+        android:drawableRight="@drawable/ic_add_circle_outline_black_24dp"
         android:drawablePadding="10dp"
+        android:drawableTint="@color/yellow"
         android:text="Create New Order"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -37,6 +43,8 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="49dp"
         tools:layout_editor_absoluteY="121dp" />
+</LinearLayout>
+
 
 
 </LinearLayout>
