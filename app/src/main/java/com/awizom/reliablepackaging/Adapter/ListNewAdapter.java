@@ -32,14 +32,16 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
     private int resourceLayout;
     private Context mContext;
     String[] layerlist = {"Two Layer", "Three Layer"};
+    String[] packtypelist = {"Pouching", "Roll"};
     private ArrayList<String> orderdetailslist = new ArrayList<String>();
     Button buildpositivbutto;
-    private String layervalue = "0";
+    private String layervalue = "0", packtypevalue = "";
     private android.app.AlertDialog progressDialog;
     private ArrayList<String> valueOfEditText = new ArrayList<String>();
     private ArrayList<String> valueOfproductname = new ArrayList<String>();
     private ArrayList<String> valueOfproductid = new ArrayList<String>();
     private ArrayList<String> valueofLayerType = new ArrayList<String>();
+    private ArrayList<String> valueofPackType = new ArrayList<String>();
     Object[] itemslist;
 
     public ListNewAdapter(Context context, int resource, Object[] items, Button order) {
@@ -83,37 +85,26 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
                     }
                 }
             });
-
-
-            buildpositivbutto.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    progressDialog.show();
-                    orderdetailslist.add(valueOfproductname.toString() + valueOfEditText.toString() + valueOfproductid.toString() + valueofLayerType.toString());
-                    Toast.makeText(mContext, orderdetailslist.toString(), Toast.LENGTH_LONG).show();
-                    try {
-                        String length = String.valueOf(valueOfproductname.size());
-                        String result = new OrderHelper.POSTRebookPreOrder().execute(valueOfproductname.toString().toString(), valueOfproductid.toString(), valueOfEditText.toString(), valueofLayerType.toString(), length.toString()).get();
-
-                        if (result.isEmpty()) {
-                            Toast.makeText(mContext, "Invalid request", Toast.LENGTH_SHORT).show();
-                            result = new OrderHelper.POSTRebookPreOrder().execute(orderdetailslist.toString()).get();
-                            dismissmethod();
-                        } else {
-                            Toast.makeText(mContext, "Successfully Re-Booked Order", Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(mContext,HomePage.class);
-                            mContext.startActivity(intent);
-                            dismissmethod();
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        dismissmethod();
-                    }
-                    dismissmethod();
-                }
-
-            });
             holder.layertype = v.findViewById(R.id.layertype);
+            holder.packtype = v.findViewById(R.id.packType);
+
+            final ArrayAdapter<String> arrayAdapterpack = new ArrayAdapter<String>(mContext, android.R.layout.simple_dropdown_item_1line, packtypelist);
+            holder.packtype.setAdapter(arrayAdapterpack);
+            holder.packtype.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String layertypedetails = parent.getItemAtPosition(position).toString();
+                    if (layertypedetails.equals("Pouching")) {
+                        //Toast.makeText(getApplicationContext(), "" + createComplaint, Toast.LENGTH_SHORT).show();
+                        packtypevalue = "Pouching".toString();
+                        valueofPackType.add(packtypevalue.toString());
+                    } else {
+                        packtypevalue = "Roll".toString();
+                        valueofPackType.add(packtypevalue.toString());
+                    }
+                }
+            });
+
             final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_dropdown_item_1line, layerlist);
             holder.layertype.setAdapter(arrayAdapter);
             holder.layertype.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -130,6 +121,38 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
                     }
                 }
             });
+
+            buildpositivbutto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    progressDialog.show();
+                    orderdetailslist.add(valueOfproductname.toString() + valueOfEditText.toString() + valueOfproductid.toString() + valueofLayerType.toString() + valueofPackType.toString());
+                    Toast.makeText(mContext, orderdetailslist.toString(), Toast.LENGTH_LONG).show();
+                    try {
+                        String length = String.valueOf(valueOfproductname.size());
+                        String result = new OrderHelper.POSTRebookPreOrder().execute(valueOfproductname.toString().toString(), valueOfproductid.toString(), valueOfEditText.toString(), valueofLayerType.toString(), valueofPackType.toString(), length.toString()).get();
+
+                        if (result.isEmpty()) {
+                            Toast.makeText(mContext, "Invalid request", Toast.LENGTH_SHORT).show();
+                            result = new OrderHelper.POSTRebookPreOrder().execute(orderdetailslist.toString()).get();
+                            dismissmethod();
+                        } else {
+                            Toast.makeText(mContext, "Successfully Re-Booked Order", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(mContext, HomePage.class);
+                            mContext.startActivity(intent);
+                            dismissmethod();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        dismissmethod();
+                    }
+                    dismissmethod();
+
+                }
+            });
+
+
           /*  holder.layertype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -177,7 +200,7 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
     private class ViewHolder {
         EditText et2;
         TextView tt1, productid;
-        MaterialBetterSpinner layertype;
+        MaterialBetterSpinner layertype, packtype;
 
     }
 }

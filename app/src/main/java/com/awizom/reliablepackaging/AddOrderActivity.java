@@ -31,9 +31,11 @@ public class AddOrderActivity extends AppCompatActivity {
     private TextView productype;
     private Button submitOrder;
     private RelativeLayout relativeLayout;
-    private MaterialBetterSpinner layertype;
+    private MaterialBetterSpinner layertype,packType;
     private String layervalue = "0", weightvalue;
+    private String packtypevalue = "";
     String[] layerlist = {"Two Layer", "Three Layer"};
+    String[] packlist = {"Pouching", "Roll"};
     private AlertDialog progressDialog;
 
     @Override
@@ -60,6 +62,23 @@ public class AddOrderActivity extends AppCompatActivity {
         progressDialog = new SpotsDialog(AddOrderActivity.this, R.style.Custom);
         itemweight = findViewById(R.id.itemWeight);
         layertype = findViewById(R.id.layerType);
+        packType=findViewById(R.id.packType);
+        final ArrayAdapter<String> arrayAdapterpack = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, packlist);
+        packType.setAdapter(arrayAdapterpack);
+        packType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String packtypedetails = parent.getItemAtPosition(position).toString();
+                if (packtypedetails.equals("Pouching")) {
+                    //Toast.makeText(getApplicationContext(), "" + createComplaint, Toast.LENGTH_SHORT).show();
+                    packtypevalue = "Pouching".toString();
+                    //valueofLayerType.add(layervalue.toString());
+                } else {
+                    packtypevalue = "Roll".toString();
+                    //valueofLayerType.add(layervalue.toString());
+                }
+            }
+        });
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, layerlist);
         layertype.setAdapter(arrayAdapter);
         layertype.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -132,7 +151,14 @@ public class AddOrderActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     layertype.setError("Layer type should not be blank");
                     layertype.requestFocus();
-                } else {
+                }
+
+                else if (packtypevalue.toString().equals("")) {
+                    progressDialog.dismiss();
+                    packType.setError("Pack type should not be blank");
+                    packType.requestFocus();
+                }
+                else {
                     CreateOrder();
                 }
             }
@@ -155,10 +181,10 @@ public class AddOrderActivity extends AppCompatActivity {
         String userid = SharedPrefManager.getInstance(this).getUser().getUserID();
 
         try {
-            String result = new OrderHelper.POSTCreateOrder().execute(clientId, productname.getText().toString(), layervalue.toString(), itemweight.getText().toString(), userid).get();
+            String result = new OrderHelper.POSTCreateOrder().execute(clientId, productname.getText().toString(), layervalue.toString(), itemweight.getText().toString(), userid,packtypevalue.toString()).get();
             if (result.isEmpty()) {
                 Toast.makeText(this, "Invalid request", Toast.LENGTH_SHORT).show();
-                result = new OrderHelper.POSTCreateOrder().execute(clientId, productname.getText().toString(), layervalue.toString(), itemweight.getText().toString()).get();
+                result = new OrderHelper.POSTCreateOrder().execute(clientId, productname.getText().toString(), layervalue.toString(), itemweight.getText().toString(),userid,packtypevalue.toString()).get();
             } else {
                 Intent intent = new Intent(this, HomePage.class);
                 startActivity(intent);

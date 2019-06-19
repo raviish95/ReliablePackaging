@@ -13,6 +13,7 @@
     <string name="scaletype"><font fgcolor='#FF0000'> *</font> Choose Your Product Scale Type</string>
     <string name="close"><font fgcolor='#FF0000'> </font> Choose Your Product Scale Type</string>
     <string name="layertype"><font fgcolor='#FF0000'> *</font> Choose Product Layer Type</string>
+    <string name="packtype"><font fgcolor='#FF0000'> *</font> Choose Product Pack Type</string>
     <string name="layertypebook"><font fgcolor='#FF0000'> *</font>Choose Layer Type</string>
     <string name="action_settings">Settings</string>
     <string name="action_logouts">Logout</string>

@@ -109,5 +109,8 @@
         <item name="android:textColor">?android:attr/textColorTertiary</item>
     </style>
 
+    <style name="tallerbarstyle">
+        <![CDATA[<style name="tallerBarStyle" parent="@android:style/Widget.SeekBar"> <item name="android:indeterminateOnly">false</item> <item name="android:progressDrawable">@android:drawable/progress_horizontal</item> <item name="android:indeterminateDrawable">@android:drawable/progress_horizontal</item> <item name="android:minHeight">8dip</item> <item name="android:maxHeight">20dip</item> </style>]]></style>
+
 
 </resources>

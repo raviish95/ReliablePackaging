@@ -259,6 +259,7 @@ public class OrderHelper extends AppCompatActivity {
             String layer = params[2];
             String weight = params[3];
             String createdby = params[4];
+            String packtype = params[5];
             String json = "";
             try {
 
@@ -274,6 +275,7 @@ public class OrderHelper extends AppCompatActivity {
                 parameters.add("Layer", layer);
                 parameters.add("Weight", weight);
                 parameters.add("CreatedBy", createdby);
+                parameters.add("PackType", packtype);
                 builder.post(parameters.build());
                 okhttp3.Response response = client.newCall(builder.build()).execute();
                 if (response.isSuccessful()) {
@@ -347,20 +349,19 @@ public class OrderHelper extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             //     InputStream inputStream
-
             String Product_name = params[0];
             String OrderId = params[1];
             String weight = params[2];
             String layerType = params[3];
-            String Length = params[4];
-
+            String packtype = params[4];
+            String Length = params[5];
 
             String json = "";
             try {
 
                 OkHttpClient client = new OkHttpClient();
                 Request.Builder builder = new Request.Builder();
-                builder.url(AppConfig.BASE_URL_API_ + "ReOrder/"+Product_name+"/"+OrderId+"/"+weight+"/"+layerType+"/"+Length);
+                builder.url(AppConfig.BASE_URL_API_ + "ReOrder/"+Product_name+"/"+OrderId+"/"+weight+"/"+layerType+"/"+packtype+"/"+Length);
                 builder.addHeader("Content-Type", "application/x-www-form-urlencoded");
                 builder.addHeader("Accept", "application/json");
                 //builder.addHeader("Authorization", "Bearer " + accesstoken);

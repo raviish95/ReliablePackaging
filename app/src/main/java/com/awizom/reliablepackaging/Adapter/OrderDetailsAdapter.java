@@ -1,5 +1,8 @@
 package com.awizom.reliablepackaging.Adapter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -47,7 +50,18 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
         holder.weight.setText("Weight - " + String.valueOf(c.getWeight()));
         holder.orderid.setText(String.valueOf(c.getOrderId()));
         holder.amount.setText(" \u20B9" + String.valueOf(c.getTotalAmount()).toString());
-
+     /*   String dispatchedate=String.valueOf(c.getCreatedDate().toString());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        try {
+            cal.setTime(sdf.parse(dispatchedate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        cal.add(Calendar.DATE, 25);  // number of days to add
+        dispatchedate = sdf.format(cal.getTime());
+        holder.dispatch_date.setText("Estimated Dispatch Date - "+cal.toString()*/
+        //);
         try {
             holder.image_linkurl.setText(AppConfig.BASE_URL + c.getImageUrl().toString());
         } catch (Exception e) {
@@ -144,7 +158,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView product, weight, orderid, amount,image_linkurl, order_no,checking;
+        public TextView product, weight, orderid, amount,image_linkurl, order_no,checking,dispatch_date;
         public ImageView productdesign;
 
         @RequiresApi(api = Build.VERSION_CODES.M)
@@ -153,6 +167,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
             progressDialog = new SpotsDialog(mCtx, R.style.Custom);
             image_linkurl=view.findViewById(R.id.image_link);
             product = (TextView) view.findViewById(R.id.prod_name);
+            dispatch_date=view.findViewById(R.id.dispatch_date);
             productdesign = (ImageView) view.findViewById(R.id.productdesign);
             weight = (TextView) view.findViewById(R.id.weight);
             orderid = view.findViewById(R.id.orderid);

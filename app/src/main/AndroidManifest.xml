@@ -28,14 +28,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <activity
             android:name=".login.MainActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>

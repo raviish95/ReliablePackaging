@@ -40,5 +40,5 @@ dependencies {
     implementation 'com.github.d-max:spots-dialog:0.4@aar'
     implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
     implementation 'com.kofigyan.stateprogressbar:stateprogressbar:1.0.0'
-
+    implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.2'
 }

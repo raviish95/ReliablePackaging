@@ -28,8 +28,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="3dp"
-        android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="5dp">
 
@@ -59,14 +59,12 @@
                         android:background="@null"
                         android:focusable="auto"
                         android:max="4"
-                        android:pointerIcon="arrow"
-                        android:progress="1"
                         android:progressDrawable="@drawable/seekbar"
                         android:scrollbarSize="50dp"
                         android:scrollbarThumbHorizontal="@color/grey"
                         android:splitTrack="false"
                         android:thumb="@drawable/rotate"
-                        android:tickMark="@drawable/grey_fiber_circle"
+                        android:tickMark="@drawable/blue_dot"
                         app:seekBarRotation="CW90" />
 
 
@@ -106,19 +104,19 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/pr24"
-                                android:padding="5dp"/>
+                                android:padding="5dp"
+                                android:src="@drawable/pr24" />
 
                             <TextView
                                 android:id="@+id/printing"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
+                                android:fontFamily="serif"
+                                android:padding="5dp"
                                 android:text="Printing"
                                 android:textColor="@color/black"
-                                android:textSize="18sp"
-                                android:padding="5dp"
-                                android:fontFamily="serif"/>
+                                android:textSize="18sp" />
 
 
                         </LinearLayout>
@@ -127,11 +125,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
+                            android:fontFamily="serif"
+                            android:padding="5dp"
                             android:text="@string/printing"
                             android:textColor="@color/black"
-                            android:textSize="13sp"
-                            android:fontFamily="serif"
-                            android:padding="5dp"/>
+                            android:textSize="13sp" />
 
                     </LinearLayout>
 
@@ -149,30 +147,30 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/s24"
-                                android:padding="5dp"/>
+                                android:padding="5dp"
+                                android:src="@drawable/s24" />
 
                             <TextView
                                 android:id="@+id/inspection"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
+                                android:fontFamily="serif"
+                                android:padding="5dp"
                                 android:text="Inspection"
                                 android:textColor="@color/black"
-                                android:textSize="18sp"
-                                android:padding="5dp"
-                                android:fontFamily="serif" />
+                                android:textSize="18sp" />
                         </LinearLayout>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
+                            android:fontFamily="serif"
+                            android:padding="5dp"
                             android:text="@string/inspection"
                             android:textColor="@color/black"
-                            android:textSize="13sp"
-                            android:fontFamily="serif"
-                            android:padding="5dp"/>
+                            android:textSize="13sp" />
 
 
                     </LinearLayout>
@@ -191,19 +189,19 @@
                             <ImageView
                                 android:layout_width="35dp"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/l24"
-                                android:padding="5dp"/>
+                                android:padding="5dp"
+                                android:src="@drawable/l24" />
 
                             <TextView
                                 android:id="@+id/lamination"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
+                                android:fontFamily="serif"
+                                android:padding="5dp"
                                 android:text="Lamination"
                                 android:textColor="@color/black"
-                                android:textSize="18sp"
-                                android:padding="5dp"
-                                android:fontFamily="serif" />
+                                android:textSize="18sp" />
                         </LinearLayout>
 
                         <TextView
@@ -211,11 +209,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
+                            android:fontFamily="serif"
+                            android:padding="5dp"
                             android:text="@string/lamination"
                             android:textColor="@color/black"
-                            android:textSize="13sp"
-                            android:fontFamily="serif"
-                            android:padding="5dp" />
+                            android:textSize="13sp" />
 
                     </LinearLayout>
 
@@ -234,19 +232,19 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/c24"
-                                android:padding="5dp"/>
+                                android:padding="5dp"
+                                android:src="@drawable/c24" />
 
                             <TextView
                                 android:id="@+id/cutting"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
+                                android:fontFamily="serif"
+                                android:padding="5dp"
                                 android:text="Cutting"
                                 android:textColor="@color/black"
-                                android:textSize="18sp"
-                                android:padding="5dp"
-                                android:fontFamily="serif"/>
+                                android:textSize="18sp" />
                         </LinearLayout>
 
                         <TextView
@@ -254,11 +252,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="15dp"
+                            android:fontFamily="serif"
+                            android:padding="5dp"
                             android:text="@string/cutting"
                             android:textColor="@color/black"
-                            android:textSize="13sp"
-                            android:fontFamily="serif"
-                            android:padding="5dp"/>
+                            android:textSize="13sp" />
 
 
                         <TextView
@@ -266,7 +264,7 @@
                             android:layout_height="60dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="15dp"
-                            android:padding="5dp"/>
+                            android:padding="5dp" />
                     </LinearLayout>
 
                 </LinearLayout>

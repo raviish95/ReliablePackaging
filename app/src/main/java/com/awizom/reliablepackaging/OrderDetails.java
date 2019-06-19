@@ -56,32 +56,18 @@ public class OrderDetails extends AppCompatActivity {
         imageLink = getIntent().getStringExtra("ImageLink");
         initview();
         verticalSeekBar = findViewById(R.id.capacity_seek);
-        verticalSeekBar.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-
-            }
-        });
-        verticalSeekBar.setOnHoverListener(new View.OnHoverListener() {
-            @Override
-            public boolean onHover(View v, MotionEvent event) {
-                return false;
-            }
-        });
 
            if (Build.VERSION.SDK_INT >= 11) {
-
-               ObjectAnimator animation = ObjectAnimator.ofInt(verticalSeekBar,"progress",0,2);
+               ObjectAnimator animation = ObjectAnimator.ofInt(verticalSeekBar,"progress",3);
             animation.setDuration(1050); // 0.5 second
             animation.setInterpolator(new DecelerateInterpolator());
-            animation.setPropertyName("check");
             animation.start();
 
            verticalSeekBar.setEnabled(false);
 
            } else {
 
-         verticalSeekBar.setProgress(2);
+         verticalSeekBar.setProgress(3);
 
         }
         }
@@ -138,11 +124,9 @@ public class OrderDetails extends AppCompatActivity {
     private void getOrderDetails() {
 
         try {
-
             String result = new OrderHelper.GETMyOrderDetails().execute(Orderid.toString()).get();
             Gson gson = new Gson();
-            Type listType = new TypeToken<List<OrderDetailsView>>() {
-            }.getType();
+            Type listType = new TypeToken<List<OrderDetailsView>>() {  }.getType();
             orderdetails = new Gson().fromJson(result, listType);
             adapterOrderDetails = new OrderDetailsAdapter(OrderDetails.this, orderdetails, imageLink);
             recyclerViewOrder.setAdapter(adapterOrderDetails);

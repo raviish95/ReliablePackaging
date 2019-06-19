@@ -9,26 +9,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
+
         <RelativeLayout
             android:id="@+id/rel1"
             android:layout_width="match_parent"
             android:layout_height="270dp"
             android:background="@color/yellow">
+
             <RelativeLayout
                 android:id="@+id/rel2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
-                android:layout_marginTop="280dp"/>
+                android:layout_marginTop="280dp"
+                android:background="@color/white" />
 
 
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/rel3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:layout_marginTop="240dp"/>
+            android:layout_marginTop="240dp"
+            android:background="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -144,6 +147,20 @@
                             android:text="$4.6"
                             android:textColor="@color/dark_yellow"
                             android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/dispatch_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="serif"
+                            android:gravity="bottom|center_vertical"
+                            android:padding="5dp"
+                            android:text="Dispatched upto"
+                            android:textColor="@color/dark_yellow"
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -181,6 +198,7 @@
                             android:textSize="13sp" />
 
                     </LinearLayout>
+
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
