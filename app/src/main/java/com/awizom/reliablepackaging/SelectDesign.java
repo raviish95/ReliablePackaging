@@ -47,6 +47,7 @@ public class SelectDesign extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_design);
         orderid = getIntent().getStringExtra("OrderId");
+        getApproveDesign();
         initview();
     }
 
@@ -71,11 +72,11 @@ public class SelectDesign extends AppCompatActivity {
         agreeMent = findViewById(R.id.agreement);
         feedBack = findViewById(R.id.feedback);
         feedBack.setEnabled(false);
+
         agreeMent.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
             @Override
                   public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                       if (agreeMent.isChecked()) {
-
                           recyclerViewDesign.setVisibility(View.VISIBLE);
                           feedBack.setEnabled(true);
                           feedBack.setHint("Enter your own design details");
@@ -108,7 +109,31 @@ public class SelectDesign extends AppCompatActivity {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         getDesignList();
+    }
+
+    private void getApproveDesign() {
+
+        try {
+            String result = new OrderHelper.GETDesignApproveList().execute(orderid.toString()).get();
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<DesignDetails>>() {
+            }.getType();
+
+            if(result.equals("true"))
+            {
+                Toast.makeText(getApplicationContext(),"You have already approved your design",Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(this,OrderDetails.class);
+                intent.putExtra("ImageLink","imagelink");
+                intent.putExtra("OrderId",orderid.toString());
+                startActivity(intent);
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void postApprovedesign(String designId,  String isapproved, String remArks,String length) {
@@ -127,7 +152,6 @@ public class SelectDesign extends AppCompatActivity {
     }
 
     private void showApproveDesign() {
-
 
         final android.support.v7.app.AlertDialog.Builder dialogBuilder = new android.support.v7.app.AlertDialog.Builder(this);
         dialogBuilder.setCancelable(false);

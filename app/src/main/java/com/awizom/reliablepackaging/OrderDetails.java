@@ -3,6 +3,7 @@ package com.awizom.reliablepackaging;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.DragEvent;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -93,6 +95,7 @@ public class OrderDetails extends AppCompatActivity {
 
             }
         });
+
         progressDialog = new SpotsDialog(OrderDetails.this, R.style.Custom);
         linearLayout = findViewById(R.id.linearlayout);
         linearLayout.setOnTouchListener(new OnSwipeTouchListener(OrderDetails.this) {
@@ -121,6 +124,19 @@ public class OrderDetails extends AppCompatActivity {
         getOrderDetails();
     }
 
+    @SuppressLint("ResourceType")
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            if (imageLink.toString().equals("imagelink")) {
+                Intent intent = new Intent(OrderDetails.this, HomePage.class);
+                startActivity(intent);
+            } else {
+                onBackPressed();
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
     private void getOrderDetails() {
 
         try {

@@ -82,6 +82,7 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
                     dismissmethod();
 
                 } else if (holder.notification_type.getText().toString().equals("Design")) {
+
                     readNotification(holder.notification_id.getText().toString());
                     Intent intent = new Intent(mCtx, SelectDesign.class);
                     intent.putExtra("OrderId", holder.orderid.getText().toString());

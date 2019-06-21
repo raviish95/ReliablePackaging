@@ -73,14 +73,18 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
             holder.productid.setText(p.toString().split(">")[1]);
             holder.tt1.setText(p.toString().split(">")[0]);
             holder.et2 = (EditText) v.findViewById(R.id.weight_kg);
+
             holder.et2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
                     if (!hasFocus) {
-                        valueOfEditText.add(holder.et2.getText().toString());
-                        valueOfproductname.add(holder.tt1.getText().toString());
-                        valueOfproductid.add(holder.productid.getText().toString());
-
+                        if (!holder.et2.getText().toString().isEmpty()) {
+                            valueOfEditText.add(holder.et2.getText().toString());
+                            valueOfproductname.add(holder.tt1.getText().toString());
+                            valueOfproductid.add(holder.productid.getText().toString());
+                        } else {
+                            Toast.makeText(mContext, "Please fill all the values", Toast.LENGTH_LONG).show();
+                        }
                         //     Toast.makeText(mContext, holder.et2.getText().toString(), Toast.LENGTH_LONG).show();
                     }
                 }
@@ -126,9 +130,10 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
                 @Override
                 public void onClick(View v) {
 
+
                     progressDialog.show();
                     orderdetailslist.add(valueOfproductname.toString() + valueOfEditText.toString() + valueOfproductid.toString() + valueofLayerType.toString() + valueofPackType.toString());
-                    Toast.makeText(mContext, orderdetailslist.toString(), Toast.LENGTH_LONG).show();
+                    //    Toast.makeText(mContext, orderdetailslist.toString(), Toast.LENGTH_LONG).show();
                     try {
                         String length = String.valueOf(valueOfproductname.size());
                         String result = new OrderHelper.POSTRebookPreOrder().execute(valueOfproductname.toString().toString(), valueOfproductid.toString(), valueOfEditText.toString(), valueofLayerType.toString(), valueofPackType.toString(), length.toString()).get();
@@ -148,6 +153,7 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
                         dismissmethod();
                     }
                     dismissmethod();
+
 
                 }
             });

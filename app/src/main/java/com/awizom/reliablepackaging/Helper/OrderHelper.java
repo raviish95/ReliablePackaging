@@ -54,9 +54,7 @@ public class OrderHelper extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
-
-    }
+        }
 
     public static final class GETMDesignList extends AsyncTask<String, Void, String> {
         @Override
@@ -69,6 +67,52 @@ public class OrderHelper extends AppCompatActivity {
                 OkHttpClient client = new OkHttpClient();
                 Request.Builder builder = new Request.Builder();
                 builder.url(AppConfig.BASE_URL_API_ + "MyDesign/" + orderid);
+                builder.addHeader("Content-Type", "Application/json");
+                builder.addHeader("Accept", "application/json");
+
+                okhttp3.Response response = client.newCall(builder.build()).execute();
+                if (response.isSuccessful()) {
+                    json = response.body().string();
+                }
+            } catch (Exception e) {
+
+
+                e.printStackTrace();
+
+            }
+            return json;
+        }
+
+        protected void onPostExecute(String result) {
+
+            try {
+                if (result.isEmpty()) {
+
+
+                } else {
+                    super.onPostExecute(result);
+                }
+
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+    public static final class GETDesignApproveList extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+
+            String json = "";
+            String orderid = params[0];
+
+            try {
+                OkHttpClient client = new OkHttpClient();
+                Request.Builder builder = new Request.Builder();
+                builder.url(AppConfig.BASE_URL_API_ + "MyApproveDesign/" + orderid);
                 builder.addHeader("Content-Type", "Application/json");
                 builder.addHeader("Accept", "application/json");
 

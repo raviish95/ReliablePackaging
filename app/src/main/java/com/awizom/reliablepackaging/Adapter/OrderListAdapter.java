@@ -48,8 +48,12 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
         holder.product.setText(c.getJobName());
         holder.weight.setText("Weight - " + String.valueOf(c.getWeight()));
 
-        holder.layer_type.setText(c.getLayerName().toString());
+        try {
+            holder.layer_type.setText(c.getLayerName().toString());
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         holder.orderid.setText(String.valueOf(c.getOrderId()));
         try {
             holder.imglinkurl.setText(AppConfig.BASE_URL + c.getImageUrl().toString());
