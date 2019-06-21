@@ -23,11 +23,12 @@
         android:layout_height="wrap_content"
         android:visibility="gone" />
 
+
     <android.support.v7.widget.CardView
         android:id="@+id/w1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="0dp"
+        app:cardCornerRadius="10dp"
         android:padding="20dp">
 
         <LinearLayout
@@ -43,7 +44,8 @@
                 android:layout_height="80dp"
                 android:layout_gravity="center_vertical|center"
                 android:gravity="center"
-                android:src="@drawable/chips_packet" />
+                android:src="@drawable/chips_packet"
+                android:layout_margin="10dp"/>
 
 
             <LinearLayout
@@ -62,10 +64,11 @@
                     android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:text="Product Name"
-                    android:textColor="@color/colorBackground"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:fontFamily="serif"
-                    android:padding="4dp"/>
+                    android:padding="4dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/layer"
@@ -76,11 +79,11 @@
                     android:layout_weight="1"
                     android:gravity="left"
                     android:text="Layer Type"
-                    android:textColor="@color/distempur"
-                    android:textSize="15sp"
+                    android:textColor="@color/dark_yellow"
+                    android:textSize="14sp"
                     android:textStyle="normal"
                     android:fontFamily="serif"
-                    android:padding="4dp"/>
+                    android:padding="4dp" />
 
                 <TextView
                     android:id="@+id/weight"
@@ -91,10 +94,10 @@
                     android:layout_weight="1"
                     android:gravity="left"
                     android:text="weight"
-                    android:textColor="@color/distempur"
-                    android:textSize="15sp"
+                    android:textColor="@color/red"
+                    android:textSize="13sp"
                     android:fontFamily="serif"
-                    android:padding="4dp"/>
+                    android:padding="4dp" />
             </LinearLayout>
 
 
@@ -106,3 +109,5 @@
         android:layout_width="match_parent"
         android:layout_height="5dp" />
 </LinearLayout>
+
+

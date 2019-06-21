@@ -64,7 +64,7 @@
                         android:scrollbarThumbHorizontal="@color/grey"
                         android:splitTrack="false"
                         android:thumb="@drawable/rotate"
-                        android:tickMark="@drawable/blue_dot"
+                        android:tickMark="@drawable/unchek"
                         app:seekBarRotation="CW90" />
 
 
@@ -83,6 +83,7 @@
                      app:seekBarRotation="CW90" />-->
 
                 </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
