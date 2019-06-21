@@ -17,6 +17,10 @@
 
     </style>
 
+    <!--<style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">-->
+        <!--<item name="colorAccent">@color/colorPrimary</item>-->
+    <!--</style>  Sakshi Alert Change-->
+
 
 
     <style name="Custom" parent="android:Theme.DeviceDefault.Dialog">

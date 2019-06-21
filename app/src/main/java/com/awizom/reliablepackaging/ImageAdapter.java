@@ -20,7 +20,7 @@ public class ImageAdapter extends PagerAdapter {
     }
 
     private int[] sliderImageId = new int[]{
-            R.mipmap.i1, R.mipmap.i2, R.mipmap.i3, R.mipmap.i4
+            R.mipmap.i1, R.mipmap.i2, R.mipmap.i3, R.mipmap.i4, R.mipmap.i5, R.mipmap.i6, R.mipmap.i7
     };
 
     @Override

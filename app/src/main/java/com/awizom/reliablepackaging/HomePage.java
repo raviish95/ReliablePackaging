@@ -36,6 +36,7 @@ import android.view.MenuItem;
 import com.awizom.reliablepackaging.Adapter.OrderListAdapter;
 import com.awizom.reliablepackaging.Helper.OrderHelper;
 import com.awizom.reliablepackaging.Helper.ProfileHelper;
+import com.awizom.reliablepackaging.login.LoginActivity;
 import com.awizom.reliablepackaging.login.MainActivity;
 import com.awizom.reliablepackaging.Model.MyProfileView;
 import com.awizom.reliablepackaging.Model.Order;
@@ -71,13 +72,15 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            AlertDialog.Builder alertbox = new AlertDialog.Builder(HomePage.this);
+            final AlertDialog.Builder alertbox = new AlertDialog.Builder(HomePage.this);//R.style.AlertDialogTheme (Sakshee change alert)
             alertbox.setIcon(R.drawable.ic_search_black_24dp);
             alertbox.setIconAttribute(90);
             alertbox.setTitle("Do You Want To Exit ?");
+
             alertbox.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface arg0, int arg1) {
                     // finish used for destroyed activity
+
                     finishAffinity();
                     System.exit(0);
                 }
@@ -89,6 +92,10 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                     // of Dialog
                 }
             });
+
+//            alertbox.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorPrimary));
+//            alertbox.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+
             alertbox.show();
         }
         return super.onKeyDown(keyCode, event);
@@ -283,7 +290,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                   progressDialog.show();
                   try {
                       SharedPrefManager.getInstance(HomePage.this).logout();
-                      Intent intent = new Intent(HomePage.this, MainActivity.class);
+                      Intent intent = new Intent(HomePage.this, LoginActivity.class);
                       intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                       startActivity(intent);
                       finish();
@@ -351,7 +358,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 try {
 
                     SharedPrefManager.getInstance(this).logout();
-                    Intent intent = new Intent(this, MainActivity.class);
+                    Intent intent = new Intent(this, LoginActivity.class);
 
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);

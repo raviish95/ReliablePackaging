@@ -50,6 +50,7 @@ public class ChangePassword extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
         progressDialog = new SpotsDialog(this, R.style.Custom);
         subMitButton = findViewById(R.id.submitButton);
         oldPass = findViewById(R.id.old_pwd);
