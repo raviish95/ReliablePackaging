@@ -44,6 +44,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import dmax.dialog.SpotsDialog;
 
@@ -58,7 +60,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     Snackbar snackbar;
     DrawerLayout drawer;
     FloatingActionButton addorder;
-    TextView rebook, neworder;
+    TextView rebook, neworder,closeBtn;
     TextView textCartItemCount;
     private ImageView notification;
     int mCartItemCount = 10;
@@ -66,6 +68,13 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     String clientid = "", userName = "", userId = "";
     SwipeRefreshLayout mSwipeRefreshLayout;
     private AlertDialog progressDialog;
+    ViewPager mViewPager;
+
+    int currentPage = 0;
+    Timer timer;
+    final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
+    final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
+
 
     /* For OnBackPRess in HomePage */
     @SuppressLint("ResourceType")
@@ -119,9 +128,13 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         progressDialog = new SpotsDialog(this, R.style.Custom);
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.viewPage);
+
+
+        mViewPager = findViewById(R.id.viewPage);
         ImageAdapter adapterView = new ImageAdapter(this);
         mViewPager.setAdapter(adapterView);
+
+
         clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
         userName = SharedPrefManager.getInstance(this).getUser().getUserName().toString();
         userId = SharedPrefManager.getInstance(this).getUser().getUserID();
@@ -175,6 +188,26 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 }
             }
         });
+
+
+
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (currentPage == 5-1) {
+                    currentPage = 0;
+                }
+                mViewPager.setCurrentItem(currentPage++, true);
+            }
+        };
+
+        timer = new Timer(); // This will create a new Thread
+        timer.schedule(new TimerTask() { // task to be scheduled
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, DELAY_MS, PERIOD_MS);
     }
 
     private void getNotiCount() {
@@ -217,6 +250,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         final View dialogView = inflater.inflate(R.layout.order_type, null);
         rebook = dialogView.findViewById(R.id.rebOok);
         neworder = dialogView.findViewById(R.id.neworder);
+        closeBtn = dialogView.findViewById(R.id.closeBtn);
         rebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -234,6 +268,13 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         dialogBuilder.setView(dialogView);
         dialogView.setBackgroundColor(Color.parseColor("#F0F8FF"));
         final android.support.v7.app.AlertDialog b = dialogBuilder.create();
+
+        closeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                b.dismiss();
+            }
+        });
         b.show();
 
     }

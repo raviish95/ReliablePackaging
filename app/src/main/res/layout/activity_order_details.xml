@@ -64,7 +64,7 @@
                         android:scrollbarThumbHorizontal="@color/grey"
                         android:splitTrack="false"
                         android:thumb="@drawable/rotate"
-                        android:tickMark="@drawable/unchek"
+                        android:tickMark="@drawable/grey_fiber_circle"
                         app:seekBarRotation="CW90" />
 
 

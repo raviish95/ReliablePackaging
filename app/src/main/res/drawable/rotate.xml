@@ -4,5 +4,5 @@
     android:toDegrees="270"
     android:pivotX="50%"
     android:pivotY="50%"
-    android:drawable="@drawable/check">
+    android:drawable="@drawable/green_checkbox">
 </rotate>
