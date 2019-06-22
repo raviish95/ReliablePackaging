@@ -30,7 +30,6 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyViewHolder> {
 
-    String imagestr;
     private List<Order> orderList;
     private Context mCtx;
     private AlertDialog progressDialog;

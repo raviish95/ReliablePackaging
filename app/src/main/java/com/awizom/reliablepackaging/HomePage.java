@@ -119,12 +119,9 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         progressDialog = new SpotsDialog(this, R.style.Custom);
-
-
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewPage);
         ImageAdapter adapterView = new ImageAdapter(this);
         mViewPager.setAdapter(adapterView);
-
         clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
         userName = SharedPrefManager.getInstance(this).getUser().getUserName().toString();
         userId = SharedPrefManager.getInstance(this).getUser().getUserID();
@@ -143,7 +140,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         recyclerView.scrollToPosition(0);
         recyclerView.smoothScrollToPosition(0);
         linearLayout = findViewById(R.id.linearlayout);
-
         snackbar = Snackbar.make(linearLayout, "No internet connection!", Snackbar.LENGTH_INDEFINITE)
                 .setAction("RETRY", new View.OnClickListener() {
                     @Override
@@ -187,7 +183,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             String result = new ProfileHelper.GetNotiCount().execute(clientId.toString()).get();
             // Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_LONG).show();
             mCartItemCount = Integer.parseInt(result);
-
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "1045742558779",
+    "firebase_url": "https://reliablepackaging-1852d.firebaseio.com",
+    "project_id": "reliablepackaging-1852d",
+    "storage_bucket": "reliablepackaging-1852d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045742558779:android:592720d5cc14dfb5",
+        "android_client_info": {
+          "package_name": "com.awizom.reliablepackaging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1045742558779-a7v7htvs2ljlhftoaku8rg3a2t0t11qs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.awizom.reliablepackaging",
+            "certificate_hash": "92bc508ef4e98ea9b0378ad18c503c6f8c3d1d01"
+          }
+        },
+        {
+          "client_id": "1045742558779-12pjqhgg5h525b69inuisvj2p26c9gr7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.awizom.reliablepackaging",
+            "certificate_hash": "b01d040b3dd669c1929c25c3f8f9deb94f7f784a"
+          }
+        },
+        {
+          "client_id": "1045742558779-kunj6b7qenb1eqluiqssiljp6b2fl9mp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmg0qed7TjNzKGk1PEqqaGIdsxrYP7q0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1045742558779-kunj6b7qenb1eqluiqssiljp6b2fl9mp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
