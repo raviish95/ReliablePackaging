@@ -55,7 +55,6 @@ public class FirebaseMessagingService
                         .setContentIntent(pendingIntent)
                         .setLargeIcon(BitmapFactory.decodeResource
                                 (getResources(), R.mipmap.ic_launcher));;
-
         NotificationManager notificationManager=(NotificationManager)
                 getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notificationbuilder.build());
