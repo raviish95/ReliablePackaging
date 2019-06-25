@@ -41,10 +41,8 @@ public class FirebaseMessagingService
         Intent intent= new      Intent(this,FirebaseNotiication.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intents[0]=intent;
-        PendingIntent pendingIntent=PendingIntent.getActivities(this,0,
-                intents,PendingIntent.FLAG_ONE_SHOT);
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri
-                (RingtoneManager.TYPE_NOTIFICATION);
+        PendingIntent pendingIntent=PendingIntent.getActivities(this,0,   intents,PendingIntent.FLAG_ONE_SHOT);
+        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationbuilder=
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_add_black_24dp)

@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,8 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
         holder.weight.setText("Weight - " + String.valueOf(c.getWeight()));
         holder.orderid.setText(String.valueOf(c.getOrderId()));
         holder.amount.setText(" \u20B9" + String.valueOf(c.getTotalAmount()).toString());
+        holder.order_type.setText(Html.fromHtml("<u>"+c.getOrderType().toString().split(" ")[0]+"</u>"));
+        holder.pack_type.setText("Pack Type - "+c.getPackType().toString());
         String dispatchedate = String.valueOf(c.getCreatedDate().toString());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Calendar calendar = Calendar.getInstance();
@@ -168,7 +171,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView product, weight, orderid, amount, image_linkurl, order_no, checking, dispatch_date;
+        public TextView product, weight, orderid, amount, image_linkurl, order_no, checking, dispatch_date,order_type,pack_type;
         public ImageView productdesign;
 
         @RequiresApi(api = Build.VERSION_CODES.M)
@@ -176,6 +179,8 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
             super(view);
             progressDialog = new SpotsDialog(mCtx, R.style.Custom);
             image_linkurl = view.findViewById(R.id.image_link);
+            order_type=view.findViewById(R.id.order_type);
+            pack_type=view.findViewById(R.id.pack_type);
             product = (TextView) view.findViewById(R.id.prod_name);
             dispatch_date = view.findViewById(R.id.dispatch_date);
             productdesign = (ImageView) view.findViewById(R.id.productdesign);

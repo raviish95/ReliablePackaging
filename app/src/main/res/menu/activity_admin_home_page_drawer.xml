@@ -14,6 +14,14 @@
             android:icon="@drawable/rupay_logo"
             android:title="@string/myAccount" />
         <item
+            android:id="@+id/my_jobs"
+            android:icon="@drawable/job_blue_24dp"
+            android:title="@string/myjob" />
+        <item
+            android:id="@+id/my_order"
+            android:icon="@drawable/shopping_cart"
+            android:title="@string/myOrder" />
+        <item
             android:id="@+id/nav_password"
             android:icon="@drawable/key"
             android:title="@string/password" />
@@ -30,6 +38,10 @@
                 android:id="@+id/nav_refer"
                 android:icon="@drawable/link"
                 android:title="Refer App" />
+            <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_feedback_black_24dp"
+                android:title="Feedback Company" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/send"

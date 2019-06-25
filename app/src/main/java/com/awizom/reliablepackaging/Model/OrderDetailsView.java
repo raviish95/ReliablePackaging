@@ -22,6 +22,15 @@ public class OrderDetailsView {
     public double UTGST ;
     public String OrderNo;
     public String OrderType;
+    public String PackType;
+
+    public String getPackType() {
+        return PackType;
+    }
+
+    public void setPackType(String packType) {
+        PackType = packType;
+    }
 
     public String getOrderType() {
         return OrderType;

@@ -47,10 +47,11 @@ public class LoginActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.login);
-//        if (!(SharedPrefManager.getInstance(this).getUser().getClientID() == 0)) {
-//            Intent intent = new Intent(this, HomePage.class);
-//            startActivity(intent);
-//        }
+        if (!(SharedPrefManager.getInstance(this).getUser().getClientID() == 0)) {
+            Intent intent = new Intent(this, HomePage.class);
+            startActivity(intent);
+        }
+
         initViews();
 
     }

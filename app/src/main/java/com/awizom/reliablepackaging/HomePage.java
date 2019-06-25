@@ -23,6 +23,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +34,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.awizom.reliablepackaging.Adapter.GridImageAdapter;
 import com.awizom.reliablepackaging.Adapter.OrderListAdapter;
 import com.awizom.reliablepackaging.Helper.OrderHelper;
 import com.awizom.reliablepackaging.Helper.ProfileHelper;
@@ -40,8 +44,10 @@ import com.awizom.reliablepackaging.login.LoginActivity;
 import com.awizom.reliablepackaging.login.MainActivity;
 import com.awizom.reliablepackaging.Model.MyProfileView;
 import com.awizom.reliablepackaging.Model.Order;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Timer;
@@ -60,20 +66,19 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     Snackbar snackbar;
     DrawerLayout drawer;
     FloatingActionButton addorder;
-    TextView rebook, neworder,closeBtn;
+    TextView rebook, neworder, closeBtn;
     TextView textCartItemCount;
     private ImageView notification;
     int mCartItemCount = 10;
     TextView username;
+    GridView gridView;
     String clientid = "", userName = "", userId = "";
     SwipeRefreshLayout mSwipeRefreshLayout;
     private AlertDialog progressDialog;
-    ViewPager mViewPager;
-
     int currentPage = 0;
     Timer timer;
-    final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
-    final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
+    final long DELAY_MS = 1000;//delay in milliseconds before task is to be executed
+    final long PERIOD_MS = 5000; // time in milliseconds between successive task executions.
 
 
     /* For OnBackPRess in HomePage */
@@ -85,7 +90,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             alertbox.setIcon(R.drawable.ic_search_black_24dp);
             alertbox.setIconAttribute(90);
             alertbox.setTitle("Do You Want To Exit ?");
-
             alertbox.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface arg0, int arg1) {
                     // finish used for destroyed activity
@@ -127,14 +131,11 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         toolbar.setTitleTextAppearance(getApplicationContext(), R.style.styleA);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+        gridView = (GridView) findViewById(R.id.gridview);
+        gridView.setAdapter(new GridImageAdapter(this));
+        TextView autoslideOffer = findViewById(R.id.auto_sldier);
+        autoslideOffer.setSelected(true);
         progressDialog = new SpotsDialog(this, R.style.Custom);
-
-
-        mViewPager = findViewById(R.id.viewPage);
-        ImageAdapter adapterView = new ImageAdapter(this);
-        mViewPager.setAdapter(adapterView);
-
-
         clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
         userName = SharedPrefManager.getInstance(this).getUser().getUserName().toString();
         userId = SharedPrefManager.getInstance(this).getUser().getUserID();
@@ -190,24 +191,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         });
 
 
-
-        final Handler handler = new Handler();
-        final Runnable Update = new Runnable() {
-            public void run() {
-                if (currentPage == 5-1) {
-                    currentPage = 0;
-                }
-                mViewPager.setCurrentItem(currentPage++, true);
-            }
-        };
-
-        timer = new Timer(); // This will create a new Thread
-        timer.schedule(new TimerTask() { // task to be scheduled
-            @Override
-            public void run() {
-                handler.post(Update);
-            }
-        }, DELAY_MS, PERIOD_MS);
     }
 
     private void getNotiCount() {
@@ -286,6 +269,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
             //we are connected to a network
             no_internet.setVisibility(View.GONE);
+
             connected = true;
             getMyOrderList();
             //    Toast.makeText(getApplicationContext(), "Internet is On", Toast.LENGTH_SHORT).show();
@@ -299,7 +283,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
     private void getMyOrderList() {
         try {
-
+            Toast.makeText(getApplicationContext(), "deviceid->" + FirebaseInstanceId.getInstance().getToken(), Toast.LENGTH_LONG).show();
             String result = new OrderHelper.GETMyOrder().execute(clientid.toString()).get();
             Gson gson = new Gson();
             Type listType = new TypeToken<List<Order>>() {
@@ -319,26 +303,26 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home_page, menu);
         MenuItem menuItem = menu.findItem(R.id.admin1);
-        MenuItem logouts=menu.findItem(R.id.action_logout);
-          logouts.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-              @Override
-              public boolean onMenuItemClick(MenuItem item) {
-                  progressDialog.show();
-                  try {
-                      SharedPrefManager.getInstance(HomePage.this).logout();
-                      Intent intent = new Intent(HomePage.this, LoginActivity.class);
-                      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                      startActivity(intent);
-                      finish();
-                      dismissmethod();
+        MenuItem logouts = menu.findItem(R.id.action_logout);
+        logouts.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                progressDialog.show();
+                try {
+                    SharedPrefManager.getInstance(HomePage.this).logout();
+                    Intent intent = new Intent(HomePage.this, LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                    dismissmethod();
 
-                  } catch (Exception e) {
-                      e.printStackTrace();
-                      dismissmethod();
-                  }
-                  return true;
-              }
-          });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    dismissmethod();
+                }
+                return true;
+            }
+        });
         View actionView = MenuItemCompat.getActionView(menuItem);
         textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
         notification = (ImageView) actionView.findViewById(R.id.notification);
@@ -439,6 +423,13 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 /*Toast.makeText(getApplicationContext(), "Send", Toast.LENGTH_LONG).show();*/
                 break;
             }
+            case R.id.nav_feedback: {
+                Toast.makeText(getApplicationContext(), "Feedback", Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(this,FeedbackActivity.class);
+                startActivity(intent);
+                break;
+            }
+
             case R.id.nav_refer: {
                 /*  Toast.makeText(getApplicationContext(), "ReferApp", Toast.LENGTH_LONG).show();*/
 
@@ -447,6 +438,14 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.my_acc: {
                 progressDialog.show();
                 Intent intent = new Intent(this, MyAccount.class);
+                startActivity(intent);
+                dismissmethod();
+                /*   Toast.makeText(getApplicationContext(), "My Account", Toast.LENGTH_LONG).show();*/
+                break;
+            }
+            case R.id.my_order: {
+                progressDialog.show();
+                Intent intent = new Intent(this, MyOrderList.class);
                 startActivity(intent);
                 dismissmethod();
                 /*   Toast.makeText(getApplicationContext(), "My Account", Toast.LENGTH_LONG).show();*/
