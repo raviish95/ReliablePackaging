@@ -6,10 +6,12 @@ import android.graphics.Color;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -31,7 +33,7 @@ public class AddOrderActivity extends AppCompatActivity {
     private TextView productype;
     private Button submitOrder;
     private RelativeLayout relativeLayout;
-    private MaterialBetterSpinner layertype,packType;
+    private MaterialBetterSpinner layertype, packType;
     private String layervalue = "0", weightvalue;
     private String packtypevalue = "";
     String[] layerlist = {"Two Layer", "Three Layer"};
@@ -62,7 +64,7 @@ public class AddOrderActivity extends AppCompatActivity {
         progressDialog = new SpotsDialog(AddOrderActivity.this, R.style.Custom);
         itemweight = findViewById(R.id.itemWeight);
         layertype = findViewById(R.id.layerType);
-        packType=findViewById(R.id.packType);
+        packType = findViewById(R.id.packType);
         final ArrayAdapter<String> arrayAdapterpack = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, packlist);
         packType.setAdapter(arrayAdapterpack);
         packType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -151,15 +153,46 @@ public class AddOrderActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     layertype.setError("Layer type should not be blank");
                     layertype.requestFocus();
-                }
-
-                else if (packtypevalue.toString().equals("")) {
+                } else if (packtypevalue.toString().equals("")) {
                     progressDialog.dismiss();
                     packType.setError("Pack type should not be blank");
                     packType.requestFocus();
-                }
-                else {
-                    CreateOrder();
+                } else {
+                    final android.support.v7.app.AlertDialog.Builder dialogBuilder = new android.support.v7.app.AlertDialog.Builder(AddOrderActivity.this);
+                    dialogBuilder.setCancelable(false);
+                    LayoutInflater inflater = LayoutInflater.from(AddOrderActivity.this);
+                    final View dialogView = inflater.inflate(R.layout.notification_want, null);
+                    Button yesnoti = dialogView.findViewById(R.id.yes);
+                    Button nonoti = dialogView.findViewById(R.id.no);
+                    ImageView close=dialogView.findViewById(R.id.close);
+                    TextView textView = dialogView.findViewById(R.id.text);
+                    yesnoti.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String notif="Yes";
+                            CreateOrder(notif);
+                        }
+                    });
+
+                    dialogBuilder.setView(dialogView);
+                    final android.support.v7.app.AlertDialog b = dialogBuilder.create();
+                    b.show();
+                    close.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            b.dismiss();
+                            progressDialog.dismiss();
+                        }
+                    });
+                    nonoti.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String notif="No";
+                            CreateOrder(notif);
+                        }
+                    });
+
+
                 }
             }
         });
@@ -174,17 +207,17 @@ public class AddOrderActivity extends AppCompatActivity {
 
     }
 
-    private void CreateOrder() {
+    private void CreateOrder(String notif) {
 
 
         String clientId = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
         String userid = SharedPrefManager.getInstance(this).getUser().getUserID();
 
         try {
-            String result = new OrderHelper.POSTCreateOrder().execute(clientId, productname.getText().toString(), layervalue.toString(), itemweight.getText().toString(), userid,packtypevalue.toString()).get();
+            String result = new OrderHelper.POSTCreateOrder().execute(clientId, productname.getText().toString(), layervalue.toString(), itemweight.getText().toString(), userid, packtypevalue.toString(),notif.toString()).get();
             if (result.isEmpty()) {
                 Toast.makeText(this, "Invalid request", Toast.LENGTH_SHORT).show();
-                result = new OrderHelper.POSTCreateOrder().execute(clientId, productname.getText().toString(), layervalue.toString(), itemweight.getText().toString(),userid,packtypevalue.toString()).get();
+                result = new OrderHelper.POSTCreateOrder().execute(clientId, productname.getText().toString(), layervalue.toString(), itemweight.getText().toString(), userid, packtypevalue.toString()).get();
             } else {
                 Intent intent = new Intent(this, HomePage.class);
                 startActivity(intent);

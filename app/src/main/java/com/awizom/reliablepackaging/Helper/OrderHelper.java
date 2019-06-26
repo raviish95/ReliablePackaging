@@ -350,12 +350,13 @@ public class OrderHelper extends AppCompatActivity {
             String weight = params[3];
             String createdby = params[4];
             String packtype = params[5];
+            String isnotify = params[6];
             String json = "";
             try {
 
                 OkHttpClient client = new OkHttpClient();
                 Request.Builder builder = new Request.Builder();
-                builder.url(AppConfig.BASE_URL_API_ + "CreateOrder");
+                builder.url(AppConfig.BASE_URL_API_ + "CreateOrder/"+isnotify);
                 builder.addHeader("Content-Type", "application/x-www-form-urlencoded");
                 builder.addHeader("Accept", "application/json");
                 //builder.addHeader("Authorization", "Bearer " + accesstoken);

@@ -46,8 +46,9 @@ public class MyOrderList extends AppCompatActivity {
     }
 
     private void initview() {
+        String headername=getIntent().getStringExtra("HeaderName");
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Order");
+        toolbar.setTitle(headername.toString());
         toolbar.setBackgroundColor(getResources().getColor(R.color.yellow));
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
@@ -58,6 +59,14 @@ public class MyOrderList extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        LinearLayout linearLayout=findViewById(R.id.OrderDataFunc);
+        if(headername.equals("My Job"))
+        {
+            linearLayout.setVisibility(View.GONE);
+        }
+        else {
+            linearLayout.setVisibility(View.VISIBLE);
+        }
         no_internet = findViewById(R.id.no_internet);
         linearLayout = findViewById(R.id.linearlayout);
         addorder = findViewById(R.id.neworder);
@@ -119,7 +128,7 @@ public class MyOrderList extends AppCompatActivity {
     private void getMyOrderList() {
         String clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
         try {
-            Toast.makeText(getApplicationContext(), "deviceid->" + FirebaseInstanceId.getInstance().getToken(), Toast.LENGTH_LONG).show();
+          //  Toast.makeText(getApplicationContext(), "deviceid->" + FirebaseInstanceId.getInstance().getToken(), Toast.LENGTH_LONG).show();
             String result = new OrderHelper.GETMyOrder().execute(clientid.toString()).get();
             Gson gson = new Gson();
             Type listType = new TypeToken<List<Order>>() {

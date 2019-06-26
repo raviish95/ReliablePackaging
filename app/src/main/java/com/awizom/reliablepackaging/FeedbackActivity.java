@@ -1,6 +1,7 @@
 package com.awizom.reliablepackaging;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +25,18 @@ public class FeedbackActivity extends AppCompatActivity {
     }
 
     private void initview() {
-
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Feedback");
+        toolbar.setBackgroundColor(getResources().getColor(R.color.yellow));
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         feedEditetet = findViewById(R.id.feedback);
         feedSubmit = findViewById(R.id.submit);
         feedSubmit.setOnClickListener(new View.OnClickListener() {

@@ -14,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.DragEvent;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -21,6 +22,8 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -48,7 +51,9 @@ public class OrderDetails extends AppCompatActivity {
     OrderDetailsAdapter adapterOrderDetails;
     List<OrderDetailsView> orderdetails;
     String imageLink;
+    ScrollView scrollView;
     private AlertDialog progressDialog;
+    RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,29 +64,46 @@ public class OrderDetails extends AppCompatActivity {
         initview();
         verticalSeekBar = findViewById(R.id.capacity_seek);
 
-           if (Build.VERSION.SDK_INT >= 11) {
-               ObjectAnimator animation = ObjectAnimator.ofInt(verticalSeekBar,"progress",3);
+        if (Build.VERSION.SDK_INT >= 11) {
+            ObjectAnimator animation = ObjectAnimator.ofInt(verticalSeekBar, "progress", 3);
             animation.setDuration(1050); // 0.5 second
             animation.setInterpolator(new DecelerateInterpolator());
             animation.start();
 
-           verticalSeekBar.setEnabled(false);
+            verticalSeekBar.setEnabled(false);
 
-           } else {
+        } else {
 
-         verticalSeekBar.setProgress(3);
+            verticalSeekBar.setProgress(3);
 
         }
-        }
+    }
 
     private void initview() {
 
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Order Details");
         toolbar.setBackgroundColor(getResources().getColor(R.color.yellow));
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);
+        relativeLayout = findViewById(R.id.footer);
+        scrollView = findViewById(R.id.scrollView);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                     if(scrollY<=oldScrollY)
+                    {
+                        //scroll up
+                        relativeLayout.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                    relativeLayout.setVisibility(View.GONE);}
+                }
+            });
+        }
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,12 +159,14 @@ public class OrderDetails extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
     private void getOrderDetails() {
 
         try {
             String result = new OrderHelper.GETMyOrderDetails().execute(Orderid.toString()).get();
             Gson gson = new Gson();
-            Type listType = new TypeToken<List<OrderDetailsView>>() {  }.getType();
+            Type listType = new TypeToken<List<OrderDetailsView>>() {
+            }.getType();
             orderdetails = new Gson().fromJson(result, listType);
             adapterOrderDetails = new OrderDetailsAdapter(OrderDetails.this, orderdetails, imageLink);
             recyclerViewOrder.setAdapter(adapterOrderDetails);

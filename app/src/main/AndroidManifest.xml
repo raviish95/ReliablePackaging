@@ -73,7 +73,9 @@
         <activity android:name=".MyOrderList"
             android:theme="@style/AppTheme.NoActionBar"
             />
-        <activity android:name=".FeedbackActivity"></activity>
+        <activity android:name=".FeedbackActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            ></activity>
     </application>
 
 </manifest>

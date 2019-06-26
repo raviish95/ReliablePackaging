@@ -181,8 +181,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             @Override
             public void onRefresh() {
                 try {
-                    Intent intent = new Intent(HomePage.this, HomePage.class);
-                    startActivity(intent);
+                    initview();
                 } catch (Exception e) {
                     e.printStackTrace();
                     // relativeLayout.setVisibility(View.VISIBLE);
@@ -283,14 +282,13 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
     private void getMyOrderList() {
         try {
-            Toast.makeText(getApplicationContext(), "deviceid->" + FirebaseInstanceId.getInstance().getToken(), Toast.LENGTH_LONG).show();
+           // Toast.makeText(getApplicationContext(), "deviceid->" + FirebaseInstanceId.getInstance().getToken(), Toast.LENGTH_LONG).show();
             String result = new OrderHelper.GETMyOrder().execute(clientid.toString()).get();
             Gson gson = new Gson();
             Type listType = new TypeToken<List<Order>>() {
             }.getType();
             orderlist = new Gson().fromJson(result, listType);
             adapterOrderList = new OrderListAdapter(HomePage.this, orderlist);
-
             recyclerView.setAdapter(adapterOrderList);
             mSwipeRefreshLayout.setRefreshing(false);
         } catch (Exception e) {
@@ -446,12 +444,22 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.my_order: {
                 progressDialog.show();
                 Intent intent = new Intent(this, MyOrderList.class);
+                intent.putExtra("HeaderName","My Order");
                 startActivity(intent);
                 dismissmethod();
                 /*   Toast.makeText(getApplicationContext(), "My Account", Toast.LENGTH_LONG).show();*/
                 break;
             }
 
+            case R.id.my_jobs: {
+                progressDialog.show();
+                Intent intent = new Intent(this, MyOrderList.class);
+                intent.putExtra("HeaderName","My Job");
+                startActivity(intent);
+                dismissmethod();
+                /*   Toast.makeText(getApplicationContext(), "My Account", Toast.LENGTH_LONG).show();*/
+                break;
+            }
         }
         //close navigation drawer
         drawer.closeDrawer(GravityCompat.START);

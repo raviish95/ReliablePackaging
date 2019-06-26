@@ -39,14 +39,12 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
         this.mCtx = baseContext;
     }
 
-
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         Order c = orderList.get(position);
 
         holder.product.setText(c.getJobName());
         holder.weight.setText("Weight - " + String.valueOf(c.getWeight()));
-
         try {
             holder.layer_type.setText(c.getLayerName().toString());
 
@@ -70,7 +68,6 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
             }
         } catch (Exception e) {
             holder.categoryImage.setImageResource(R.drawable.desgin_notapprove);
-
             e.printStackTrace();
         }
 
@@ -104,7 +101,6 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
                 dismissmethod();
             }
         });
-
 
     }
 
