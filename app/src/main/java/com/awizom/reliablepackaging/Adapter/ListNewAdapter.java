@@ -2,6 +2,7 @@ package com.awizom.reliablepackaging.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -130,31 +131,44 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
                 @Override
                 public void onClick(View v) {
 
+                    int lengthof = itemslist.length;
+                    if (!((valueOfEditText.toArray().length == lengthof) || (valueofPackType.toArray().length == lengthof) || valueofLayerType.toArray().length == lengthof)) {
+                        Toast toast = Toast.makeText(mContext, "Please fill all the fields...", Toast.LENGTH_LONG);
+                        View view = toast.getView();
+                        //To change the Background of Toast
+                        view.setBackgroundColor(Color.WHITE);
+                        TextView text = (TextView) view.findViewById(android.R.id.message);
+                        //Shadow of the Of the Text Color
+                        text.setShadowLayer(0, 0, 0, Color.TRANSPARENT);
+                        text.setTextColor(Color.RED);
+                        text.setTextSize(20);
+                        toast.show();
+                    } else {
+                        progressDialog.show();
+                        orderdetailslist.add(valueOfproductname.toString() + valueOfEditText.toString() + valueOfproductid.toString() + valueofLayerType.toString() + valueofPackType.toString());
+                        //    Toast.makeText(mContext, orderdetailslist.toString(), Toast.LENGTH_LONG).show();
+                        try {
+                            String length = String.valueOf(valueOfproductname.size());
+                            String result = new OrderHelper.POSTRebookPreOrder().execute(valueOfproductname.toString().toString(), valueOfproductid.toString(), valueOfEditText.toString(), valueofLayerType.toString(), valueofPackType.toString(), length.toString()).get();
 
-                    progressDialog.show();
-                    orderdetailslist.add(valueOfproductname.toString() + valueOfEditText.toString() + valueOfproductid.toString() + valueofLayerType.toString() + valueofPackType.toString());
-                    //    Toast.makeText(mContext, orderdetailslist.toString(), Toast.LENGTH_LONG).show();
-                    try {
-                        String length = String.valueOf(valueOfproductname.size());
-                        String result = new OrderHelper.POSTRebookPreOrder().execute(valueOfproductname.toString().toString(), valueOfproductid.toString(), valueOfEditText.toString(), valueofLayerType.toString(), valueofPackType.toString(), length.toString()).get();
-
-                        if (result.isEmpty()) {
-                            Toast.makeText(mContext, "Invalid request", Toast.LENGTH_SHORT).show();
-                            result = new OrderHelper.POSTRebookPreOrder().execute(orderdetailslist.toString()).get();
-                            dismissmethod();
-                        } else {
-                            Toast.makeText(mContext, "Successfully Re-Booked Order", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(mContext, HomePage.class);
-                            mContext.startActivity(intent);
+                            if (result.isEmpty()) {
+                                Toast.makeText(mContext, "Invalid request", Toast.LENGTH_SHORT).show();
+                                result = new OrderHelper.POSTRebookPreOrder().execute(orderdetailslist.toString()).get();
+                                dismissmethod();
+                            } else {
+                                Toast.makeText(mContext, "Successfully Re-Booked Order", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(mContext, HomePage.class);
+                                mContext.startActivity(intent);
+                                dismissmethod();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                             dismissmethod();
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
                         dismissmethod();
+
+
                     }
-                    dismissmethod();
-
-
                 }
             });
 

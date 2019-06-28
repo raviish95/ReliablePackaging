@@ -452,7 +452,7 @@ public class OrderHelper extends AppCompatActivity {
 
                 OkHttpClient client = new OkHttpClient();
                 Request.Builder builder = new Request.Builder();
-                builder.url(AppConfig.BASE_URL_API_ + "ReOrder/"+Product_name+"/"+OrderId+"/"+weight+"/"+layerType+"/"+packtype+"/"+Length);
+                builder.url(AppConfig.BASE_URL_API_ + "ReOrder/"+Product_name+"/"+OrderId+"/"+weight+"/"+layerType+"/"+packtype+"/"+Length+"/"+"Yes");
                 builder.addHeader("Content-Type", "application/x-www-form-urlencoded");
                 builder.addHeader("Accept", "application/json");
                 //builder.addHeader("Authorization", "Bearer " + accesstoken);

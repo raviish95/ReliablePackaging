@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,6 +38,7 @@ public class MyOrderList extends AppCompatActivity {
     LinearLayout linearLayout;
     Snackbar snackbar;
     private TextView addorder, rebookOrder;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,18 @@ public class MyOrderList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+        swipeRefreshLayout=findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                try {
+                    initview();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    // relativeLayout.setVisibility(View.VISIBLE);
+                }
             }
         });
         LinearLayout linearLayout=findViewById(R.id.OrderDataFunc);
@@ -135,9 +149,8 @@ public class MyOrderList extends AppCompatActivity {
             }.getType();
             orderlist = new Gson().fromJson(result, listType);
             adapterOrderList = new MyOrderListAdapter(MyOrderList.this, orderlist);
-
             recyclerView.setAdapter(adapterOrderList);
-
+            swipeRefreshLayout.setRefreshing(false);
         } catch (Exception e) {
             e.printStackTrace();
         }

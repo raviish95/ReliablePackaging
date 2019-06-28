@@ -24,6 +24,7 @@
 
 
     <style name="Custom" parent="android:Theme.DeviceDefault.Dialog">
+        <item name="android:windowCloseOnTouchOutside">false</item>
         <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
         <item name="DialogTitleText">Please Wait</item>
         <item name="DialogSpotColor">@color/yellow</item>

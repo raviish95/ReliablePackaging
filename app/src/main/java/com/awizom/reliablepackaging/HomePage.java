@@ -136,6 +136,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         TextView autoslideOffer = findViewById(R.id.auto_sldier);
         autoslideOffer.setSelected(true);
         progressDialog = new SpotsDialog(this, R.style.Custom);
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
         clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
         userName = SharedPrefManager.getInstance(this).getUser().getUserName().toString();
         userId = SharedPrefManager.getInstance(this).getUser().getUserID();
@@ -377,7 +379,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
                     SharedPrefManager.getInstance(this).logout();
                     Intent intent = new Intent(this, LoginActivity.class);
-
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
@@ -412,12 +413,20 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 /*  Toast.makeText(getApplicationContext(), "Profile", Toast.LENGTH_LONG).show();*/
                 break;
             }
-            case R.id.nav_send: {
+            case R.id.nav_share: {
 
-                String phoneNumber = "", message = "hi reliable packaging";
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBody = "Hi Reliable Packaging";
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(sharingIntent, "Share via"));
+            //    overridePendingTransition(R.anim.slide_out, R.anim.slide_in);
+
+          /*      String phoneNumber = "", message = "hi reliable packaging";
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
                 intent.putExtra("sms_body", message);
-                startActivity(intent);
+                startActivity(intent);*/
                 /*Toast.makeText(getApplicationContext(), "Send", Toast.LENGTH_LONG).show();*/
                 break;
             }

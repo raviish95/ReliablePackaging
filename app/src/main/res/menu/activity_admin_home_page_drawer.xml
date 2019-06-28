@@ -43,9 +43,9 @@
                 android:icon="@drawable/ic_feedback_black_24dp"
                 android:title="Feedback Company" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_share"
                 android:icon="@drawable/send"
-                android:title="Send" />
+                android:title="Share" />
         </menu>
     </item>
 

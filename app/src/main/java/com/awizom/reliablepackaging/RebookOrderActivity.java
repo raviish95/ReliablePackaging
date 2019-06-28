@@ -3,6 +3,7 @@ package com.awizom.reliablepackaging;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,6 +33,7 @@ public class RebookOrderActivity extends AppCompatActivity {
     private RebookOrderListAdapter adapterOrderList;
     private LinearLayout linearLayout;
     private Button rebook;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +56,19 @@ public class RebookOrderActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        rebook=findViewById(R.id.addReOrder);
-
+        rebook = findViewById(R.id.addReOrder);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                try {
+                    initview();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    // relativeLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         linearLayout = findViewById(R.id.linear);
         linearLayout.setOnTouchListener(new OnSwipeTouchListener(RebookOrderActivity.this) {
             public void onSwipeTop() {
@@ -98,10 +111,9 @@ public class RebookOrderActivity extends AppCompatActivity {
             Type listType = new TypeToken<List<Order>>() {
             }.getType();
             orderlist = new Gson().fromJson(result, listType);
-            adapterOrderList = new RebookOrderListAdapter(RebookOrderActivity.this, orderlist,rebook);
-
+            adapterOrderList = new RebookOrderListAdapter(RebookOrderActivity.this, orderlist, rebook);
             recyclerView.setAdapter(adapterOrderList);
-
+          swipeRefreshLayout.setRefreshing(false);
         } catch (Exception e) {
             e.printStackTrace();
         }

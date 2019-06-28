@@ -145,7 +145,6 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
         final android.support.v7.app.AlertDialog.Builder dialogBuilder = new android.support.v7.app.AlertDialog.Builder(mCtx);
         dialogBuilder.setCancelable(false);
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-
         final View dialogView = inflater.inflate(R.layout.dialog_openordercinfirm, null);
         dialogBuilder.setTitle("Rebook Order");
         dialogBuilder.setIcon(R.drawable.reliables);
