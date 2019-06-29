@@ -89,7 +89,6 @@ public class DesignCheckboxAdapter extends RecyclerView.Adapter<com.awizom.relia
                     showtheConfirmApprovedlg(mCtx, holder.designId.getText().toString(), holder.orderId.getText().toString());
                 }
             });
-
         }
 
         private void showtheConfirmApprovedlg(Context mContext, final String designid, final String orderid) {
@@ -97,7 +96,6 @@ public class DesignCheckboxAdapter extends RecyclerView.Adapter<com.awizom.relia
             alertDialog.setTitle("Approve Design");
             alertDialog.setMessage("Do you want to approve this design?");
             alertDialog.setIcon(R.drawable.print);
-
             alertDialog.setPositiveButton("YES",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {

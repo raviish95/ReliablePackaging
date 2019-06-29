@@ -150,7 +150,6 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
             layer_type = view.findViewById(R.id.layer);
         }
 
-
     }
 
 }

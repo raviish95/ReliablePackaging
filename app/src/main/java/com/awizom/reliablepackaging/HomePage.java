@@ -20,6 +20,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.EventLogTags;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,7 @@ import com.awizom.reliablepackaging.Adapter.GridImageAdapter;
 import com.awizom.reliablepackaging.Adapter.OrderListAdapter;
 import com.awizom.reliablepackaging.Helper.OrderHelper;
 import com.awizom.reliablepackaging.Helper.ProfileHelper;
+import com.awizom.reliablepackaging.Model.OfferModel;
 import com.awizom.reliablepackaging.login.LoginActivity;
 import com.awizom.reliablepackaging.login.MainActivity;
 import com.awizom.reliablepackaging.Model.MyProfileView;
@@ -70,7 +72,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     TextView textCartItemCount;
     private ImageView notification;
     int mCartItemCount = 10;
-    TextView username;
+    TextView username, autoslideOffer;
     GridView gridView;
     String clientid = "", userName = "", userId = "";
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -133,11 +135,12 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         setSupportActionBar(toolbar);
         gridView = (GridView) findViewById(R.id.gridview);
         gridView.setAdapter(new GridImageAdapter(this));
-        TextView autoslideOffer = findViewById(R.id.auto_sldier);
+        autoslideOffer = findViewById(R.id.auto_sldier);
         autoslideOffer.setSelected(true);
         progressDialog = new SpotsDialog(this, R.style.Custom);
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.getContext();
         clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
         userName = SharedPrefManager.getInstance(this).getUser().getUserName().toString();
         userId = SharedPrefManager.getInstance(this).getUser().getUserID();
@@ -177,6 +180,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         navigationView.setNavigationItemSelectedListener(this);
         View headerview = navigationView.getHeaderView(0);
         username = headerview.findViewById(R.id.profileName);
+        getMyOffer();
         getMyProfile();
         getNotiCount();
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -220,6 +224,22 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             String pincode = String.valueOf(myProfileView.getPinCode());
             String billingaddredss = String.valueOf(myProfileView.getBillingAdddress().toString());
             username.setText(nameview.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getMyOffer() {
+        //  mSwipeRefreshLayout.setRefreshing(true);
+        try {
+            String result = new OrderHelper.GETMyOffer().execute(clientid.toString()).get();
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<String>>() {
+            }.getType();
+          //  OfferModel offerModel = new Gson().fromJson(result, listType);
+        //    String descroptionslide=offerModel.getDescription().toString();
+            autoslideOffer.setText(result.toString().replace("[","").replace("]","").replace("\"",""));
 
         } catch (Exception e) {
             e.printStackTrace();

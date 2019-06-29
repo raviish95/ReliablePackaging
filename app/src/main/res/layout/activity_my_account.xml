@@ -218,7 +218,7 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:background="@color/purple"
+        android:background="#A9CCE3"
         android:gravity="center">
 
         <TextView
