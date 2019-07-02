@@ -1,8 +1,11 @@
 package com.awizom.reliablepackaging;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -129,7 +132,6 @@ public class AddOrderActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 // Toast.makeText(getApplicationContext(), checkedId + " " + group, Toast.LENGTH_SHORT).show();
-
                 if (piece.isChecked()) {
                     productype.setHint("Enter Piece");
                 } else {
@@ -151,25 +153,27 @@ public class AddOrderActivity extends AppCompatActivity {
                     productype.requestFocus();
                 } else if (layervalue.toString().equals("0")) {
                     progressDialog.dismiss();
-                    layertype.setError("Layer type should not be blank");
+                    layertype.setError("Layer type should be not blank");
                     layertype.requestFocus();
                 } else if (packtypevalue.toString().equals("")) {
                     progressDialog.dismiss();
-                    packType.setError("Pack type should not be blank");
+                    packType.setError("Pack type should be not blank");
                     packType.requestFocus();
                 } else {
                     final android.support.v7.app.AlertDialog.Builder dialogBuilder = new android.support.v7.app.AlertDialog.Builder(AddOrderActivity.this);
                     dialogBuilder.setCancelable(false);
                     LayoutInflater inflater = LayoutInflater.from(AddOrderActivity.this);
                     final View dialogView = inflater.inflate(R.layout.notification_want, null);
+                    final AlertDialog progressDialogs= new SpotsDialog(AddOrderActivity.this, R.style.Custom);
                     Button yesnoti = dialogView.findViewById(R.id.yes);
                     Button nonoti = dialogView.findViewById(R.id.no);
-                    ImageView close=dialogView.findViewById(R.id.close);
+                    ImageView close = dialogView.findViewById(R.id.close);
                     TextView textView = dialogView.findViewById(R.id.text);
                     yesnoti.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String notif="Yes";
+                            progressDialogs.show();
+                            String notif = "Yes";
                             CreateOrder(notif);
                         }
                     });
@@ -187,7 +191,8 @@ public class AddOrderActivity extends AppCompatActivity {
                     nonoti.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String notif="No";
+                            progressDialogs.show();
+                            String notif = "No";
                             CreateOrder(notif);
                         }
                     });
@@ -209,16 +214,19 @@ public class AddOrderActivity extends AppCompatActivity {
 
     private void CreateOrder(String notif) {
 
-
+        progressDialog.show();
         String clientId = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
         String userid = SharedPrefManager.getInstance(this).getUser().getUserID();
 
         try {
-            String result = new OrderHelper.POSTCreateOrder().execute(clientId, productname.getText().toString(), layervalue.toString(), itemweight.getText().toString(), userid, packtypevalue.toString(),notif.toString()).get();
+
+            String result = new OrderHelper.POSTCreateOrder().execute(clientId, productname.getText().toString(), layervalue.toString(), itemweight.getText().toString(), userid, packtypevalue.toString(), notif.toString()).get();
             if (result.isEmpty()) {
+                  dismismethod();
                 Toast.makeText(this, "Invalid request", Toast.LENGTH_SHORT).show();
                 result = new OrderHelper.POSTCreateOrder().execute(clientId, productname.getText().toString(), layervalue.toString(), itemweight.getText().toString(), userid, packtypevalue.toString()).get();
             } else {
+                  dismismethod();
                 Intent intent = new Intent(this, HomePage.class);
                 startActivity(intent);
                 Toast.makeText(this, "Success request", Toast.LENGTH_SHORT).show();
@@ -228,6 +236,17 @@ public class AddOrderActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void dismismethod() {
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
+        }, 100);
     }
 
 }

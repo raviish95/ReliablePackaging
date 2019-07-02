@@ -26,6 +26,7 @@
     <string name="myAccount">My Account</string>
     <string name="myjob">My Job</string>
     <string name="myOrder">My Order</string>
+    <string name="mynotifi">Do you want notification for this order?</string>
     <string name="OrderSelect">Select Order for Rebook</string>
     <string name="AgreeForDesign">I am not satisfied as per design show in above</string>
     <string name="DesignChoose">Please select design for which you want to submit feedback</string>

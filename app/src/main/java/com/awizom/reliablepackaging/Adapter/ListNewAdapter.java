@@ -9,11 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -43,7 +46,9 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
     private ArrayList<String> valueOfproductid = new ArrayList<String>();
     private ArrayList<String> valueofLayerType = new ArrayList<String>();
     private ArrayList<String> valueofPackType = new ArrayList<String>();
+    private ArrayList<String> valueofNotiType = new ArrayList<String>();
     Object[] itemslist;
+    String valuesfor = "No";
 
     public ListNewAdapter(Context context, int resource, Object[] items, Button order) {
         super(context, resource, items);
@@ -59,7 +64,6 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
         View v = convertView;
         holder = new ViewHolder();
         if (v == null) {
-
             LayoutInflater vi;
             vi = LayoutInflater.from(mContext);
             v = vi.inflate(R.layout.adapter_itemlist, null);
@@ -71,9 +75,24 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
             holder.tt1 = (TextView) v.findViewById(R.id.productname);
             final int listLength = itemslist.length;
             holder.productid = v.findViewById(R.id.productid);
+            holder.checkBox = v.findViewById(R.id.notify);
             holder.productid.setText(p.toString().split(">")[1]);
             holder.tt1.setText(p.toString().split(">")[0]);
             holder.et2 = (EditText) v.findViewById(R.id.weight_kg);
+            holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                    if (isChecked) {
+                        holder.checkBox.setHint("Yes");
+
+                    } else {
+                        holder.checkBox.setHint("No");
+                    }
+
+                    valueofNotiType.add(holder.checkBox.getHint().toString());
+                }
+            });
 
             holder.et2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
@@ -131,6 +150,7 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
                 @Override
                 public void onClick(View v) {
 
+                    valueofNotiType.add(holder.checkBox.getHint().toString());
                     int lengthof = itemslist.length;
                     if (!((valueOfEditText.toArray().length == lengthof) || (valueofPackType.toArray().length == lengthof) || valueofLayerType.toArray().length == lengthof)) {
                         Toast toast = Toast.makeText(mContext, "Please fill all the fields...", Toast.LENGTH_LONG);
@@ -149,7 +169,7 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
                         //    Toast.makeText(mContext, orderdetailslist.toString(), Toast.LENGTH_LONG).show();
                         try {
                             String length = String.valueOf(valueOfproductname.size());
-                            String result = new OrderHelper.POSTRebookPreOrder().execute(valueOfproductname.toString().toString(), valueOfproductid.toString(), valueOfEditText.toString(), valueofLayerType.toString(), valueofPackType.toString(), length.toString()).get();
+                            String result = new OrderHelper.POSTRebookPreOrder().execute(valueOfproductname.toString().toString(), valueOfproductid.toString(), valueOfEditText.toString(), valueofLayerType.toString(), valueofPackType.toString(), length.toString(), valueofNotiType.toString()).get();
 
                             if (result.isEmpty()) {
                                 Toast.makeText(mContext, "Invalid request", Toast.LENGTH_SHORT).show();
@@ -221,6 +241,6 @@ public class ListNewAdapter extends ArrayAdapter<Object> {
         EditText et2;
         TextView tt1, productid;
         MaterialBetterSpinner layertype, packtype;
-
+        CheckBox checkBox;
     }
 }

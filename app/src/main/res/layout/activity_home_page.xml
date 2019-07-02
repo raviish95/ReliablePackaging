@@ -53,13 +53,16 @@
                 android:id="@+id/auto_sldier"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/light_blue"
+                android:background="#F0F4F6"
                 android:ellipsize="marquee"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:fontFamily="@font/raleway_semibold"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
+                android:textSize="25sp"
+                android:textColor="#A00707"
                 android:text="off! off! off! Order now and get 50% off on first order. minimum amount should be 50k. terms and conditions apply" />
 
             <LinearLayout

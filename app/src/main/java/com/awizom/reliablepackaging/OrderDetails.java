@@ -90,7 +90,7 @@ public class OrderDetails extends AppCompatActivity {
         relativeLayout = findViewById(R.id.footer);
         scrollView = findViewById(R.id.scrollView);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+     /*   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
                 @Override
                 public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
@@ -103,7 +103,7 @@ public class OrderDetails extends AppCompatActivity {
                     relativeLayout.setVisibility(View.GONE);}
                 }
             });
-        }
+        }*/
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

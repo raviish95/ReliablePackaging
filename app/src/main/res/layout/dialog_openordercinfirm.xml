@@ -11,12 +11,16 @@
         android:layout_height="400dp"
         android:orientation="vertical">
 
-        <ListView
+        <!--<ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        </ListView>
+        </ListView>-->
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerView"></android.support.v7.widget.RecyclerView>
 
         <!--
                 <Button

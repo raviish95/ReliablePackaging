@@ -1,289 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearlayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
-
-    </android.support.v7.widget.Toolbar>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerOrderdetails"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </android.support.v7.widget.RecyclerView>
-
-    <android.support.v7.widget.CardView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/linearlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="3dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp">
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <ScrollView
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:id="@+id/scrollView"
-            android:fillViewport="true"
-            android:layout_height="match_parent">
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerOrderdetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp">
+
+            <ScrollView
+                android:id="@+id/scrollView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:fillViewport="true">
 
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:orientation="horizontal">
-
-                <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp">
-
-                    <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
-                        android:id="@+id/capacity_seek"
-                        style="@style/Base.Widget.AppCompat.SeekBar.Discrete"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:focusable="auto"
-                        android:max="4"
-                        android:progressDrawable="@drawable/seekbar"
-                        android:scrollbarSize="50dp"
-                        android:scrollbarThumbHorizontal="@color/grey"
-                        android:splitTrack="false"
-                        android:thumb="@drawable/rotate"
-                        android:tickMark="@drawable/blue_dot"
-                        app:seekBarRotation="CW90" />
-
-
-                    <!--    <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
-                     android:id="@+id/capacity_seek"
-                     style="@style/Widget.AppCompat.SeekBar.Discrete"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:background="@null"
-                     android:max="4"
-                     android:progress="1"
-                     android:progressDrawable="@drawable/seekbar"
-                     android:splitTrack="false"
-                     android:thumb="@drawable/seekbar_thumb_green"
-                     android:tickMark="@drawable/rotate"
-                     app:seekBarRotation="CW90" />-->
-
-                </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
-
-
-                <LinearLayout
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
 
-                    android:orientation="vertical">
+                    <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp">
+
+                        <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+                            android:id="@+id/capacity_seek"
+                            style="@style/Base.Widget.AppCompat.SeekBar.Discrete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:focusable="auto"
+                            android:max="4"
+                            android:progressDrawable="@drawable/seekbar"
+                            android:scrollbarSize="50dp"
+                            android:scrollbarThumbHorizontal="@color/grey"
+                            android:splitTrack="false"
+                            android:thumb="@drawable/rotate"
+                            android:tickMark="@drawable/blue_dot"
+                            app:seekBarRotation="CW90" />
+
+
+                        <!--    <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+                         android:id="@+id/capacity_seek"
+                         style="@style/Widget.AppCompat.SeekBar.Discrete"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:background="@null"
+                         android:max="4"
+                         android:progress="1"
+                         android:progressDrawable="@drawable/seekbar"
+                         android:splitTrack="false"
+                         android:thumb="@drawable/seekbar_thumb_green"
+                         android:tickMark="@drawable/rotate"
+                         app:seekBarRotation="CW90" />-->
+
+                    </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+
                         android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="5dp"
-                                android:src="@drawable/pr24" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="5dp"
+                                    android:src="@drawable/pr24" />
+
+                                <TextView
+                                    android:id="@+id/printing"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:fontFamily="serif"
+                                    android:padding="5dp"
+                                    android:text="Printing"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp" />
+
+
+                            </LinearLayout>
 
                             <TextView
-                                android:id="@+id/printing"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
                                 android:fontFamily="serif"
                                 android:padding="5dp"
-                                android:text="Printing"
+                                android:text="@string/printing"
                                 android:textColor="@color/black"
-                                android:textSize="18sp" />
-
+                                android:textSize="13sp" />
 
                         </LinearLayout>
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:fontFamily="serif"
-                            android:padding="5dp"
-                            android:text="@string/printing"
-                            android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                    </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="5dp"
+                                    android:src="@drawable/s24" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="5dp"
-                                android:src="@drawable/s24" />
+                                <TextView
+                                    android:id="@+id/inspection"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:fontFamily="serif"
+                                    android:padding="5dp"
+                                    android:text="Inspection"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp" />
+                            </LinearLayout>
 
                             <TextView
-                                android:id="@+id/inspection"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
                                 android:fontFamily="serif"
                                 android:padding="5dp"
-                                android:text="Inspection"
+                                android:text="@string/inspection"
                                 android:textColor="@color/black"
-                                android:textSize="18sp" />
+                                android:textSize="13sp" />
+
+
                         </LinearLayout>
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:fontFamily="serif"
-                            android:padding="5dp"
-                            android:text="@string/inspection"
-                            android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
-                    </LinearLayout>
+                                <ImageView
+                                    android:layout_width="35dp"
+                                    android:layout_height="wrap_content"
+                                    android:padding="5dp"
+                                    android:src="@drawable/l24" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:layout_width="35dp"
-                                android:layout_height="wrap_content"
-                                android:padding="5dp"
-                                android:src="@drawable/l24" />
+                                <TextView
+                                    android:id="@+id/lamination"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:fontFamily="serif"
+                                    android:padding="5dp"
+                                    android:text="Lamination"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp" />
+                            </LinearLayout>
 
                             <TextView
-                                android:id="@+id/lamination"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
                                 android:fontFamily="serif"
                                 android:padding="5dp"
-                                android:text="Lamination"
+                                android:text="@string/lamination"
                                 android:textColor="@color/black"
-                                android:textSize="18sp" />
+                                android:textSize="13sp" />
+
                         </LinearLayout>
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
-                            android:fontFamily="serif"
-                            android:padding="5dp"
-                            android:text="@string/lamination"
-                            android:textColor="@color/black"
-                            android:textSize="13sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="5dp"
-                                android:src="@drawable/c24" />
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="5dp"
+                                    android:src="@drawable/c24" />
+
+                                <TextView
+                                    android:id="@+id/cutting"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:fontFamily="serif"
+                                    android:padding="5dp"
+                                    android:text="Cutting"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp" />
+                            </LinearLayout>
 
                             <TextView
-                                android:id="@+id/cutting"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginTop="15dp"
                                 android:fontFamily="serif"
                                 android:padding="5dp"
-                                android:text="Cutting"
+                                android:text="@string/cutting"
                                 android:textColor="@color/black"
-                                android:textSize="18sp" />
+                                android:textSize="13sp" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="15dp"
+                                android:padding="5dp" />
                         </LinearLayout>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="serif"
-                            android:padding="5dp"
-                            android:text="@string/cutting"
-                            android:textColor="@color/black"
-                            android:textSize="13sp" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="15dp"
-                            android:padding="5dp" />
                     </LinearLayout>
-
                 </LinearLayout>
-            </LinearLayout>
 
-        </ScrollView>
-    </android.support.v7.widget.CardView>
-</LinearLayout>
+            </ScrollView>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/footer"

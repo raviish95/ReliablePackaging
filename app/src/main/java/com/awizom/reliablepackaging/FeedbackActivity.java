@@ -1,7 +1,9 @@
 package com.awizom.reliablepackaging;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +13,13 @@ import android.widget.Toast;
 
 import com.awizom.reliablepackaging.Helper.OrderHelper;
 
+import dmax.dialog.SpotsDialog;
+
 public class FeedbackActivity extends AppCompatActivity {
 
     private EditText feedEditetet;
     private Button feedSubmit;
+    private AlertDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,7 @@ public class FeedbackActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        progressDialog = new SpotsDialog(this, R.style.Custom);
         feedEditetet = findViewById(R.id.feedback);
         feedSubmit = findViewById(R.id.submit);
         feedSubmit.setOnClickListener(new View.OnClickListener() {
@@ -48,13 +54,15 @@ public class FeedbackActivity extends AppCompatActivity {
                     feedEditetet.requestFocus();
                 } else {
 
-
+                    progressDialog.show();
                     try {
                         String result = new OrderHelper.POSTCompanyFeedback().execute(clientid, feedEditetet.getText().toString()).get();
                         if (result.isEmpty()) {
                             Toast.makeText(FeedbackActivity.this, "Invalid request", Toast.LENGTH_SHORT).show();
                             result = new OrderHelper.POSTCompanyFeedback().execute(clientid, feedEditetet.getText().toString()).get();
+                            dismissmethod();
                         } else {
+                            dismissmethod();
                             Toast.makeText(FeedbackActivity.this, "Feedback Submitted", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(FeedbackActivity.this, HomePage.class);
                             startActivity(intent);
@@ -65,5 +73,16 @@ public class FeedbackActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void dismissmethod() {
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
+        }, 100);
     }
 }

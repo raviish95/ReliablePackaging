@@ -119,7 +119,6 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
 
                 } else {
                     itemnamelist.remove(holder.product.getText().toString() + ">" + holder.orderid.getText().toString());
-
                 }
 
             }
@@ -155,10 +154,14 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
         /* dialogBuilder.setPositiveButtonIcon(mCtx.getResources().getDrawable(R.drawable.check_box_green_24dp));
 
          */
-        ListView listView = dialogView.findViewById(R.id.listView);
+       // ListView listView = dialogView.findViewById(R.id.listView);
+        RecyclerView recyleritemview = dialogView.findViewById(R.id.recyclerView);
+        recyleritemview.setHasFixedSize(true);
+        recyleritemview.setLayoutManager(new LinearLayoutManager(mCtx));
         Button order = dialogView.findViewById(R.id.orders);
-        final ListNewAdapter customAdapter = new ListNewAdapter(mCtx, R.layout.adapter_itemlist, itemNameList, order);
-        listView.setAdapter(customAdapter);
+        final NewRecyclerAdapter customAdapter = new NewRecyclerAdapter(mCtx,itemNameList, order);
+        recyleritemview.setAdapter(customAdapter);
+   //     listView.setAdapter(customAdapter);
        /* dialogBuilder.setPositiveButton("Order", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
