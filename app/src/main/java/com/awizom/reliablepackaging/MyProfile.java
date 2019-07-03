@@ -39,7 +39,7 @@ public class MyProfile extends AppCompatActivity {
 
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("My Profile");
-        toolbar.setBackgroundColor(getResources().getColor(R.color.yellow));
+        toolbar.setBackgroundColor(Color.parseColor("#28B463"));
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);

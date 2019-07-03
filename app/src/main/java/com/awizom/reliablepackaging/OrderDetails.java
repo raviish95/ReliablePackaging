@@ -83,7 +83,7 @@ public class OrderDetails extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Order Details");
-        toolbar.setBackgroundColor(getResources().getColor(R.color.yellow));
+        toolbar.setBackgroundColor(Color.parseColor("#212F3D"));
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);

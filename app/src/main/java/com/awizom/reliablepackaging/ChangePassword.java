@@ -40,7 +40,7 @@ public class ChangePassword extends AppCompatActivity {
 
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Change Password");
-        toolbar.setBackgroundColor(getResources().getColor(R.color.yellow));
+        toolbar.setBackgroundColor(Color.parseColor("#488586"));
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);

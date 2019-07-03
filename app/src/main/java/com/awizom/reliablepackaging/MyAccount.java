@@ -20,7 +20,7 @@ public class MyAccount extends AppCompatActivity {
     private void initview() {
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("My Account");
-        toolbar.setBackgroundColor(getResources().getColor(R.color.yellow));
+        toolbar.setBackgroundColor(Color.parseColor("#21618C"));
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);

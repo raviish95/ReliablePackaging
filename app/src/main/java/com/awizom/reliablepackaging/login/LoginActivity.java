@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login);
         if (!(SharedPrefManager.getInstance(this).getUser().getClientID() == 0)) {
             Intent intent = new Intent(this, HomePage.class);
+
             startActivity(intent);
         }
 
@@ -101,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent intent = new Intent(LoginActivity.this, HomePage.class);
                                 intent.putExtra("ClientId", clientId.toString());
                                 intent.putExtra("UserName", userName.getText().toString());
+                                intent.putExtra("Welcome","welcometo");
                                 startActivity(intent);
                                 //   progressDialog.dismiss();
                             } else {

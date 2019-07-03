@@ -52,6 +52,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
         holder.weight.setText("Weight - " + String.valueOf(c.getWeight()));
         holder.orderid.setText(String.valueOf(c.getOrderId()));
         holder.amount.setText(" \u20B9" + String.valueOf(c.getTotalAmount()).toString());
+        holder.order_date.setText(String.valueOf("Order Date - "+c.getCreatedDate()));
         holder.order_type.setText(Html.fromHtml("<u>"+c.getOrderType().toString().split(" ")[0]+"</u>"));
         holder.pack_type.setText("Pack Type - "+c.getPackType().toString());
         String dispatchedate = String.valueOf(c.getCreatedDate().toString());
@@ -171,7 +172,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView product, weight, orderid, amount, image_linkurl, order_no, checking, dispatch_date,order_type,pack_type;
+        public TextView product, weight, orderid, amount, image_linkurl, order_no, checking, dispatch_date,order_type,pack_type,order_date;
         public ImageView productdesign;
 
         @RequiresApi(api = Build.VERSION_CODES.M)
@@ -182,6 +183,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
             order_type=view.findViewById(R.id.order_type);
             pack_type=view.findViewById(R.id.pack_type);
             product = (TextView) view.findViewById(R.id.prod_name);
+            order_date=view.findViewById(R.id.order_date);
             dispatch_date = view.findViewById(R.id.dispatch_date);
             productdesign = (ImageView) view.findViewById(R.id.productdesign);
             weight = (TextView) view.findViewById(R.id.weight);

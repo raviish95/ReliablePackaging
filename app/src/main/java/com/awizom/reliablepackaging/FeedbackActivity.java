@@ -32,7 +32,7 @@ public class FeedbackActivity extends AppCompatActivity {
     private void initview() {
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Feedback");
-        toolbar.setBackgroundColor(getResources().getColor(R.color.yellow));
+        toolbar.setBackgroundColor(Color.parseColor("#517BFE"));
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);

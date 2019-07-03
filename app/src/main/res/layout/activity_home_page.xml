@@ -5,6 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="@drawable/gradientbackground">
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -19,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:background="@drawable/traingle_shape_two"
+            android:background="@drawable/reliablebackground_mob"
             android:orientation="vertical">
 
 

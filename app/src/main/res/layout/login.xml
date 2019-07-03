@@ -13,7 +13,7 @@
             android:id="@+id/rel1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/layout_background">
+          >
 
             <RelativeLayout
                 android:id="@+id/rel2"
@@ -40,17 +40,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="120dp"
                     android:layout_above="@+id/cardview"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="30dp"
                     android:fontFamily="@font/fonts"
-                    android:text="SignIn"
-                    android:textColor="@color/white"
-                    android:textSize="34sp"
-                    android:textStyle="bold" />
+                    android:src="@drawable/reliables"
+                   />
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/cardview"
@@ -69,7 +69,15 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="10dp"
                         android:orientation="vertical">
-
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="80dp"
+                            android:text="Sign in"
+                            android:textColor="@color/distempur"
+                            android:textSize="34sp"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:src="@drawable/reliables"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -124,7 +132,7 @@
                             android:background="@drawable/button_shape"
                             android:fontFamily="@font/raleway_bold"
                             android:paddingLeft="10dp"
-                            android:text="SignIn"
+                            android:text="Login"
                             android:textAllCaps="false"
                             android:textColor="@color/white"
                             android:textSize="19sp" />

@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -24,6 +26,7 @@ import android.util.EventLogTags;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -78,6 +81,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     SwipeRefreshLayout mSwipeRefreshLayout;
     private AlertDialog progressDialog;
     int currentPage = 0;
+    String welcome = " ";
     Timer timer;
     final long DELAY_MS = 1000;//delay in milliseconds before task is to be executed
     final long PERIOD_MS = 5000; // time in milliseconds between successive task executions.
@@ -122,12 +126,17 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+        try {
+            welcome = getIntent().getStringExtra("Welcome");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         initview();
     }
 
     private void initview() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(Color.parseColor("#F9CD50"));
+        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
         toolbar.setLogo(R.drawable.action_logo);
         toolbar.setSubtitleTextAppearance(getApplicationContext(), R.style.styleA);
         toolbar.setTitleTextAppearance(getApplicationContext(), R.style.styleA);
@@ -175,7 +184,11 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
-        toggle.syncState();
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.app_name, R.string.app_name);
+        mDrawerToggle.getDrawerArrowDrawable().setColor(Color.GRAY);
+        drawer.addDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+        //  toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerview = navigationView.getHeaderView(0);
@@ -187,11 +200,44 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             @Override
             public void onRefresh() {
                 try {
+
                     initview();
                 } catch (Exception e) {
                     e.printStackTrace();
                     // relativeLayout.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+
+
+        try {
+            if (welcome.equals("welcometo")) {
+                welcome = "noithg";
+                welcomereliable();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void welcomereliable() {
+        final android.support.v7.app.AlertDialog.Builder dialogBuilder = new android.support.v7.app.AlertDialog.Builder(this);
+        dialogBuilder.setCancelable(false);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        final View dialogView = inflater.inflate(R.layout.design_welcome, null);
+        Button okay = dialogView.findViewById(R.id.ok);
+        TextView textView = dialogView.findViewById(R.id.text);
+        textView.setText("Welcome to");
+
+        dialogBuilder.setView(dialogView);
+        final android.support.v7.app.AlertDialog b = dialogBuilder.create();
+        b.show();
+        okay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              b.dismiss();
             }
         });
 
@@ -237,9 +283,9 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             Gson gson = new Gson();
             Type listType = new TypeToken<List<String>>() {
             }.getType();
-          //  OfferModel offerModel = new Gson().fromJson(result, listType);
-        //    String descroptionslide=offerModel.getDescription().toString();
-            autoslideOffer.setText(result.toString().replace("[","").replace("]","").replace("\"",""));
+            //  OfferModel offerModel = new Gson().fromJson(result, listType);
+            //    String descroptionslide=offerModel.getDescription().toString();
+            autoslideOffer.setText(result.toString().replace("[", "").replace("]", "").replace("\"", ""));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -304,7 +350,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
     private void getMyOrderList() {
         try {
-           // Toast.makeText(getApplicationContext(), "deviceid->" + FirebaseInstanceId.getInstance().getToken(), Toast.LENGTH_LONG).show();
+            // Toast.makeText(getApplicationContext(), "deviceid->" + FirebaseInstanceId.getInstance().getToken(), Toast.LENGTH_LONG).show();
             String result = new OrderHelper.GETMyOrder().execute(clientid.toString()).get();
             Gson gson = new Gson();
             Type listType = new TypeToken<List<Order>>() {
@@ -441,7 +487,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                 startActivity(Intent.createChooser(sharingIntent, "Share via"));
-            //    overridePendingTransition(R.anim.slide_out, R.anim.slide_in);
+                //    overridePendingTransition(R.anim.slide_out, R.anim.slide_in);
 
           /*      String phoneNumber = "", message = "hi reliable packaging";
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
@@ -452,7 +498,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             }
             case R.id.nav_feedback: {
                 Toast.makeText(getApplicationContext(), "Feedback", Toast.LENGTH_LONG).show();
-                Intent intent=new Intent(this,FeedbackActivity.class);
+                Intent intent = new Intent(this, FeedbackActivity.class);
                 startActivity(intent);
                 break;
             }
@@ -473,7 +519,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.my_order: {
                 progressDialog.show();
                 Intent intent = new Intent(this, MyOrderList.class);
-                intent.putExtra("HeaderName","My Order");
+                intent.putExtra("HeaderName", "My Order");
                 startActivity(intent);
                 dismissmethod();
                 /*   Toast.makeText(getApplicationContext(), "My Account", Toast.LENGTH_LONG).show();*/
@@ -483,7 +529,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.my_jobs: {
                 progressDialog.show();
                 Intent intent = new Intent(this, MyOrderList.class);
-                intent.putExtra("HeaderName","My Job");
+                intent.putExtra("HeaderName", "My Job");
                 startActivity(intent);
                 dismissmethod();
                 /*   Toast.makeText(getApplicationContext(), "My Account", Toast.LENGTH_LONG).show();*/

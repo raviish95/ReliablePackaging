@@ -6,13 +6,14 @@
     <item
         android:id="@+id/action_logout"
         android:orderInCategory="100"
+        android:icon="@drawable/lock_open"
+        android:tooltipText="Logout"
         android:title="@string/action_logouts"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 
     <item  android:id="@+id/admin1"
         android:icon="@drawable/notifications"
         android:iconTint="@color/white"
-
         app:actionLayout="@layout/custom_action_item_layout"
         app:showAsAction="always"
         android:title="vds"/>

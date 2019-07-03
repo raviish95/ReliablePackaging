@@ -40,7 +40,7 @@
                     android:id="@+id/rel1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/layout_background">
+                    android:background="@drawable/reliable_navheader">
 
                     <RelativeLayout
                         android:id="@+id/rel2"
@@ -84,7 +84,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_gravity="center_horizontal"
                             android:text="User"
-                            android:textColor="#fff"
+                            android:textColor="@color/distempur"
                             android:textSize="21sp"
                             android:textStyle="bold" />
 
