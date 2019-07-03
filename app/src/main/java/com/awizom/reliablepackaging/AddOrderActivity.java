@@ -39,7 +39,7 @@ public class AddOrderActivity extends AppCompatActivity {
     private MaterialBetterSpinner layertype, packType;
     private String layervalue = "0", weightvalue;
     private String packtypevalue = "";
-    String[] layerlist = {"Two Layer", "Three Layer"};
+    String[] layerlist = {"2 Layer", "3 Layer"};
     String[] packlist = {"Pouching", "Roll"};
     private AlertDialog progressDialog;
 
@@ -53,7 +53,7 @@ public class AddOrderActivity extends AppCompatActivity {
     private void initview() {
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Add Order");
-        toolbar.setBackgroundColor(getResources().getColor(R.color.yellow));
+        toolbar.setBackgroundColor(Color.parseColor("#094B6C"));
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);
@@ -90,7 +90,7 @@ public class AddOrderActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String layertypedetails = parent.getItemAtPosition(position).toString();
-                if (layertypedetails.equals("Two Layer")) {
+                if (layertypedetails.equals("2 Layer")) {
                     //Toast.makeText(getApplicationContext(), "" + createComplaint, Toast.LENGTH_SHORT).show();
                     layervalue = "1".toString();
                     //valueofLayerType.add(layervalue.toString());

@@ -6,8 +6,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:id="@+id/transition"
         android:layout_height="match_parent"
-        android:background="@color/yellow">
+        android:background="@drawable/transition_drawable">
 
         <RelativeLayout
             android:id="@+id/rel1"

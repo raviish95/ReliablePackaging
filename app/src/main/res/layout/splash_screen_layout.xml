@@ -1,59 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="260dp">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="right"
-                android:gravity="right"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="34dp">
+                android:layout_gravity="right"
+                android:layout_marginRight="34dp"
+                android:gravity="right"
+                android:orientation="vertical">
+
                 <View
                     android:layout_width="3dp"
                     android:layout_height="128dp"
-                    android:background="@color/yellow"
-                    android:layout_gravity="center|center_horizontal"/>
+                    android:layout_gravity="center|center_horizontal"
+                    android:background="@color/yellow" />
+
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_below="@+id/v1"
-                    android:src="@drawable/circle_two_shape"
                     android:layout_gravity="right"
+                    android:layout_marginTop="2dp"
                     android:gravity="right"
-                    android:layout_marginTop="2dp"/>
+                    android:src="@drawable/circle_two_shape" />
             </LinearLayout>
 
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/traingle_shape"
-            android:layout_marginBottom="5dp"/>
+            android:background="@drawable/reliablebackground_mob" />
 
 
         <ImageView
             android:id="@+id/t1"
-            android:layout_width="150dp"
-            android:layout_height="45dp"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="213dp"
+            android:fontFamily="serif"
+            android:layout_centerInParent="true"
+            android:foregroundGravity="center"
             android:src="@drawable/reliables"
-            android:foregroundGravity="left"
             android:textColor="@color/distempur"
             android:textSize="45sp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="serif"/> <!--android:text="Reliable"-->
+            android:textStyle="bold" /> <!--android:text="Reliable"-->
 
         <pl.droidsonroids.gif.GifImageView
             android:id="@+id/imgLogo"
@@ -62,8 +69,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="123dp"
             android:src="@drawable/loader_interior"
-            android:tint="@color/distempur"/>
-
+            android:tint="@color/black" />
 
 
     </RelativeLayout>

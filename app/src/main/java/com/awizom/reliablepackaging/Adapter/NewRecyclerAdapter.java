@@ -54,7 +54,7 @@ public class NewRecyclerAdapter extends RecyclerView.Adapter<NewRecyclerAdapter.
     private Button rebookbutton;
     private Context mCtx;
     String result = "";
-    String[] layerlist = {"Two Layer", "Three Layer"};
+    String[] layerlist = {"2 Layer", "3 Layer"};
     String[] packtypelist = {"Pouching", "Roll"};
     private AlertDialog progressDialog;
     private ArrayList<String> valueOfEditText = new ArrayList<String>();
@@ -132,7 +132,7 @@ public class NewRecyclerAdapter extends RecyclerView.Adapter<NewRecyclerAdapter.
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String layertypedetails = parent.getItemAtPosition(position).toString();
-                if (layertypedetails.equals("Two Layer")) {
+                if (layertypedetails.equals("2 Layer")) {
                     //Toast.makeText(getApplicationContext(), "" + createComplaint, Toast.LENGTH_SHORT).show();
                     layervalue = "1".toString();
                     valueofLayerType.add(layervalue.toString());

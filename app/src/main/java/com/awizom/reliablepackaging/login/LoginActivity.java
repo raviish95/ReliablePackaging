@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.TransitionDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.awizom.reliablepackaging.Helper.ProfileHelper;
@@ -31,12 +33,9 @@ import dmax.dialog.SpotsDialog;
 
 public class LoginActivity extends AppCompatActivity {
 
-
-
     private Button loginbutton;
     private EditText userName, password;
     private AlertDialog progressDialog;
-
     Snackbar snackbar;
     String result = "";
     boolean connected = false;
@@ -49,15 +48,15 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login);
         if (!(SharedPrefManager.getInstance(this).getUser().getClientID() == 0)) {
             Intent intent = new Intent(this, HomePage.class);
-
             startActivity(intent);
         }
-
         initViews();
-
     }
 
     private void initViews() {
+        RelativeLayout relativeLayout=findViewById(R.id.transition);
+        TransitionDrawable trans = (TransitionDrawable) relativeLayout.getBackground();
+        trans.startTransition(4000);
         checkInternet();
         progressDialog = new SpotsDialog(LoginActivity.this, R.style.Custom);
         userName = findViewById(R.id.username);
