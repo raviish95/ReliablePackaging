@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/reliablebackground_mob"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/reliablebackground_mob">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -59,8 +59,8 @@
                     <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginBottom="100dp">
+                        android:layout_marginBottom="100dp"
+                        android:layout_marginLeft="20dp">
 
                         <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
                             android:id="@+id/capacity_seek"
@@ -69,10 +69,9 @@
                             android:layout_height="wrap_content"
                             android:background="@null"
                             android:focusable="auto"
-                            android:max="6"
+                            android:max="7"
                             android:progressDrawable="@drawable/seekbar"
                             android:scrollbarSize="50dp"
-                            android:secondaryProgress="2"
                             android:scrollbarThumbHorizontal="@color/grey"
                             android:splitTrack="false"
                             android:thumb="@drawable/rotate"
@@ -111,6 +110,49 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
+
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="5dp"
+                                    android:src="@drawable/pr24" />
+
+                                <TextView
+                                    android:id="@+id/cylinderprep"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:fontFamily="serif"
+                                    android:padding="5dp"
+                                    android:text="Cylinder Preparation"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp" />
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="serif"
+                                android:padding="5dp"
+                                android:text="@string/printing"
+                                android:textColor="@color/black"
+                                android:textSize="13sp" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+
                                 android:layout_height="wrap_content">
 
                                 <ImageView
@@ -195,6 +237,7 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
+
                                 android:layout_height="wrap_content">
 
                                 <ImageView
@@ -237,6 +280,7 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
+
                                 android:layout_height="wrap_content">
 
                                 <ImageView
@@ -277,6 +321,7 @@
                                 android:layout_marginTop="15dp"
                                 android:padding="5dp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -292,7 +337,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="5dp"
-                                    android:src="@drawable/c24" />
+                                    android:src="@drawable/pouching" />
 
                                 <TextView
                                     android:id="@+id/pouching"
@@ -314,7 +359,7 @@
                                 android:layout_marginTop="15dp"
                                 android:fontFamily="serif"
                                 android:padding="5dp"
-                                android:text="@string/cutting"
+                                android:text="@string/pouching"
                                 android:textColor="@color/black"
                                 android:textSize="13sp" />
 
@@ -326,6 +371,7 @@
                                 android:layout_marginTop="15dp"
                                 android:padding="5dp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -342,7 +388,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="5dp"
-                                    android:src="@drawable/c24" />
+                                    android:src="@drawable/packaging" />
 
                                 <TextView
                                     android:id="@+id/packaging"
@@ -364,7 +410,7 @@
                                 android:layout_marginTop="15dp"
                                 android:fontFamily="serif"
                                 android:padding="5dp"
-                                android:text="@string/cutting"
+                                android:text="@string/packaging"
                                 android:textColor="@color/black"
                                 android:textSize="13sp" />
 
@@ -376,6 +422,7 @@
                                 android:layout_marginTop="15dp"
                                 android:padding="5dp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -392,7 +439,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="5dp"
-                                    android:src="@drawable/c24" />
+                                    android:src="@drawable/delivery" />
 
                                 <TextView
                                     android:id="@+id/dispatch"
@@ -414,7 +461,6 @@
                                 android:layout_marginTop="15dp"
                                 android:fontFamily="serif"
                                 android:padding="5dp"
-                                android:text="@string/cutting"
                                 android:textColor="@color/black"
                                 android:textSize="13sp" />
 

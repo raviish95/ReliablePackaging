@@ -25,7 +25,7 @@ public class MyProfile extends AppCompatActivity {
 
     private LinearLayout linearLayout;
     List<MyProfileView> profileViews;
-    private TextView name, email, mobno, place;
+    private TextView name, email, mobno, place,nameimage;
     private Button orders;
 
     @Override
@@ -75,6 +75,7 @@ public class MyProfile extends AppCompatActivity {
         mobno = findViewById(R.id.mobno);
         place = findViewById(R.id.place);
         orders=findViewById(R.id.orders);
+        nameimage=findViewById(R.id.img);
         orders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +105,7 @@ public class MyProfile extends AppCompatActivity {
             email.setText(Email.toString());
             mobno.setText(PhoneNumber.toString());
             place.setText(billingaddredss.toString() + " " + pincode);
+            nameimage.setText(nameview.toString().split("")[1]);
         } catch (Exception e) {
             e.printStackTrace();
         }

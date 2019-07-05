@@ -27,7 +27,7 @@
         android:layout_height="200dp"
         android:src="@drawable/reliables"/>
 
-     <Button
+    <!-- <Button
          android:id="@+id/ok"
          android:layout_width="190dp"
          android:layout_height="wrap_content"
@@ -36,5 +36,5 @@
          android:background="#D2B1F9"
          android:text="Ok"
          android:textColor="#fff" />
-
+-->
 </LinearLayout>

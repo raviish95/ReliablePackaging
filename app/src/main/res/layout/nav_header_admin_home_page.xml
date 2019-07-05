@@ -15,30 +15,28 @@
     tools:divider="#1e3d992">
 
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <TextView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profileImage"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginTop="7dp"
-        android:src="@drawable/customer_image"
-        app:civ_border_width="2dp"
-        app:civ_border_color="@color/white"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true" />
+        android:textColor="@color/black"
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:textSize="40sp" />
+
 
     <TextView
         android:id="@+id/profileName"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="4dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:fontFamily="serif"
         android:text="Name"
         android:textColor="@color/dark_yellow"
         android:textSize="20sp"
-        android:fontFamily="serif"
-        android:textStyle="bold"
-        />
-
+        android:textStyle="bold" />
 
 
 </LinearLayout>

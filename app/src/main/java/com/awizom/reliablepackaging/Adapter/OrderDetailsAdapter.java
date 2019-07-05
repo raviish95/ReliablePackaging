@@ -54,7 +54,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
         holder.amount.setText(" \u20B9" + String.valueOf(c.getTotalAmount()).toString());
         holder.order_date.setText(String.valueOf("Order Date - "+c.getCreatedDate()));
         holder.order_type.setText(Html.fromHtml("<u>"+c.getOrderType().toString().split(" ")[0]+"</u>"));
-        holder.pack_type.setText("Pack Type - "+c.getPackType().toString());
+        holder.pack_type.setText(c.getPackType().toString());
         String dispatchedate = String.valueOf(c.getCreatedDate().toString());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Calendar calendar = Calendar.getInstance();
@@ -73,7 +73,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<com.awizom.reliabl
         SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
         String output = sdf1.format(calendar.getTime());
 
-        holder.dispatch_date.setText("Estimated Dispatch Date - " + output.toString()
+        holder.dispatch_date.setText("Dispatch Date - " + output.toString()
         );
         try {
             holder.image_linkurl.setText(AppConfig.BASE_URL + c.getImageUrl().toString());

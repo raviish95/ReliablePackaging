@@ -76,6 +76,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     private ImageView notification;
     int mCartItemCount = 10;
     TextView username, autoslideOffer;
+    TextView headernamefirst;
     GridView gridView;
     String clientid = "", userName = "", userId = "";
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -193,6 +194,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         navigationView.setNavigationItemSelectedListener(this);
         View headerview = navigationView.getHeaderView(0);
         username = headerview.findViewById(R.id.profileName);
+        headernamefirst=headerview.findViewById(R.id.profileImage);
+
         getMyOffer();
         getMyProfile();
         getNotiCount();
@@ -227,20 +230,34 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         dialogBuilder.setCancelable(false);
         LayoutInflater inflater = LayoutInflater.from(this);
         final View dialogView = inflater.inflate(R.layout.design_welcome, null);
-        Button okay = dialogView.findViewById(R.id.ok);
+       // Button okay = dialogView.findViewById(R.id.ok);
         TextView textView = dialogView.findViewById(R.id.text);
         textView.setText("Welcome to");
 
         dialogBuilder.setView(dialogView);
         final android.support.v7.app.AlertDialog b = dialogBuilder.create();
         b.show();
-        okay.setOnClickListener(new View.OnClickListener() {
+
+
+
+        final Handler handler  = new Handler();
+        final Runnable runnable = new Runnable() {
             @Override
-            public void onClick(View v) {
-              b.dismiss();
+            public void run() {
+                if (b.isShowing()) {
+                    b.dismiss();
+                }
+            }
+        };
+
+        b.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                handler.removeCallbacks(runnable);
             }
         });
 
+        handler.postDelayed(runnable, 3000);
 
     }
 
@@ -270,6 +287,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             String pincode = String.valueOf(myProfileView.getPinCode());
             String billingaddredss = String.valueOf(myProfileView.getBillingAdddress().toString());
             username.setText(nameview.toString());
+            headernamefirst.setText(nameview.split("")[1]);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -295,7 +313,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     private void addOrderget() {
 
         final android.support.v7.app.AlertDialog.Builder dialogBuilder = new android.support.v7.app.AlertDialog.Builder(HomePage.this);
-
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.order_type, null);
         rebook = dialogView.findViewById(R.id.rebOok);

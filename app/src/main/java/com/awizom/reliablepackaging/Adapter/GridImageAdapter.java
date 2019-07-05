@@ -115,7 +115,7 @@ public class GridImageAdapter extends BaseAdapter {
 
     // Keep all Images in array
     public Integer[] mThumbIds = {
-            R.drawable.customer_image, R.drawable.icons8purchaseorder100, R.drawable.icons8money100, R.drawable.icons8myjob100
+            R.drawable.resume, R.drawable.icons8purchaseorder100, R.drawable.icons8money100, R.drawable.icons8myjob100
     };
     public String[] imagename = {
             "My Profile", "My Order", "My Account", "My Job"

@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@android:id/background"
-        android:drawable="@drawable/seekbar_background"
 
-      ></item>
-    <item android:id="@android:id/progress">
-        <clip android:drawable="@drawable/seekbar_progress" />
-    </item>
+    <item android:id="@android:id/background"
+        android:drawable="@drawable/seekbar_background" />
+
     <item android:id="@android:id/secondaryProgress">
-        <clip>
-            <shape
-                android:shape="line">
-                <stroke
-                    android:color="@color/green"
-                    android:width="5dp"/>
-            </shape>
-        </clip>
+        <scale android:scaleWidth="100%"
+            android:drawable="@drawable/secondaryprogress" />
     </item>
+
+    <item android:id="@android:id/progress">
+        <scale android:scaleWidth="100%"
+            android:drawable="@drawable/primryprogress" />
+    </item>
+
 </layer-list>
