@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.transition.Slide;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -23,6 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.EventLogTags;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -183,20 +185,29 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         textView.setTextColor(Color.YELLOW);
         checkInternet();
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.app_name, R.string.app_name);
         mDrawerToggle.getDrawerArrowDrawable().setColor(Color.GRAY);
         drawer.addDrawerListener(mDrawerToggle);
+
         mDrawerToggle.syncState();
         //  toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerview = navigationView.getHeaderView(0);
-        username = headerview.findViewById(R.id.profileName);
-        headernamefirst=headerview.findViewById(R.id.profileImage);
 
+        username = headerview.findViewById(R.id.profileName);
+        headernamefirst = headerview.findViewById(R.id.profileImage);
+        ImageView backdrawer=headerview.findViewById(R.id.navi_back);
+        backdrawer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             drawer.closeDrawers();
+            }
+        });
         getMyOffer();
         getMyProfile();
         getNotiCount();
@@ -231,7 +242,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         dialogBuilder.setCancelable(false);
         LayoutInflater inflater = LayoutInflater.from(this);
         final View dialogView = inflater.inflate(R.layout.design_welcome, null);
-       // Button okay = dialogView.findViewById(R.id.ok);
+        // Button okay = dialogView.findViewById(R.id.ok);
         TextView textView = dialogView.findViewById(R.id.text);
         textView.setText("Welcome to");
 
@@ -240,8 +251,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         b.show();
 
 
-
-        final Handler handler  = new Handler();
+        final Handler handler = new Handler();
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -391,19 +401,40 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         logouts.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                progressDialog.show();
-                try {
-                    SharedPrefManager.getInstance(HomePage.this).logout();
-                    Intent intent = new Intent(HomePage.this, LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                    dismissmethod();
+                AlertDialog.Builder alertbox = new AlertDialog.Builder(HomePage.this);
+                alertbox.setCancelable(false);
+                alertbox.setIcon(R.drawable.lock_open);
+                alertbox.setTitle("Are you sure, You want to logout?");
+                alertbox.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        // finish used for destroyed activity
+                        try {
+                            progressDialog.show();
+                            SharedPrefManager.getInstance(HomePage.this).logout();
+                            Intent intent = new Intent(HomePage.this, LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                            dismissmethod();
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    dismissmethod();
-                }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            dismissmethod();
+                        }
+
+
+                    }
+                });
+
+                alertbox.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        // Nothing will be happened when clicked on no button
+                        // of Dialog
+                    }
+                });
+                alertbox.show();
+
+
                 return true;
             }
         });
@@ -458,20 +489,40 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         switch (menuItem.getItemId()) {
 
             case R.id.nav_logout: {
-                progressDialog.show();
-                try {
 
-                    SharedPrefManager.getInstance(this).logout();
-                    Intent intent = new Intent(this, LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                    dismissmethod();
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    dismissmethod();
-                }
+                AlertDialog.Builder alertbox = new AlertDialog.Builder(HomePage.this);
+                alertbox.setCancelable(false);
+                alertbox.setIcon(R.drawable.lock_open);
+                alertbox.setTitle("Are you sure, You want to logout?");
+                alertbox.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        // finish used for destroyed activity
+                        try {
+                            progressDialog.show();
+                            SharedPrefManager.getInstance(HomePage.this).logout();
+                            Intent intent = new Intent(HomePage.this, LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                            dismissmethod();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            dismissmethod();
+                        }
+
+
+                    }
+                });
+
+                alertbox.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        // Nothing will be happened when clicked on no button
+                        // of Dialog
+                    }
+                });
+                alertbox.show();
 
 
                 //do somthing
@@ -515,7 +566,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 break;
             }
             case R.id.nav_feedback: {
-                Toast.makeText(getApplicationContext(), "Feedback", Toast.LENGTH_LONG).show();
+            //    Toast.makeText(getApplicationContext(), "Feedback", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this, FeedbackActivity.class);
                 startActivity(intent);
                 break;

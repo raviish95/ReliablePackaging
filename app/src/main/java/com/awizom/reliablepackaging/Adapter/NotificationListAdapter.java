@@ -50,7 +50,15 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
 
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         NotificationModel c = notificationModelList.get(position);

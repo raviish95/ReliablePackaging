@@ -81,6 +81,7 @@ public class SelectDesign extends AppCompatActivity {
                           feedBack.setEnabled(true);
                           feedBack.setHint("Enter your own design details");
                       } else {
+                          recyclerViewDesign.setVisibility(View.GONE);
                           feedBack.setHint("Check on declaration");
                           feedBack.setEnabled(false);
                       }
