@@ -46,6 +46,7 @@ import java.util.List;
 
 import dmax.dialog.SpotsDialog;
 
+ /*created by ravi on 18/05/2019*/
 public class OrderDetails extends AppCompatActivity {
 
     com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar verticalSeekBar;
@@ -83,19 +84,12 @@ public class OrderDetails extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);
         cylinderpre = findViewById(R.id.cylinderprep);
-
         printing = findViewById(R.id.printing);
-
         inspection = findViewById(R.id.inspection);
-
         lamination = findViewById(R.id.lamination);
-
         slitting = findViewById(R.id.slitting);
-
         pouching = findViewById(R.id.pouching);
-
         packaging = findViewById(R.id.packaging);
-
         dispatch = findViewById(R.id.dispatch);
         relativeLayout = findViewById(R.id.footer);
         scrollView = findViewById(R.id.scrollView);
@@ -167,7 +161,6 @@ public class OrderDetails extends AppCompatActivity {
         } else {
 
             verticalSeekBar.setProgress(3);
-
         }
     }
 
@@ -239,9 +232,9 @@ public class OrderDetails extends AppCompatActivity {
                 blink(cylinderpre);
             }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-          /*  Track Seekbar*/
+            /*                           TRACK SEEKBAR                          */
 
 
            /* dispatch track*/
@@ -251,7 +244,7 @@ public class OrderDetails extends AppCompatActivity {
 
 
             }
-            /* poching track*/
+            /* pouching track*/
             else if (!(trackingStatuses.getPouchingStatus() == 0)) {
                 trackinProgress = 4;
                 secondaryProgress = trackinProgress + 1;
@@ -301,7 +294,7 @@ public class OrderDetails extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int timeToBlink = 500;    //in milissegunds
+                int timeToBlink = 400;    //in milissegunds
                 try{Thread.sleep(timeToBlink);}catch (Exception e) {}
                 handler.post(new Runnable() {
                     @Override

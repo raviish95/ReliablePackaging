@@ -21,7 +21,7 @@
         android:layout_height="70dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:background="@drawable/circle"
         android:gravity="center"
         android:textSize="40sp" />
