@@ -50,15 +50,18 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
 
     }
 
+    /* for solve issue of item change on scroll this method is set*/
     @Override
     public long getItemId(int position) {
         return position;
     }
 
+    /* for solve issue of item change on scroll this method is set*/
     @Override
     public int getItemViewType(int position) {
         return position;
     }
+
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         NotificationModel c = notificationModelList.get(position);
