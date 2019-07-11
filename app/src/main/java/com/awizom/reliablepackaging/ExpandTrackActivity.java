@@ -47,30 +47,25 @@ import java.util.List;
 
 import dmax.dialog.SpotsDialog;
 
- /*created by ravi on 18/05/2019*/
-public class OrderDetails extends AppCompatActivity {
+/*created by ravi on 11/07/2019*/
+public class ExpandTrackActivity extends AppCompatActivity {
 
     com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar verticalSeekBar;
 
     private LinearLayout linearLayout;
-    private RecyclerView recyclerViewOrder;
     String Orderid;
-    OrderDetailsAdapter adapterOrderDetails;
-    List<OrderDetailsView> orderdetails;
     TrackingStatus trackingStatuses;
-    String imageLink;
     ScrollView scrollView;
     private AlertDialog progressDialog;
     RelativeLayout relativeLayout;
-    TextView cylinderpre, printing, inspection, lamination, slitting, pouching, packaging, dispatch,expand;
+    TextView cylinderpre, printing, inspection, lamination, slitting, pouching, packaging, dispatch;
     int trackinProgress = 0, secondaryProgress = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_details);
+        setContentView(R.layout.activity_expand_track);
         Orderid = getIntent().getStringExtra("OrderId");
-        imageLink = getIntent().getStringExtra("ImageLink");
         verticalSeekBar = findViewById(R.id.capacity_seek);
         initview();
 
@@ -79,12 +74,12 @@ public class OrderDetails extends AppCompatActivity {
     private void initview() {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Order Details");
+        toolbar.setTitle("Order No: "+Orderid.toString());
         toolbar.setBackgroundColor(Color.parseColor("#212F3D"));
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);
-        expand=findViewById(R.id.expand);
+
         cylinderpre = findViewById(R.id.cylinderprep);
         printing = findViewById(R.id.printing);
         inspection = findViewById(R.id.inspection);
@@ -95,15 +90,7 @@ public class OrderDetails extends AppCompatActivity {
         dispatch = findViewById(R.id.dispatch);
         relativeLayout = findViewById(R.id.footer);
         scrollView = findViewById(R.id.scrollView);
-        expand.setText(Html.fromHtml("<u>"+"Expand Track..>"+"</u>"));
-        expand.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(OrderDetails.this,ExpandTrackActivity.class);
-                intent.putExtra("OrderId",Orderid.toString());
-                startActivity(intent);
-            }
-        });
+
      /*   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
                 @Override
@@ -122,19 +109,13 @@ public class OrderDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (imageLink.toString().equals("imagelink")) {
-                    Intent intent = new Intent(OrderDetails.this, HomePage.class);
-                    startActivity(intent);
-                } else {
-                    onBackPressed();
-                }
-
+               onBackPressed();
             }
         });
 
-        progressDialog = new SpotsDialog(OrderDetails.this, R.style.Custom);
+        progressDialog = new SpotsDialog(ExpandTrackActivity.this, R.style.Custom);
         linearLayout = findViewById(R.id.linearlayout);
-        linearLayout.setOnTouchListener(new OnSwipeTouchListener(OrderDetails.this) {
+        linearLayout.setOnTouchListener(new OnSwipeTouchListener(ExpandTrackActivity.this) {
             public void onSwipeTop() {
                 //   Toast.makeText(RebookOrderActivity.this, "top", Toast.LENGTH_SHORT).show();
             }
@@ -154,22 +135,17 @@ public class OrderDetails extends AppCompatActivity {
             }
 
         });
-        recyclerViewOrder = findViewById(R.id.recyclerOrderdetails);
-        recyclerViewOrder.setHasFixedSize(true);
-        recyclerViewOrder.setLayoutManager(new LinearLayoutManager(this));
-        getOrderDetails();
+
         getTracking();
         if (Build.VERSION.SDK_INT >= 11) {
             ObjectAnimator animation = ObjectAnimator.ofInt(verticalSeekBar, "progress", trackinProgress);
             verticalSeekBar.setSecondaryProgress(secondaryProgress);
-
             animation.setDuration(1050); // 0.5 second
             animation.setInterpolator(new DecelerateInterpolator());
             animation.start();
             verticalSeekBar.setEnabled(false);
 
         } else {
-
             verticalSeekBar.setProgress(3);
         }
     }
@@ -181,6 +157,8 @@ public class OrderDetails extends AppCompatActivity {
             Type listType = new TypeToken<TrackingStatus>() {
             }.getType();
             trackingStatuses = new Gson().fromJson(result, listType);
+
+            /*                     Track Steps Colour                              */
 
             //dispatch color
             if (trackingStatuses.getDispatchStatus() == 3) {
@@ -247,7 +225,7 @@ public class OrderDetails extends AppCompatActivity {
             /*                           TRACK SEEKBAR                          */
 
 
-           /* dispatch track*/
+            /* dispatch track*/
             if (!(trackingStatuses.getDispatchStatus() == 0)) {
                 trackinProgress = 6;
                 secondaryProgress = trackinProgress + 1;
@@ -326,29 +304,12 @@ public class OrderDetails extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            if (imageLink.toString().equals("imagelink")) {
-                Intent intent = new Intent(OrderDetails.this, HomePage.class);
-                startActivity(intent);
-            } else {
+
                 onBackPressed();
-            }
+
         }
         return super.onKeyDown(keyCode, event);
     }
 
-    private void getOrderDetails() {
 
-        try {
-            String result = new OrderHelper.GETMyOrderDetails().execute(Orderid.toString()).get();
-            Gson gson = new Gson();
-            Type listType = new TypeToken<List<OrderDetailsView>>() {
-            }.getType();
-            orderdetails = new Gson().fromJson(result, listType);
-            adapterOrderDetails = new OrderDetailsAdapter(OrderDetails.this, orderdetails, imageLink);
-            recyclerViewOrder.setAdapter(adapterOrderDetails);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

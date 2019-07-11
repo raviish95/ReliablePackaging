@@ -113,7 +113,7 @@ public class RebookOrderActivity extends AppCompatActivity {
             orderlist = new Gson().fromJson(result, listType);
             adapterOrderList = new RebookOrderListAdapter(RebookOrderActivity.this, orderlist, rebook);
             recyclerView.setAdapter(adapterOrderList);
-          swipeRefreshLayout.setRefreshing(false);
+            swipeRefreshLayout.setRefreshing(false);
         } catch (Exception e) {
             e.printStackTrace();
         }

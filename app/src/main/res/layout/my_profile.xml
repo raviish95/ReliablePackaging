@@ -73,14 +73,13 @@
                                 android:layout_height="100dp"
                                 android:layout_centerHorizontal="true"
                                 android:layout_gravity="center_horizontal"
-                                android:textColor="@color/white"
-                                android:gravity="center"
-                                android:textSize="30sp"
-                                android:background="@drawable/circle"
                                 android:layout_marginTop="15dp"
-                              />
+                                android:background="@drawable/circle"
+                                android:gravity="center"
+                                android:textColor="@color/white"
+                                android:textSize="30sp" />
 
-                             <TextView
+                            <TextView
                                 android:id="@+id/name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -112,6 +111,7 @@
                                         android:layout_width="0dp"
                                         android:layout_height="match_parent"
                                         android:layout_weight="1"
+                                        android:id="@+id/totalOrder"
                                         android:gravity="center"
                                         android:orientation="vertical">
 
@@ -127,6 +127,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:paddingTop="10dp"
+                                            android:id="@+id/totalordervalue"
                                             android:text="12"
                                             android:textColor="@color/dark_yellow"
                                             android:textSize="20sp"
@@ -145,6 +146,7 @@
                                         android:layout_width="0dp"
                                         android:layout_height="match_parent"
                                         android:layout_weight="1"
+                                        android:id="@+id/runningOrder"
                                         android:gravity="center"
                                         android:orientation="vertical">
 
@@ -160,6 +162,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:paddingTop="10dp"
+                                            android:id="@+id/runningordervalue"
                                             android:text="6"
                                             android:textColor="@color/dark_yellow"
                                             android:textSize="20sp"
@@ -177,6 +180,7 @@
                                         android:layout_width="0dp"
                                         android:layout_height="match_parent"
                                         android:layout_weight="1"
+                                        android:id="@+id/completedOrder"
                                         android:gravity="center"
                                         android:orientation="vertical">
 
@@ -193,6 +197,7 @@
                                             android:layout_height="wrap_content"
                                             android:paddingTop="10dp"
                                             android:text="6"
+                                            android:id="@+id/completedordervalue"
                                             android:textColor="@color/dark_yellow"
                                             android:textSize="20sp"
                                             android:textStyle="bold" />
@@ -283,28 +288,28 @@
                                         android:textStyle="bold" />
                                 </LinearLayout>
 
-                             <!--   <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:paddingLeft="25dp">
+                                <!--   <LinearLayout
+                                       android:layout_width="match_parent"
+                                       android:layout_height="wrap_content"
+                                       android:orientation="horizontal"
+                                       android:paddingLeft="25dp">
 
-                                    <ImageView
-                                        android:layout_width="45dp"
-                                        android:layout_height="45dp"
-                                        android:padding="10dp"
-                                        android:src="@drawable/ic_border"
-                                        android:tint="@color/distempur" />
+                                       <ImageView
+                                           android:layout_width="45dp"
+                                           android:layout_height="45dp"
+                                           android:padding="10dp"
+                                           android:src="@drawable/ic_border"
+                                           android:tint="@color/distempur" />
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:fontFamily="serif"
-                                        android:padding="15dp"
-                                        android:text="Show all Orders"
-                                        android:textStyle="bold" />
-                                </LinearLayout>-->
+                                       <TextView
+                                           android:layout_width="wrap_content"
+                                           android:layout_height="wrap_content"
+                                           android:layout_gravity="center_vertical"
+                                           android:fontFamily="serif"
+                                           android:padding="15dp"
+                                           android:text="Show all Orders"
+                                           android:textStyle="bold" />
+                                   </LinearLayout>-->
                             </LinearLayout>
 
                             <Button

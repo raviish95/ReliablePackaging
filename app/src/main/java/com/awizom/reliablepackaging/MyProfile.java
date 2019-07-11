@@ -14,6 +14,7 @@ import com.awizom.reliablepackaging.Helper.OrderHelper;
 import com.awizom.reliablepackaging.Helper.ProfileHelper;
 import com.awizom.reliablepackaging.Model.MyProfileView;
 import com.awizom.reliablepackaging.Model.Order;
+import com.awizom.reliablepackaging.Model.OrderCount;
 import com.awizom.reliablepackaging.Model.OrderDetailsView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -25,8 +26,9 @@ public class MyProfile extends AppCompatActivity {
 
     private LinearLayout linearLayout;
     List<MyProfileView> profileViews;
-    private TextView name, email, mobno, place,nameimage;
+    private TextView name, email, mobno, place, nameimage, totalordervalue, totalrunningorder, totalcompltdorder;
     private Button orders;
+    private LinearLayout totalodr, runningodr, cmpltdodr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,39 @@ public class MyProfile extends AppCompatActivity {
             }
         });
         linearLayout = findViewById(R.id.linearlayout);
+        totalodr = findViewById(R.id.totalOrder);
+        runningodr = findViewById(R.id.runningOrder);
+        cmpltdodr = findViewById(R.id.completedOrder);
+        totalordervalue = findViewById(R.id.totalordervalue);
+        totalrunningorder = findViewById(R.id.runningordervalue);
+        totalcompltdorder = findViewById(R.id.completedordervalue);
+        totalodr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyProfile.this, MyOrderList.class);
+                intent.putExtra("Ordertype", "TotalOdr");
+                intent.putExtra("HeaderName", "Total Order");
+                startActivity(intent);
+            }
+        });
+        cmpltdodr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyProfile.this, MyOrderList.class);
+                intent.putExtra("Ordertype", "CompletedOdr");
+                intent.putExtra("HeaderName", "Completed Order");
+                startActivity(intent);
+            }
+        });
+        runningodr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyProfile.this, MyOrderList.class);
+                intent.putExtra("Ordertype", "RunningOdr");
+                intent.putExtra("HeaderName", "Running Order");
+                startActivity(intent);
+            }
+        });
         linearLayout.setOnTouchListener(new OnSwipeTouchListener(MyProfile.this) {
             public void onSwipeTop() {
                 //   Toast.makeText(RebookOrderActivity.this, "top", Toast.LENGTH_SHORT).show();
@@ -74,16 +109,40 @@ public class MyProfile extends AppCompatActivity {
         email = findViewById(R.id.email);
         mobno = findViewById(R.id.mobno);
         place = findViewById(R.id.place);
-        orders=findViewById(R.id.orders);
-        nameimage=findViewById(R.id.img);
+        orders = findViewById(R.id.orders);
+        nameimage = findViewById(R.id.img);
         orders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               onBackPressed();
+                onBackPressed();
             }
         });
         getmyProfile();
+        getMyOrderCount();
 
+    }
+
+    private void getMyOrderCount() {
+
+        String clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
+        try {
+
+            String result = new ProfileHelper.GetOrderCount().execute(clientid.toString()).get();
+            Gson gson = new Gson();
+            Type listType = new TypeToken<OrderCount>() {
+            }.getType();
+            OrderCount orderCount = new Gson().fromJson(result, listType);
+
+            String totalorder = String.valueOf(orderCount.getTotalstauscount());
+            String runningorder = String.valueOf(orderCount.getTotalrunningstatus());
+            String completedorder = String.valueOf(orderCount.getTotalcompletedcount());
+
+            totalordervalue.setText(totalorder.toString());
+            totalrunningorder.setText(runningorder.toString());
+            totalcompltdorder.setText(completedorder.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void getmyProfile() {

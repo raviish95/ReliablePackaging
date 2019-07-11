@@ -39,16 +39,21 @@ public class MyOrderList extends AppCompatActivity {
     Snackbar snackbar;
     private TextView addorder, rebookOrder;
     private SwipeRefreshLayout swipeRefreshLayout;
-
+    String ordertype;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_order_list);
+        try {
+             ordertype = getIntent().getStringExtra("Ordertype");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         initview();
     }
 
     private void initview() {
-        String headername=getIntent().getStringExtra("HeaderName");
+        String headername = getIntent().getStringExtra("HeaderName");
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(headername.toString());
         toolbar.setBackgroundColor(Color.parseColor("#45B39D"));
@@ -61,7 +66,7 @@ public class MyOrderList extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        swipeRefreshLayout=findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -73,12 +78,10 @@ public class MyOrderList extends AppCompatActivity {
                 }
             }
         });
-        LinearLayout linearLayout=findViewById(R.id.OrderDataFunc);
-        if(headername.equals("My Job"))
-        {
+        LinearLayout linearLayout = findViewById(R.id.OrderDataFunc);
+        if (headername.equals("My Job")) {
             linearLayout.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             linearLayout.setVisibility(View.VISIBLE);
         }
         no_internet = findViewById(R.id.no_internet);
@@ -129,7 +132,21 @@ public class MyOrderList extends AppCompatActivity {
             no_internet.setVisibility(View.GONE);
 
             connected = true;
-            getMyOrderList();
+
+            if(ordertype.toString().equals("TotalOdr")) {
+                getMyOrderList();
+            }
+            else if(ordertype.toString().equals("CompletedOdr"))
+            {
+                getMyCompletedOrderList();
+            }
+            else  if(ordertype.toString().equals("RunningOdr"))
+            {
+                getMyRunningOrderList();
+            }
+            else{
+                getMyOrderList();
+            }
             //    Toast.makeText(getApplicationContext(), "Internet is On", Toast.LENGTH_SHORT).show();
         } else {
             connected = false;
@@ -142,7 +159,7 @@ public class MyOrderList extends AppCompatActivity {
     private void getMyOrderList() {
         String clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
         try {
-          //  Toast.makeText(getApplicationContext(), "deviceid->" + FirebaseInstanceId.getInstance().getToken(), Toast.LENGTH_LONG).show();
+            //  Toast.makeText(getApplicationContext(), "deviceid->" + FirebaseInstanceId.getInstance().getToken(), Toast.LENGTH_LONG).show();
             String result = new OrderHelper.GETMyOrder().execute(clientid.toString()).get();
             Gson gson = new Gson();
             Type listType = new TypeToken<List<Order>>() {
@@ -155,4 +172,37 @@ public class MyOrderList extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    private void getMyRunningOrderList() {
+        String clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
+        try {
+            //  Toast.makeText(getApplicationContext(), "deviceid->" + FirebaseInstanceId.getInstance().getToken(), Toast.LENGTH_LONG).show();
+            String result = new OrderHelper.getMyRunningOrder().execute(clientid.toString()).get();
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<Order>>() {
+            }.getType();
+            orderlist = new Gson().fromJson(result, listType);
+            adapterOrderList = new MyOrderListAdapter(MyOrderList.this, orderlist);
+            recyclerView.setAdapter(adapterOrderList);
+            swipeRefreshLayout.setRefreshing(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void getMyCompletedOrderList() {
+        String clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
+        try {
+            //  Toast.makeText(getApplicationContext(), "deviceid->" + FirebaseInstanceId.getInstance().getToken(), Toast.LENGTH_LONG).show();
+            String result = new OrderHelper.getMyCompletedOrder().execute(clientid.toString()).get();
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<Order>>() {
+            }.getType();
+            orderlist = new Gson().fromJson(result, listType);
+            adapterOrderList = new MyOrderListAdapter(MyOrderList.this, orderlist);
+            recyclerView.setAdapter(adapterOrderList);
+            swipeRefreshLayout.setRefreshing(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

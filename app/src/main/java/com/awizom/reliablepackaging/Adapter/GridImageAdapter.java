@@ -81,6 +81,7 @@ public class GridImageAdapter extends BaseAdapter {
                 } else if (position == 1) {
                     progressDialog.show();
                     Intent intent = new Intent(mContext, MyOrderList.class);
+                    intent.putExtra("Ordertype","ds");
                     intent.putExtra("HeaderName", "My Order");
                     mContext.startActivity(intent);
                     dismissmethod();
@@ -92,6 +93,7 @@ public class GridImageAdapter extends BaseAdapter {
                 } else if (position == 3) {
                     progressDialog.show();
                     Intent intent = new Intent(mContext, MyOrderList.class);
+                    intent.putExtra("Ordertype","ds");
                     intent.putExtra("HeaderName", "My Job");
                     mContext.startActivity(intent);
                     dismissmethod();

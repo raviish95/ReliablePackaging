@@ -28,6 +28,7 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -130,6 +131,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
         try {
             welcome = getIntent().getStringExtra("Welcome");
         } catch (Exception e) {
@@ -588,6 +591,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.my_order: {
                 progressDialog.show();
                 Intent intent = new Intent(this, MyOrderList.class);
+                intent.putExtra("Ordertype","ds");
                 intent.putExtra("HeaderName", "My Order");
                 startActivity(intent);
                 dismissmethod();
@@ -598,6 +602,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.my_jobs: {
                 progressDialog.show();
                 Intent intent = new Intent(this, MyOrderList.class);
+                intent.putExtra("Ordertype","ds");
                 intent.putExtra("HeaderName", "My Job");
                 startActivity(intent);
                 dismissmethod();

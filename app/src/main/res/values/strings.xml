@@ -46,7 +46,8 @@
     <string name="cylinderprep">Cylinder preparation is process where are Selected Design are implemented as cylinder.</string>
     <string name="inspection">Inspection in manufacturing includes measuring, examining, and testing</string>
     <string name="lamination">Lamination is the technique/process of manufacturing a material in multiple layers</string>
-    //<string name="delivery">Pro </string>
+    //
+    <string name="delivery">Pro </string>
     <string name="cutting">Slitting is the separation or opening of a physical object, into two or more portions</string>
     <string name="pouching">Pouching is the technique/process of pouch in which A pocket in which  products are pouched</string>
     <string name="packaging">Packaging can be described as a coordinated system of preparing goods for transport, warehousing, logistics, sale, and end use</string>
