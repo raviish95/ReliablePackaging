@@ -144,7 +144,7 @@ public class MyProfile extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
+//
     private void getmyProfile() {
 
         String clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
