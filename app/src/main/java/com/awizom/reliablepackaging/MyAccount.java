@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
+/* created by ravi on 22-may-2019*/
+
 public class MyAccount extends AppCompatActivity {
 
     private LinearLayout linearLayout;

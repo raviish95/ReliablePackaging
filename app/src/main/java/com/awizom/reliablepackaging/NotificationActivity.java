@@ -22,6 +22,8 @@ import java.util.List;
 
 import dmax.dialog.SpotsDialog;
 
+/* created by ravi on 04-jun-2019*/
+
 public class NotificationActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;

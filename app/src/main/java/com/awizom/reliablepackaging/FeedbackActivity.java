@@ -29,6 +29,7 @@ public class FeedbackActivity extends AppCompatActivity {
         initview();
     }
 
+    //test
     private void initview() {
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Feedback");

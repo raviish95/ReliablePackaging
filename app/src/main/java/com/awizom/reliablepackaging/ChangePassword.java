@@ -20,7 +20,8 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 
 import dmax.dialog.SpotsDialog;
-
+/*
+created by ravi on 22-may-2019*/
 public class ChangePassword extends AppCompatActivity {
 
     private RelativeLayout relativeLayout;

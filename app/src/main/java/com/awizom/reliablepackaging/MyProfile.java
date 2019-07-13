@@ -21,11 +21,10 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.List;
-
+/* create by ravi on 22-may-2019*/
 public class MyProfile extends AppCompatActivity {
 
     private LinearLayout linearLayout;
-    List<MyProfileView> profileViews;
     private TextView name, email, mobno, place, nameimage, totalordervalue, totalrunningorder, totalcompltdorder;
     private Button orders;
     private LinearLayout totalodr, runningodr, cmpltdodr;
