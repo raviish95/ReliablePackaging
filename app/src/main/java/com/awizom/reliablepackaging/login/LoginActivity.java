@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        RelativeLayout relativeLayout=findViewById(R.id.transition);
+        RelativeLayout relativeLayout=findViewById(R.id.rel3);
         TransitionDrawable trans = (TransitionDrawable) relativeLayout.getBackground();
         trans.startTransition(4000);
         checkInternet();

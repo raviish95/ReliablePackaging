@@ -1,8 +1,16 @@
 package com.awizom.reliablepackaging.Model;
 
 public class MyProfileView {
-    public int ClientID ;
+    public int ClientID;
     public String Name ;
+    public String ContactName;
+    public String PhoneNumber ;
+    public String Email ;
+    public String BillingAdddress;
+    public String PAN ;
+    public String Gstin;
+    public String Tin;
+    public int PinCode ;
 
     public int getClientID() {
         return ClientID;
@@ -52,6 +60,30 @@ public class MyProfileView {
         BillingAdddress = billingAdddress;
     }
 
+    public String getPAN() {
+        return PAN;
+    }
+
+    public void setPAN(String PAN) {
+        this.PAN = PAN;
+    }
+
+    public String getGstin() {
+        return Gstin;
+    }
+
+    public void setGstin(String gstin) {
+        Gstin = gstin;
+    }
+
+    public String getTin() {
+        return Tin;
+    }
+
+    public void setTin(String tin) {
+        Tin = tin;
+    }
+
     public int getPinCode() {
         return PinCode;
     }
@@ -59,10 +91,4 @@ public class MyProfileView {
     public void setPinCode(int pinCode) {
         PinCode = pinCode;
     }
-
-    public String ContactName;
-    public String PhoneNumber ;
-    public String Email ;
-    public String BillingAdddress ;
-    public int PinCode;
 }

@@ -51,7 +51,6 @@ import dmax.dialog.SpotsDialog;
 public class OrderDetails extends AppCompatActivity {
 
     com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar verticalSeekBar;
-
     private LinearLayout linearLayout;
     private RecyclerView recyclerViewOrder;
     String Orderid;
@@ -162,7 +161,6 @@ public class OrderDetails extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= 11) {
             ObjectAnimator animation = ObjectAnimator.ofInt(verticalSeekBar, "progress", trackinProgress);
             verticalSeekBar.setSecondaryProgress(secondaryProgress);
-
             animation.setDuration(1050); // 0.5 second
             animation.setInterpolator(new DecelerateInterpolator());
             animation.start();
@@ -337,7 +335,6 @@ public class OrderDetails extends AppCompatActivity {
     }
 
     private void getOrderDetails() {
-
         try {
             String result = new OrderHelper.GETMyOrderDetails().execute(Orderid.toString()).get();
             Gson gson = new Gson();

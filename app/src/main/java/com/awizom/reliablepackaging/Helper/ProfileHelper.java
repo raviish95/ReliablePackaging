@@ -101,6 +101,61 @@ public class ProfileHelper extends AppCompatActivity {
         }
 
     }
+    public static final class UpdateProfile extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+
+            //     InputStream inputStream
+            String clientid = params[0];
+            String name = params[1];
+            String email = params[2];
+            String mobno = params[3];
+            String place = params[4];
+            String panno = params[5];
+            String gstno = params[6];
+            String tinno = params[7];
+
+            String json = "";
+            try {
+
+                OkHttpClient client = new OkHttpClient();
+                Request.Builder builder = new Request.Builder();
+                builder.url(AppConfig.BASE_URL_API_ + "UpdateClientProfile/"+clientid);
+                builder.addHeader("Content-Type", "application/x-www-form-urlencoded");
+                builder.addHeader("Accept", "application/json");
+                //builder.addHeader("Authorization", "Bearer " + accesstoken);
+                FormBody.Builder parameters = new FormBody.Builder();
+                parameters.add("Name", name);
+                parameters.add("Email", email);
+                parameters.add("PhoneNumber", mobno);
+                parameters.add("BillingAdddress", place);
+                parameters.add("PAN", panno);
+                parameters.add("Gstin", gstno);
+                parameters.add("Tin", tinno);
+                builder.post(parameters.build());
+                okhttp3.Response response = client.newCall(builder.build()).execute();
+                if (response.isSuccessful()) {
+                    json = response.body().string();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return json;
+        }
+
+        protected void onPostExecute(String result) {
+
+            if (result.isEmpty()) {
+
+            } else {
+                super.onPostExecute(result);
+//
+            }
+
+
+        }
+
+    }
     public static final class Changepasswordmethod extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
