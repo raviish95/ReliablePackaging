@@ -76,7 +76,10 @@
         <activity
             android:name=".FeedbackActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ExpandTrackActivity"
+        <activity
+            android:name=".ExpandTrackActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LegalDocument"
             android:theme="@style/AppTheme.NoActionBar" ></activity>
     </application>
 

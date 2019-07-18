@@ -36,7 +36,7 @@ public class MyProfile extends AppCompatActivity {
 
     private LinearLayout linearLayout;
     private TextView name, email, mobno, place, panno, gstno, tinno, nameimage, totalordervalue, totalrunningorder, totalcompltdorder;
-    private Button orders, account, update_profile;
+    private Button account, update_profile,legal_doc;
     private LinearLayout totalodr, runningodr, cmpltdodr;
 
     @Override
@@ -115,27 +115,22 @@ public class MyProfile extends AppCompatActivity {
 
         });
         name = findViewById(R.id.name);
-
         email = findViewById(R.id.email);
-
         mobno = findViewById(R.id.mobno);
-
         panno = findViewById(R.id.panno);
-
         gstno = findViewById(R.id.gstno);
-
         tinno = findViewById(R.id.tinno);
-
         place = findViewById(R.id.place);
-        orders = findViewById(R.id.orders);
         account = findViewById(R.id.accounts);
         update_profile = findViewById(R.id.update);
+        legal_doc=findViewById(R.id.legal);
         nameimage = findViewById(R.id.img);
 
-        orders.setOnClickListener(new View.OnClickListener() {
+        legal_doc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                Intent intent = new Intent(MyProfile.this, LegalDocument.class);
+                startActivity(intent);
             }
         });
         account.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +142,6 @@ public class MyProfile extends AppCompatActivity {
         });
         getmyProfile();
         getMyOrderCount();
-
     }
 
     private void showupdatedialog(String namestring, String emailstring, String mobilenostring, String placeString, String pannostring, String gstnostring, String tinnostring) {
@@ -167,7 +161,6 @@ public class MyProfile extends AppCompatActivity {
         places.setText(placeString.toString());
         pannos = dialogView.findViewById(R.id.panno);
         pannos.setText(pannostring.toString());
-
         gstnos = dialogView.findViewById(R.id.gstno);
         gstnos.setText(gstnostring.toString());
         tinnos = dialogView.findViewById(R.id.tinno);
@@ -180,7 +173,6 @@ public class MyProfile extends AppCompatActivity {
                 /*  matcher for panno*/
                 String Pan = pannos.getText().toString().trim();
                 Pattern pattern = Pattern.compile("[A-Z]{5}[0-9]{4}[A-Z]{1}");
-
                 Matcher matcher = pattern.matcher(Pan);
 
                 /*     matcher for gstno*/
@@ -228,8 +220,6 @@ public class MyProfile extends AppCompatActivity {
                     }
 
                 }
-
-
             }
         });
         dialogBuilder.setView(dialogView);
@@ -249,7 +239,6 @@ public class MyProfile extends AppCompatActivity {
             Type listType = new TypeToken<OrderCount>() {
             }.getType();
             OrderCount orderCount = new Gson().fromJson(result, listType);
-
             String totalorder = String.valueOf(orderCount.getTotalstauscount());
             String runningorder = String.valueOf(orderCount.getTotalrunningstatus());
             String completedorder = String.valueOf(orderCount.getTotalcompletedcount());
@@ -264,7 +253,7 @@ public class MyProfile extends AppCompatActivity {
 
     //
     private void getmyProfile() {
-
+        String pannos="", gstnos="", tinnos="";
         String clientid = String.valueOf(SharedPrefManager.getInstance(this).getUser().getClientID());
         try {
 
@@ -278,9 +267,13 @@ public class MyProfile extends AppCompatActivity {
             String PhoneNumber = String.valueOf(myProfileView.getPhoneNumber().toString());
             String pincode = String.valueOf(myProfileView.getPinCode());
             String billingaddredss = String.valueOf(myProfileView.getBillingAdddress().toString());
-            String pannos = String.valueOf(myProfileView.getPAN().toString());
-            String gstnos = String.valueOf(myProfileView.getGstin().toString());
-            String tinnos = String.valueOf(myProfileView.getTin().toString());
+            try {
+                pannos = String.valueOf(myProfileView.getPAN().toString());
+                gstnos = String.valueOf(myProfileView.getGstin().toString());
+                tinnos = String.valueOf(myProfileView.getTin().toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             name.setText(nameview.toString());
             email.setText(Email.toString());
             mobno.setText(PhoneNumber.toString());
@@ -300,8 +293,6 @@ public class MyProfile extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     showupdatedialog(namestring, emailstring, mobilenostring, placestring, pannostring, gstnostring, tinnostring);
-
-
                 }
             });
         } catch (Exception e) {

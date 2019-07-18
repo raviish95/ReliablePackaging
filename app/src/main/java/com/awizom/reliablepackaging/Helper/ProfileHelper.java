@@ -9,6 +9,9 @@ import okhttp3.Request;
 
 public class ProfileHelper extends AppCompatActivity {
 
+
+
+
     public static final class GETMyProfile extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -20,6 +23,52 @@ public class ProfileHelper extends AppCompatActivity {
                 OkHttpClient client = new OkHttpClient();
                 Request.Builder builder = new Request.Builder();
                 builder.url(AppConfig.BASE_URL_API_ + "MyProfile/"+clientID);
+                builder.addHeader("Content-Type", "Application/json");
+                builder.addHeader("Accept", "application/json");
+
+                okhttp3.Response response = client.newCall(builder.build()).execute();
+                if (response.isSuccessful()) {
+                    json = response.body().string();
+                }
+            } catch (Exception e) {
+
+
+                e.printStackTrace();
+
+            }
+            return json;
+        }
+
+        protected void onPostExecute(String result) {
+
+            try {
+                if (result.isEmpty()) {
+
+
+                } else {
+                    super.onPostExecute(result);
+                }
+
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+    public static final class GETMyLegalDoc extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+
+            String json = "";
+            String clientID = params[0];
+
+            try {
+                OkHttpClient client = new OkHttpClient();
+                Request.Builder builder = new Request.Builder();
+                builder.url(AppConfig.BASE_URL_API_ + "LegalDocument/"+clientID);
                 builder.addHeader("Content-Type", "Application/json");
                 builder.addHeader("Accept", "application/json");
 

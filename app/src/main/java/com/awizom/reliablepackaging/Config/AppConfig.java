@@ -4,11 +4,11 @@ public class AppConfig {
 
     public AppConfig() {
     }
-/*
 
+/*
     public static final String BASE_URL = "http://reliablepackaging.somee.com/";
-    public static final String BASE_URL_API_ = "http://reliablepackaging.somee.com/api/apps/";
-*/
+    public static final String BASE_URL_API_ = "http://reliablepackaging.somee.com/api/apps/";*/
+
 
    /*
     public static final String BASE_URL = "http://reliable.somee.com/";
