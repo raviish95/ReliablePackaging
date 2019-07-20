@@ -16,6 +16,15 @@ public class Order {
     public String OrderNo;
     public String JobName;
     public String  LayerName;
+    public String  PackType;
+
+    public String getPackType() {
+        return PackType;
+    }
+
+    public void setPackType(String packType) {
+        PackType = packType;
+    }
 
     public String getLayerName() {
         return LayerName;

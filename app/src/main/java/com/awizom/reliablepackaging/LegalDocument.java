@@ -1,18 +1,25 @@
 package com.awizom.reliablepackaging;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.awizom.reliablepackaging.Config.AppConfig;
 import com.awizom.reliablepackaging.Helper.ProfileHelper;
 import com.awizom.reliablepackaging.Model.LegalDocumentModel;
 import com.awizom.reliablepackaging.Model.MyProfileView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -25,7 +32,10 @@ public class LegalDocument extends AppCompatActivity {
     private ImageView legal_image;
     private ScaleGestureDetector mScaleGestureDetector;
     private float mScaleFactor = 1.0f;
-
+    Drawable drawable;
+    Bitmap bitmap;
+    String ImagePath;
+    Uri URI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +45,7 @@ public class LegalDocument extends AppCompatActivity {
 
     private void initview() {
         legal_image = findViewById(R.id.legaldoc);
+
         mScaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
         legal_image.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -72,7 +83,7 @@ public class LegalDocument extends AppCompatActivity {
             LegalDocumentModel legalDocumentModel = new Gson().fromJson(result, listType);
             String imagestring = legalDocumentModel.getURL().toString();
             try {
-                Glide.with(this).load(AppConfig.BASE_URL + imagestring.toString()).into(legal_image);
+                Glide.with(this).load(AppConfig.BASE_URL + imagestring.toString()).asBitmap().into(legal_image);
 
             } catch (Exception e) {
                 e.printStackTrace();

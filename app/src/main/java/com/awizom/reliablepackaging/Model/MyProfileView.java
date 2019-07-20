@@ -10,6 +10,25 @@ public class MyProfileView {
     public String PAN ;
     public String Gstin;
     public String Tin;
+    public String AccountType;
+
+    public String getAccountType() {
+        return AccountType;
+    }
+
+    public void setAccountType(String accountType) {
+        AccountType = accountType;
+    }
+
+    public String getCompanyName() {
+        return CompanyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        CompanyName = companyName;
+    }
+
+    public String CompanyName;
     public int PinCode ;
 
     public int getClientID() {

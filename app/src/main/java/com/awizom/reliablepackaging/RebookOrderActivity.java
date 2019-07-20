@@ -35,7 +35,6 @@ public class RebookOrderActivity extends AppCompatActivity {
     private RebookOrderListAdapter adapterOrderList;
     private LinearLayout linearLayout;
     private Button rebook;
-    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,18 +58,7 @@ public class RebookOrderActivity extends AppCompatActivity {
             }
         });
         rebook = findViewById(R.id.addReOrder);
-        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                try {
-                    initview();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    // relativeLayout.setVisibility(View.VISIBLE);
-                }
-            }
-        });
+
         linearLayout = findViewById(R.id.linear);
         linearLayout.setOnTouchListener(new OnSwipeTouchListener(RebookOrderActivity.this) {
             public void onSwipeTop() {
@@ -115,7 +103,6 @@ public class RebookOrderActivity extends AppCompatActivity {
             orderlist = new Gson().fromJson(result, listType);
             adapterOrderList = new RebookOrderListAdapter(RebookOrderActivity.this, orderlist, rebook);
             recyclerView.setAdapter(adapterOrderList);
-            swipeRefreshLayout.setRefreshing(false);
         } catch (Exception e) {
             e.printStackTrace();
         }

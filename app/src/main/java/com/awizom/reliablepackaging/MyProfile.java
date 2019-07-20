@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +36,7 @@ import java.util.regex.Pattern;
 public class MyProfile extends AppCompatActivity {
 
     private LinearLayout linearLayout;
-    private TextView name, email, mobno, place, panno, gstno, tinno, nameimage, totalordervalue, totalrunningorder, totalcompltdorder;
+    private TextView name,firm, email, mobno, place, panno, gstno, tinno, nameimage, totalordervalue, totalrunningorder, totalcompltdorder;
     private Button account, update_profile,legal_doc;
     private LinearLayout totalodr, runningodr, cmpltdodr;
 
@@ -64,6 +65,7 @@ public class MyProfile extends AppCompatActivity {
         totalodr = findViewById(R.id.totalOrder);
         runningodr = findViewById(R.id.runningOrder);
         cmpltdodr = findViewById(R.id.completedOrder);
+        firm=findViewById(R.id.firm_name);
         totalordervalue = findViewById(R.id.totalordervalue);
         totalrunningorder = findViewById(R.id.runningordervalue);
         totalcompltdorder = findViewById(R.id.completedordervalue);
@@ -267,6 +269,15 @@ public class MyProfile extends AppCompatActivity {
             String PhoneNumber = String.valueOf(myProfileView.getPhoneNumber().toString());
             String pincode = String.valueOf(myProfileView.getPinCode());
             String billingaddredss = String.valueOf(myProfileView.getBillingAdddress().toString());
+            String accountType=myProfileView.getAccountType().toString();
+            if(accountType.equals("Self"))
+            {
+                firm.setText(Html.fromHtml("<u>"+accountType.toString()+"</u>"));
+            }
+            else
+            {
+                firm.setText(Html.fromHtml("<u>"+myProfileView.getCompanyName().toString())+"</u>");
+            }
             try {
                 pannos = String.valueOf(myProfileView.getPAN().toString());
                 gstnos = String.valueOf(myProfileView.getGstin().toString());

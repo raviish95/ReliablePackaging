@@ -33,6 +33,7 @@ import com.awizom.reliablepackaging.HomePage;
 import com.awizom.reliablepackaging.Model.Order;
 import com.awizom.reliablepackaging.OrderDetails;
 import com.awizom.reliablepackaging.R;
+import com.awizom.reliablepackaging.RebookFillOrderActivity;
 import com.awizom.reliablepackaging.RebookOrderActivity;
 import com.awizom.reliablepackaging.SelectDesign;
 import com.bumptech.glide.Glide;
@@ -105,8 +106,12 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
         rebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openItemConfirmDialog((itemnamelist.toArray()));
-                //   Toast.makeText(mCtx, itemnamelist.toString(), Toast.LENGTH_LONG).show();
+
+                Intent intent=new Intent(mCtx, RebookFillOrderActivity.class);
+                intent.putExtra("itemslist",orderidlist);
+                mCtx.startActivity(intent);
+         //   openItemConfirmDialog((itemnamelist.toArray()));
+
 
             }
         });
@@ -115,9 +120,12 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // Toast.makeText(mCtx, "check", Toast.LENGTH_LONG).show();
                 if (isChecked) {
+                    orderidlist.add(holder.orderid.getText().toString());
+
                     itemnamelist.add(holder.product.getText().toString() + ">" + holder.orderid.getText().toString());
 
                 } else {
+                    orderidlist.remove(holder.orderid.getText().toString());
                     itemnamelist.remove(holder.product.getText().toString() + ">" + holder.orderid.getText().toString());
                 }
 
