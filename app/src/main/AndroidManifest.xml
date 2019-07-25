@@ -86,6 +86,12 @@
         <activity
             android:name=".RebookFillOrderActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UnapprovedOrdersList"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".UnapprovedOrderDetails"
+            android:theme="@style/AppTheme.NoActionBar"
+            ></activity>
     </application>
 
 </manifest>

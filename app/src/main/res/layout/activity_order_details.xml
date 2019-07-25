@@ -550,7 +550,7 @@
     <RelativeLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:background="@color/purple"
@@ -560,6 +560,8 @@
             android:id="@+id/footer_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:linksClickable="true"
             android:layout_marginStart="10dp"
             android:gravity="start"
             android:text="www.reliablepackaging.in"

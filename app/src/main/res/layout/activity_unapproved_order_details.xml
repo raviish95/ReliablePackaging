@@ -3,54 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@+id/relative"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/reliable_half">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/linearlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".FeedbackActivity">
+        android:background="@drawable/reliablebackground_mob"
+        android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
-        <android.support.v7.widget.CardView
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerOrderdetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/feedback"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/feedback_bg"
-                android:gravity="top|left"
-                android:hint="Describe Your Experience"
-                android:inputType="textMultiLine"
-                android:lines="8"
-                android:maxLines="10"
-                android:minLines="6"
-                android:scrollbars="vertical" />
-        </android.support.v7.widget.CardView>
+        </android.support.v7.widget.RecyclerView>
 
-        <Button
-            android:id="@+id/submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/button_shape"
-            android:text="Submit"
-            android:textColor="#fff" />
+
+
     </LinearLayout>
-
 
     <RelativeLayout
         android:id="@+id/footer"
@@ -58,16 +41,16 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:background="#DC7633"
+        android:background="@color/purple"
         android:gravity="center">
 
         <TextView
             android:id="@+id/footer_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:autoLink="web"
             android:linksClickable="true"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:gravity="start"
             android:text="www.reliablepackaging.in"
             android:textColor="#FFFFFF"

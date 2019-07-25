@@ -20,6 +20,7 @@ import com.awizom.reliablepackaging.MyAccount;
 import com.awizom.reliablepackaging.MyOrderList;
 import com.awizom.reliablepackaging.MyProfile;
 import com.awizom.reliablepackaging.R;
+import com.awizom.reliablepackaging.UnapprovedOrdersList;
 
 import dmax.dialog.SpotsDialog;
 
@@ -100,16 +101,17 @@ public class GridImageAdapter extends BaseAdapter {
                 }
                 else if (position == 4) {
                     progressDialog.show();
-                    Intent intent = new Intent(mContext, MyOrderList.class);
+                    Intent intent = new Intent(mContext, UnapprovedOrdersList.class);
                     intent.putExtra("Ordertype","ds");
-                    intent.putExtra("HeaderName", "Today Dispatch Item");
+                    intent.putExtra("HeaderName", "Pending order's design");
                     mContext.startActivity(intent);
                     dismissmethod();
-                } else if (position == 4) {
+                }
+                else if (position == 5) {
                     progressDialog.show();
                     Intent intent = new Intent(mContext, MyOrderList.class);
-                    intent.putExtra("Ordertype","ds");
-                    intent.putExtra("HeaderName", "Pending Design");
+                    intent.putExtra("Ordertype", "CompletedOdr");
+                    intent.putExtra("HeaderName", "Completed Order");
                     mContext.startActivity(intent);
                     dismissmethod();
                 }
@@ -132,10 +134,10 @@ public class GridImageAdapter extends BaseAdapter {
 
     // Keep all Images in array
     public Integer[] mThumbIds = {
-            R.drawable.resume, R.drawable.icons8purchaseorder100, R.drawable.icons8money100, R.drawable.icons8myjob100, R.drawable.dispatch, R.drawable.icons8purchaseorder100
+            R.drawable.resume, R.drawable.icons8purchaseorder100, R.drawable.icons8money100, R.drawable.icons8myjob100, R.drawable.pending_design,R.drawable.completed_order
     };
     public String[] imagename = {
-            "My Profile", "My Order", "My Account", "My Job", "Today Dispatch Item", "Pending Design"
+            "My Profile", "My Order", "My Account", "My Job",  "Pending designs","Completed Order"
     };
 
 }
