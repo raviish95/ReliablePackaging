@@ -132,10 +132,26 @@
             app:srcCompat="@android:drawable/ic_input_add"
             tools:layout_editor_absoluteX="328dp"
             tools:layout_editor_absoluteY="448dp" />
+        <RelativeLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:background="@color/distempur"
+            android:gravity="center">
 
-
+            <TextView
+                android:id="@+id/footer_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:gravity="start"
+                android:text="www.reliablepackaging.in"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp" />
+        </RelativeLayout>
     </RelativeLayout>
-
     <include
         layout="@layout/app_bar_admin_home_page"
         android:layout_width="match_parent"
