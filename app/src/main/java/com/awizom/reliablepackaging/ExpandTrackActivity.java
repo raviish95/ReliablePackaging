@@ -59,6 +59,8 @@ public class ExpandTrackActivity extends AppCompatActivity {
     private AlertDialog progressDialog;
     RelativeLayout relativeLayout;
     TextView cylinderpre, printing, inspection, lamination, slitting, pouching, packaging, dispatch;
+    TextView  cylinderpredate, printingdate, inspectiondate, laminationdate, slittingdate, pouchingdate, packagingdate, dispatchdate;
+
     int trackinProgress = 0, secondaryProgress = 0;
 
     @Override
@@ -81,6 +83,14 @@ public class ExpandTrackActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.back);
 
         cylinderpre = findViewById(R.id.cylinderprep);
+        cylinderpredate = findViewById(R.id.cylinderprepdate);
+        printingdate = findViewById(R.id.printingdate);
+        inspectiondate = findViewById(R.id.inspectiondate);
+        laminationdate = findViewById(R.id.laminationdate);
+        slittingdate = findViewById(R.id.slittingdate);
+        pouchingdate = findViewById(R.id.pouchingdate);
+        packagingdate = findViewById(R.id.packagingdate);
+        dispatchdate = findViewById(R.id.dispatchdate);
         printing = findViewById(R.id.printing);
         inspection = findViewById(R.id.inspection);
         lamination = findViewById(R.id.lamination);
@@ -157,6 +167,14 @@ public class ExpandTrackActivity extends AppCompatActivity {
             Type listType = new TypeToken<TrackingStatus>() {
             }.getType();
             trackingStatuses = new Gson().fromJson(result, listType);
+
+            cylinderpredate.setText(trackingStatuses.getCylinderReciveDate());
+            printingdate.setText(trackingStatuses.getPrintDate());
+            inspectiondate.setText(trackingStatuses.getInspectionDate());
+            laminationdate.setText(trackingStatuses.getLaminationDate());
+            slittingdate.setText(trackingStatuses.getSlittingDate());
+            pouchingdate.setText(trackingStatuses.getPouchingDate());
+            dispatchdate.setText(trackingStatuses.getDispatchedDate());
 
             /*                     Track Steps Colour                              */
 

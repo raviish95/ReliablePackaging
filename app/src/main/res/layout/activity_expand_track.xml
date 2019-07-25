@@ -173,6 +173,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/cylinderprepdate"
                                 android:layout_marginTop="10dp"
                                 android:fontFamily="serif"
                                 android:padding="5dp"
@@ -215,6 +216,7 @@
 
                             <TextView
                                 android:layout_width="match_parent"
+                                android:id="@+id/printingdate"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:fontFamily="serif"
@@ -257,6 +259,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/inspectiondate"
                                 android:layout_marginTop="10dp"
                                 android:fontFamily="serif"
                                 android:padding="5dp"
@@ -299,6 +302,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/laminationdate"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="10dp"
                                 android:fontFamily="serif"
@@ -343,6 +347,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/slittingdate"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="15dp"
                                 android:fontFamily="serif"
@@ -397,6 +402,7 @@
                                 android:layout_marginTop="15dp"
                                 android:fontFamily="serif"
                                 android:padding="5dp"
+                                android:id="@+id/pouchingdate"
                                 android:text="@string/pouching"
                                 android:textColor="@color/black"
                                 android:textSize="13sp" />
@@ -443,6 +449,7 @@
 
                             <TextView
                                 android:layout_width="match_parent"
+                                android:id="@+id/packagingdate"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="15dp"
@@ -494,6 +501,7 @@
 
                             <TextView
                                 android:layout_width="match_parent"
+                                android:id="@+id/dispatchdate"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="15dp"
