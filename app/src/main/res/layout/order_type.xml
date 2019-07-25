@@ -54,7 +54,7 @@
             android:drawableStart="@drawable/ic_add_circle_outline_black_24dp"
             android:drawablePadding="10dp"
             android:drawableTint="@color/distempur"
-            android:text="Create New Order"
+            android:text="New Order(New Design)"
             android:textColor="@color/black"
             android:textSize="19sp"
             android:fontFamily="serif"

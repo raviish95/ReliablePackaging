@@ -98,6 +98,21 @@ public class GridImageAdapter extends BaseAdapter {
                     mContext.startActivity(intent);
                     dismissmethod();
                 }
+                else if (position == 4) {
+                    progressDialog.show();
+                    Intent intent = new Intent(mContext, MyOrderList.class);
+                    intent.putExtra("Ordertype","ds");
+                    intent.putExtra("HeaderName", "Today Dispatch Item");
+                    mContext.startActivity(intent);
+                    dismissmethod();
+                } else if (position == 4) {
+                    progressDialog.show();
+                    Intent intent = new Intent(mContext, MyOrderList.class);
+                    intent.putExtra("Ordertype","ds");
+                    intent.putExtra("HeaderName", "Pending Design");
+                    mContext.startActivity(intent);
+                    dismissmethod();
+                }
             }
         });
         return convertView;
@@ -117,10 +132,10 @@ public class GridImageAdapter extends BaseAdapter {
 
     // Keep all Images in array
     public Integer[] mThumbIds = {
-            R.drawable.resume, R.drawable.icons8purchaseorder100, R.drawable.icons8money100, R.drawable.icons8myjob100
+            R.drawable.resume, R.drawable.icons8purchaseorder100, R.drawable.icons8money100, R.drawable.icons8myjob100, R.drawable.dispatch, R.drawable.icons8purchaseorder100
     };
     public String[] imagename = {
-            "My Profile", "My Order", "My Account", "My Job"
+            "My Profile", "My Order", "My Account", "My Job", "Today Dispatch Item", "Pending Design"
     };
 
 }
