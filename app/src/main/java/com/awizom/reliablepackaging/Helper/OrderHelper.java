@@ -672,18 +672,64 @@ public class OrderHelper extends AppCompatActivity {
             String packtype = params[4];
             String Length = params[5];
             String notify = params[6];
+            String remarks = params[7];
+            String json = "";
+            try {
+
+                OkHttpClient client = new OkHttpClient();
+                Request.Builder builder = new Request.Builder();
+                builder.url(AppConfig.BASE_URL_API_ + "ReOrder/"+Product_name+"/"+OrderId+"/"+weight+"/"+layerType+"/"+packtype+"/"+Length+"/"+notify+"/"+remarks);
+                builder.addHeader("Content-Type", "application/x-www-form-urlencoded");
+                builder.addHeader("Accept", "application/json");
+                //builder.addHeader("Authorization", "Bearer " + accesstoken);
+                FormBody.Builder parameters = new FormBody.Builder();
+
+                builder.post(parameters.build());
+                okhttp3.Response response = client.newCall(builder.build()).execute();
+                if (response.isSuccessful()) {
+                    json = response.body().string();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return json;
+        }
+
+        protected void onPostExecute(String result) {
+
+            if (result.isEmpty()) {
+
+            } else {
+                super.onPostExecute(result);
+//
+            }
+
+
+        }
+
+    }
+    public static final class PostDesignImage extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+
+            //     InputStream inputStream
+            String imgurl = params[0];
+            String clientid = params[1];
+            String imgname = params[2];
 
             String json = "";
             try {
 
                 OkHttpClient client = new OkHttpClient();
                 Request.Builder builder = new Request.Builder();
-                builder.url(AppConfig.BASE_URL_API_ + "ReOrder/"+Product_name+"/"+OrderId+"/"+weight+"/"+layerType+"/"+packtype+"/"+Length+"/"+notify);
+                builder.url(AppConfig.BASE_URL_API_ + "UploadRebbokImage");
                 builder.addHeader("Content-Type", "application/x-www-form-urlencoded");
                 builder.addHeader("Accept", "application/json");
                 //builder.addHeader("Authorization", "Bearer " + accesstoken);
                 FormBody.Builder parameters = new FormBody.Builder();
-
+                parameters.add("ClientID", clientid);
+                parameters.add("ImageUrl", imgurl);
+                parameters.add("ImageName", imgname);
                 builder.post(parameters.build());
                 okhttp3.Response response = client.newCall(builder.build()).execute();
                 if (response.isSuccessful()) {

@@ -5,6 +5,10 @@ public class MyProfileView {
     public String Name ;
     public String ContactName;
     public String PhoneNumber ;
+    public String AditionalPhoneNumber ;
+
+
+
     public String Email ;
     public String BillingAdddress;
     public String PAN ;
@@ -58,7 +62,13 @@ public class MyProfileView {
     public String getPhoneNumber() {
         return PhoneNumber;
     }
+    public String getAditionalPhoneNumber() {
+        return AditionalPhoneNumber;
+    }
 
+    public void setAditionalPhoneNumber(String aditionalPhoneNumber) {
+        AditionalPhoneNumber = aditionalPhoneNumber;
+    }
     public void setPhoneNumber(String phoneNumber) {
         PhoneNumber = phoneNumber;
     }

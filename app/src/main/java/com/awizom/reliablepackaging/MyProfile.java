@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
 public class MyProfile extends AppCompatActivity {
 
     private LinearLayout linearLayout;
-    private TextView name,firm, email, mobno, place, panno, gstno, tinno, nameimage, totalordervalue, totalrunningorder, totalcompltdorder;
+    private TextView name,firm, email, mobno, place, panno, gstno, tinno, nameimage, totalordervalue, totalrunningorder, totalcompltdorder,addmobno;
     private Button account, update_profile,legal_doc;
     private LinearLayout totalodr, runningodr, cmpltdodr;
 
@@ -123,6 +123,7 @@ public class MyProfile extends AppCompatActivity {
         gstno = findViewById(R.id.gstno);
         tinno = findViewById(R.id.tinno);
         place = findViewById(R.id.place);
+        addmobno=findViewById(R.id.addmobno);
         account = findViewById(R.id.accounts);
         update_profile = findViewById(R.id.update);
         legal_doc=findViewById(R.id.legal);
@@ -146,13 +147,16 @@ public class MyProfile extends AppCompatActivity {
         getMyOrderCount();
     }
 
-    private void showupdatedialog(String namestring, String emailstring, String mobilenostring, String placeString, String pannostring, String gstnostring, String tinnostring) {
+    private void showupdatedialog(String namestring, String emailstring, String mobilenostring, String placeString, String pannostring, String gstnostring, String tinnostring,String addmobno) {
         final android.support.v7.app.AlertDialog.Builder dialogBuilder = new android.support.v7.app.AlertDialog.Builder(MyProfile.this);
-        final EditText names, emails, mobnos, places, nameimages, totalordervalues, totalrunningorders, totalcompltdorders, pannos, gstnos, tinnos;
+        final EditText names, emails, mobnos, places, nameimages, totalordervalues, totalrunningorders, totalcompltdorders, pannos, gstnos, tinnos,addphonenos;
         Button update_button;
         LayoutInflater inflater = LayoutInflater.from(MyProfile.this);
         final View dialogView = inflater.inflate(R.layout.updateprofiledialog, null);
         dialogBuilder.setTitle("Update Profile");
+
+        addphonenos=dialogView.findViewById(R.id.addmobno);
+        addphonenos.setText(addmobno.toString());
         names = dialogView.findViewById(R.id.name);
         names.setText(namestring.toString());
         emails = dialogView.findViewById(R.id.email);
@@ -205,7 +209,7 @@ public class MyProfile extends AppCompatActivity {
                 } else {
                     String clientid = String.valueOf(SharedPrefManager.getInstance(MyProfile.this).getUser().getClientID());
                     try {
-                        String result = new ProfileHelper.UpdateProfile().execute(clientid.toString(), names.getText().toString(), emails.getText().toString(), mobnos.getText().toString(), places.getText().toString(), pannos.getText().toString(), gstnos.getText().toString(), tinnos.getText().toString()).get();
+                        String result = new ProfileHelper.UpdateProfile().execute(clientid.toString(), names.getText().toString(), emails.getText().toString(), mobnos.getText().toString(), places.getText().toString(), pannos.getText().toString(), gstnos.getText().toString(), tinnos.getText().toString(),addphonenos.getText().toString()).get();
 
                         if (result.isEmpty()) {
                             Toast.makeText(MyProfile.this, "Invalid request", Toast.LENGTH_SHORT).show();
@@ -267,6 +271,7 @@ public class MyProfile extends AppCompatActivity {
             String nameview = myProfileView.getName().toString();
             String Email = myProfileView.getEmail().toString();
             String PhoneNumber = String.valueOf(myProfileView.getPhoneNumber().toString());
+            String AddPhoneNumber = String.valueOf(myProfileView.getAditionalPhoneNumber().toString());
             String pincode = String.valueOf(myProfileView.getPinCode());
             String billingaddredss = String.valueOf(myProfileView.getBillingAdddress().toString());
             String accountType=myProfileView.getAccountType().toString();
@@ -292,6 +297,7 @@ public class MyProfile extends AppCompatActivity {
             panno.setText(pannos.toString());
             gstno.setText(gstnos.toString());
             tinno.setText(tinnos.toString());
+            addmobno.setText(AddPhoneNumber.toString());
             nameimage.setText(nameview.toString().split("")[1]);
             final String tinnostring = tinno.getText().toString();
             final String gstnostring = gstno.getText().toString();
@@ -300,10 +306,11 @@ public class MyProfile extends AppCompatActivity {
             final String emailstring = email.getText().toString();
             final String placestring = place.getText().toString();
             final String namestring = name.getText().toString();
+            final String addmobnostring = addmobno.getText().toString();
             update_profile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showupdatedialog(namestring, emailstring, mobilenostring, placestring, pannostring, gstnostring, tinnostring);
+                    showupdatedialog(namestring, emailstring, mobilenostring, placestring, pannostring, gstnostring, tinnostring,addmobnostring);
                 }
             });
         } catch (Exception e) {

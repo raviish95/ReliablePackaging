@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -66,8 +67,8 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
         holder.product.setText(c.getJobName());
 
         holder.weight.setText("Weight - " + String.valueOf(c.getWeight()));
-
         holder.orderid.setText(String.valueOf(c.getOrderId()));
+        holder.layer_type.setText(c.getLayerName().toString());
         try {
             holder.imglinkurl.setText(AppConfig.BASE_URL + c.getImageUrl().toString());
         } catch (Exception e) {
@@ -88,29 +89,15 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
         }
 
 
-     /*   holder.categoryImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (holder.checking.getText().toString().equals("filled")) {
-                    //Toast.makeText(mCtx,"filled",Toast.LENGTH_LONG).show();
-                    openZommImage(holder.imglinkurl.getText().toString(), mCtx);
-
-                } else {
-
-                    Intent intent = new Intent(mCtx, SelectDesign.class);
-                    intent.putExtra("OrderId", holder.orderid.getText().toString());
-                    mCtx.startActivity(intent);
-                }
-            }
-        });*/
         rebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent=new Intent(mCtx, RebookFillOrderActivity.class);
-                intent.putExtra("itemslist",orderidlist);
+                 progressDialog.show();
+                Intent intent = new Intent(mCtx, RebookFillOrderActivity.class);
+                intent.putExtra("itemslist", orderidlist);
                 mCtx.startActivity(intent);
-         //   openItemConfirmDialog((itemnamelist.toArray()));
+                dismissmethod();
+                //   openItemConfirmDialog((itemnamelist.toArray()));
 
 
             }
@@ -146,78 +133,17 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
         });
     }
 
-    private void openItemConfirmDialog(Object[] itemNameList) {
+    private void dismissmethod() {
 
-
-        final android.support.v7.app.AlertDialog.Builder dialogBuilder = new android.support.v7.app.AlertDialog.Builder(mCtx);
-        dialogBuilder.setCancelable(false);
-        LayoutInflater inflater = LayoutInflater.from(mCtx);
-        final View dialogView = inflater.inflate(R.layout.dialog_openordercinfirm, null);
-        dialogBuilder.setTitle("Rebook Order");
-        dialogBuilder.setIcon(R.drawable.reliables);
-        dialogBuilder.setMessage("Please fill your order details");
-        /*  dialogBuilder.setNeutralButtonIcon(mCtx.getResources().getDrawable(R.drawable.close_blue));
-         */
-
-        /* dialogBuilder.setPositiveButtonIcon(mCtx.getResources().getDrawable(R.drawable.check_box_green_24dp));
-
-         */
-       // ListView listView = dialogView.findViewById(R.id.listView);
-        RecyclerView recyleritemview = dialogView.findViewById(R.id.recyclerView);
-        recyleritemview.setHasFixedSize(true);
-        recyleritemview.setLayoutManager(new LinearLayoutManager(mCtx));
-        Button order = dialogView.findViewById(R.id.orders);
-        final NewRecyclerAdapter customAdapter = new NewRecyclerAdapter(mCtx,itemNameList, order);
-        recyleritemview.setAdapter(customAdapter);
-   //     listView.setAdapter(customAdapter);
-       /* dialogBuilder.setPositiveButton("Order", new DialogInterface.OnClickListener() {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-              customAdapter.getorderlist();
-
-
+            public void run() {
+                progressDialog.dismiss();
             }
-        });*/
-        dialogBuilder.setCancelable(true);
-
-        dialogBuilder.setView(dialogView);
-
-        final android.support.v7.app.AlertDialog b = dialogBuilder.create();
-        b.show();
-
+        }, 100);
     }
 
-    private void ShowConfirmRebookOrderDialog(final String orderid, Context context) {
-        progressDialog = new SpotsDialog(context, R.style.Custom);
-        final android.support.v7.app.AlertDialog.Builder dialogBuilder = new android.support.v7.app.AlertDialog.Builder(mCtx);
-        dialogBuilder.setCancelable(false);
-        LayoutInflater inflater = LayoutInflater.from(mCtx);
-
-        final View dialogView = inflater.inflate(R.layout.dialog_reoorder, null);
-
-        Button ok = dialogView.findViewById(R.id.btn_okay);
-        Button cancel = dialogView.findViewById(R.id.btn_cancel);
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressDialog.show();
-                PostReorder(orderid.toString());
-            }
-        });
-
-        dialogBuilder.setView(dialogView);
-
-        final android.support.v7.app.AlertDialog b = dialogBuilder.create();
-        b.show();
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialogBuilder.setCancelable(true);
-                b.dismiss();
-            }
-        });
-    }
 
     private void PostReorder(String orderId) {
 
@@ -265,6 +191,10 @@ public class RebookOrderListAdapter extends RecyclerView.Adapter<RebookOrderList
         @RequiresApi(api = Build.VERSION_CODES.M)
         public MyViewHolder(View view) {
             super(view);
+            progressDialog = new SpotsDialog(mCtx, R.style.Custom);
+            progressDialog.setCancelable(false);
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.getContext();
             itemlist = view.findViewById(R.id.item_switch);
             imglinkurl = view.findViewById(R.id.image_link);
             product = (TextView) view.findViewById(R.id.prod_name);

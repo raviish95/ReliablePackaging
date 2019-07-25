@@ -3,44 +3,40 @@ package com.awizom.reliablepackaging.Adapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.awizom.reliablepackaging.Config.AppConfig;
-import com.awizom.reliablepackaging.Helper.OrderHelper;
-import com.awizom.reliablepackaging.HomePage;
 import com.awizom.reliablepackaging.Model.Order;
-import com.awizom.reliablepackaging.Model.OrderDetailsView;
-import com.awizom.reliablepackaging.OrderDetails;
 import com.awizom.reliablepackaging.R;
-import com.awizom.reliablepackaging.SelectDesign;
+import com.awizom.reliablepackaging.RebookFillOrderActivity;
 import com.bumptech.glide.Glide;
-import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import dmax.dialog.SpotsDialog;
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class RebookListChooseAdapter extends RecyclerView.Adapter<RebookListChooseAdapter.MyViewHolder> {
 
@@ -61,14 +57,14 @@ public class RebookListChooseAdapter extends RecyclerView.Adapter<RebookListChoo
     String cheknotify = "No";
     RecyclerView recyclerView;
 
+    private static final int PICK_FROM_GALLERY = 1;
 
     public RebookListChooseAdapter(Context baseContext, List<Order> orderList, Button order, RecyclerView recyclerView) {
         this.orderList = orderList;
         this.mCtx = baseContext;
         this.add = order;
-        this.recyclerView=recyclerView;
+        this.recyclerView = recyclerView;
     }
-
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
@@ -80,7 +76,21 @@ public class RebookListChooseAdapter extends RecyclerView.Adapter<RebookListChoo
         holder.layertype.setAdapter(arrayAdapter);
         final ArrayAdapter<String> arrayAdapterpack = new ArrayAdapter<String>(mCtx, android.R.layout.simple_dropdown_item_1line, packtypelist);
         holder.packtype.setAdapter(arrayAdapterpack);
+        try{
+            holder.imgurl.setText(c.getImageUrl().toString());
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         final String weights = holder.weight.getText().toString();
+        try {
+            Glide.with(mCtx).load(AppConfig.BASE_URL + c.getImageUrl().toString()).into(holder.designImg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         if (c.getLayerName().toString().equals("2 Layer")) {
 
             holder.layertype.setSelection(0);
@@ -93,6 +103,38 @@ public class RebookListChooseAdapter extends RecyclerView.Adapter<RebookListChoo
         } else {
             holder.packtype.setSelection(1);
         }
+        holder.changeimg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (holder.changeimg.isChecked()) {
+                    holder.uploadImg.setVisibility(View.VISIBLE);
+                } else {
+                    holder.uploadImg.setVisibility(View.GONE);
+                }
+            }
+        });
+        holder.linear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              getItemId(position);
+            }
+        });
+      /*  holder.uploadImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    if (ActivityCompat.checkSelfPermission(mCtx, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions((Activity) mCtx, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PICK_FROM_GALLERY);
+                    } else {
+                        Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        ((RebookFillOrderActivity)mCtx).startActivityForResult(galleryIntent, PICK_FROM_GALLERY);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });*/
+
         holder.weight.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -203,6 +245,8 @@ public class RebookListChooseAdapter extends RecyclerView.Adapter<RebookListChoo
 
     }
 
+
+
     private void dismissmethod() {
 
         final Handler handler = new Handler();
@@ -221,6 +265,9 @@ public class RebookListChooseAdapter extends RecyclerView.Adapter<RebookListChoo
         return orderList.size();
 
     }
+
+
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -238,10 +285,13 @@ public class RebookListChooseAdapter extends RecyclerView.Adapter<RebookListChoo
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public EditText weight;
-        TextView productname, orderid;
+        TextView productname, orderid, imgurl;
         Spinner layertype, packtype;
         Switch switchnoti;
-        LinearLayout ll;
+        CheckBox changeimg;
+        Button uploadImg;
+        LinearLayout ll,linear;
+        ImageView designImg;
 
 
         @RequiresApi(api = Build.VERSION_CODES.M)
@@ -249,8 +299,13 @@ public class RebookListChooseAdapter extends RecyclerView.Adapter<RebookListChoo
             super(view);
             progressDialog = new SpotsDialog(mCtx, R.style.Custom);
             switchnoti = view.findViewById(R.id.notify);
+            imgurl = view.findViewById(R.id.imgurl);
             productname = view.findViewById(R.id.productname);
+            designImg = view.findViewById(R.id.selectdesgin);
             ll = view.findViewById(R.id.ll);
+            linear=view.findViewById(R.id.linearmain);
+            changeimg = view.findViewById(R.id.changecheck);
+            uploadImg = view.findViewById(R.id.uploadImg);
             layertype = view.findViewById(R.id.layertype);
             packtype = view.findViewById(R.id.packType);
             weight = view.findViewById(R.id.weight_kg);
