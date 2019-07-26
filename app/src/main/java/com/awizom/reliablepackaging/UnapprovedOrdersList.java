@@ -49,7 +49,7 @@ public class UnapprovedOrdersList extends AppCompatActivity {
         String headername = getIntent().getStringExtra("HeaderName");
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(headername.toString());
-        toolbar.setBackgroundColor(Color.parseColor("#45B39D"));
+        toolbar.setBackgroundColor(Color.parseColor("#225991"));
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);
@@ -67,16 +67,10 @@ public class UnapprovedOrdersList extends AppCompatActivity {
                     initview();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    // relativeLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
         LinearLayout linearLayout = findViewById(R.id.OrderDataFunc);
-        if (headername.equals("My Job")) {
-            linearLayout.setVisibility(View.GONE);
-        } else {
-            linearLayout.setVisibility(View.VISIBLE);
-        }
         no_internet = findViewById(R.id.no_internet);
         linearLayout = findViewById(R.id.linearlayout);
 

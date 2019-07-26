@@ -89,9 +89,11 @@
         <activity
             android:name=".UnapprovedOrdersList"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UnapprovedOrderDetails"
-            android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+        <activity
+            android:name=".UnapprovedOrderDetails"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".TodayDispatchOrder"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

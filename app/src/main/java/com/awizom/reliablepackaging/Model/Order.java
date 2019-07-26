@@ -2,6 +2,35 @@ package com.awizom.reliablepackaging.Model;
 
 public class Order {
 
+
+    public String JobDate ;
+    public String OrderType;
+    public String ExpectedDispatchDate ;
+
+    public String getJobDate() {
+        return JobDate;
+    }
+
+    public void setJobDate(String jobDate) {
+        JobDate = jobDate;
+    }
+
+    public String getOrderType() {
+        return OrderType;
+    }
+
+    public void setOrderType(String orderType) {
+        OrderType = orderType;
+    }
+
+    public String getExpectedDispatchDate() {
+        return ExpectedDispatchDate;
+    }
+
+    public void setExpectedDispatchDate(String expectedDispatchDate) {
+        ExpectedDispatchDate = expectedDispatchDate;
+    }
+
     public int OrderId;
     public String ProductName;
     public int TotalItem;

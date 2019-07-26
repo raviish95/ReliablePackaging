@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/purple"
                 android:orientation="vertical">
 
@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp">
 
             </android.support.v7.widget.RecyclerView>
 
@@ -76,7 +76,7 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:background="@color/purple"
+        android:background="#65295A"
         android:gravity="center">
 
         <TextView

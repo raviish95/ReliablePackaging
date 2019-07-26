@@ -76,7 +76,7 @@ public class UnapprovedOrderDetails extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Unapproved Order Details");
-        toolbar.setBackgroundColor(Color.parseColor("#212F3D"));
+        toolbar.setBackgroundColor(Color.parseColor("#A30E0E"));
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);
